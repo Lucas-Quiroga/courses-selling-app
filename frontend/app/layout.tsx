@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navbar } from "@/components";
+import { NavbarUser } from "@/components";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Couses selling",
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="relative">
-        <Navbar />
-        {children}
+        <AuthProvider>
+          <NavbarUser />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
