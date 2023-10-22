@@ -1,0 +1,45 @@
+# Archivos y directorios generados por IDEs
+.vscode/
+.idea/
+
+# Archivos compilados o generados
+*.class
+*.jar
+*.war
+*.ear
+*.swp
+*.log
+target/
+bin/
+dist/
+node_modules/
+
+# Dependencias de gestión de paquetes
+npm-debug.log
+yarn-error.log
+
+# Archivos de configuración
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+env
+
+# Carpeta de almacenamiento de archivos locales (usado por algunos servicios)
+storage/
+
+# Logs y archivos temporales
+logs/
+.tmp/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de respaldo
+*~
+
+# Cualquier archivo que termine con la extensión .bak
+*.bak
