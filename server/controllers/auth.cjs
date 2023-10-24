@@ -4,20 +4,29 @@ const jwt = require("jsonwebtoken");
 
 // registro de usuario
 exports.signup = async (req, res) => {
-  const { email } = req.body;
-  const newUser = new User(req.body);
+  const { firstName, email, password, confirmPassword } = req.body;
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: "Las contraseñas no coinciden" });
+  }
 
   try {
     const user = await User.findOne({ email });
+
     if (user) {
-      return res.status(422).json({ error: "Email already exists" });
+      return res.status(400).json({ error: "Email already exists" });
     }
+    if (!password || typeof password !== "string") {
+      throw new Error("Contraseña inválida");
+    }
+    const newUser = new User({ firstName, email, password });
     await newUser.save();
     const token = jwt.sign({ email, role: "user" }, process.env.SECRET_USER, {
       expiresIn: "3h",
     });
     return res.status(200).json({ message: "User create successfully", token });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
