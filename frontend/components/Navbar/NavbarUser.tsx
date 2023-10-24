@@ -158,7 +158,7 @@ const NavbarUser = () => {
                   aria-current="page"
                   onClick={() => setActive(!active)}
                 >
-                  Register
+                  Login
                 </a>
               </li>
             </ul>

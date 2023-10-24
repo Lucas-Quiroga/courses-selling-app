@@ -1,6 +1,27 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 
 const Sidebar = () => {
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Verifica el ancho de la ventana y actualiza el estado
+      setIsFixed(window.innerWidth >= 640);
+    };
+
+    // Agrega un event listener para detectar cambios en el tamaño de la ventana
+    window.addEventListener("resize", handleResize);
+
+    // Llama a handleResize al cargar la página
+    handleResize();
+
+    // Elimina el event listener cuando se desmonta el componente
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="flex justify-center w-full mx-auto items-center bg-gray-50 dark:bg-gray-800 ">
       <button
@@ -28,7 +49,9 @@ const Sidebar = () => {
 
       <aside
         id="separator-sidebar"
-        className="relative top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        className={`${
+          isFixed ? "relative" : "fixed" // Aplica la clase si isFixed es true
+        } top-19 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">

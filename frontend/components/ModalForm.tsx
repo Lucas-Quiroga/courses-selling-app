@@ -40,9 +40,9 @@ const Modal = () => {
           </button>
           <div className="px-6 py-6 lg:px-8 mx-auto m-auto mt-[11rem]">
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-              {!isLogin ? "Sign in to our platform" : "Register for an account"}
+              {isLogin ? "Sign in to our platform" : "Register for an account"}
             </h3>
-            {!isLogin ? <LoginUser /> : <RegisterUser />}
+            {isLogin ? <LoginUser /> : <RegisterUser />}
           </div>
         </div>
       </div>
