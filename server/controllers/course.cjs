@@ -2,9 +2,12 @@ const Admin = require("../models/admin");
 const User = require("../models/user");
 const Courses = require("../models/course");
 
-exports.courses = async (req, res) => {};
+exports.courses = async (req, res) => {
+  const courses = await Courses.find();
+  res.json({ courses });
+};
 
-//detalle del cuso individual
+//detalle del curso individual
 exports.course = async (req, res) => {
   try {
     const course = await Courses.findById(req.params.courseId);

@@ -6,12 +6,15 @@ const {
   purchasesCourse,
   createCourse,
 } = require("../controllers/course.cjs");
-const { authenticateJwtUser } = require("../controllers/auth.cjs");
+const {
+  authenticateJwtUser,
+  authenticateJwtAdmin,
+} = require("../controllers/auth.cjs");
 
 router.get("/user/courses", courses);
 router.get("/user/course/:courseId", course);
 router.post("/user/purchased", authenticateJwtUser, purchasesCourse);
 
-router.post("/admin/create", authenticateJwtUser, createCourse);
+// router.post("/admin/create", authenticateJwtAdmin, createCourse);
 
 module.exports = router;
