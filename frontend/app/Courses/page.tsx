@@ -9,7 +9,7 @@ type Course = {
   name: string;
   description: string;
   price: number;
-  id: number;
+  _id: number;
 };
 
 const Page = () => {
@@ -41,7 +41,7 @@ const Page = () => {
             name={course.name}
             description={course.description}
             price={course.price}
-            id={course.id}
+            _id={course._id}
           />
         ))
       ) : (

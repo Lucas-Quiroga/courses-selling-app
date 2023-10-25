@@ -8,3 +8,12 @@ export const getCourses = async () => {
     throw error?.response?.data;
   }
 };
+
+export const getCourseDetail = async (courseId) => {
+  try {
+    const response = await http.get(`api/user/course/${courseId}`);
+    return response?.data?.course || null;
+  } catch (error) {
+    throw error?.response?.data;
+  }
+};
