@@ -1,6 +1,16 @@
 import React from "react";
 
-const CardDetails = () => {
+interface CardDetailsProps {
+  course: {
+    _id: number;
+    name: string;
+    description: string;
+    price: string | number;
+  };
+}
+
+const CardDetails = ({ course }: CardDetailsProps) => {
+  console.log(course);
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div className="sm:hidden">
@@ -206,9 +216,9 @@ const CardDetails = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M9 5 5 1 1 5"
                   />
                 </svg>
@@ -257,9 +267,9 @@ const CardDetails = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M9 5 5 1 1 5"
                   />
                 </svg>
@@ -310,9 +320,9 @@ const CardDetails = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M9 5 5 1 1 5"
                   />
                 </svg>
