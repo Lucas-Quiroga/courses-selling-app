@@ -6,6 +6,7 @@ import Cards from "./Cards";
 import RegisterUser from "./Register/RegisterUser";
 import LoginUser from "./Login/LoginUser";
 import ModalForm from "./ModalForm";
+import Tabs from "./Tabs";
 
 export {
   NavbarUser,
@@ -16,4 +17,5 @@ export {
   RegisterUser,
   ModalForm,
   LoginUser,
+  Tabs,
 };

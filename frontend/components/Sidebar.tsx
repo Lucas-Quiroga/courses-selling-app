@@ -23,7 +23,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="flex justify-center w-full mx-auto items-center bg-gray-50 dark:bg-gray-800 ">
+    <div className="flex justify-center w-full mx-auto items-center bg-white">
       <button
         data-drawer-target="separator-sidebar"
         data-drawer-toggle="separator-sidebar"

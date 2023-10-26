@@ -28,7 +28,6 @@ const LoginUser = () => {
       email: data.email,
       password: data.password,
     };
-    console.log(user);
 
     try {
       const response = await signin(user);

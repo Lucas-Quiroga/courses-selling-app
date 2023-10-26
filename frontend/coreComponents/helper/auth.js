@@ -44,7 +44,7 @@ export const authenticate = (data, next = () => {}) => {
 };
 
 export const isAuthenticated = () => {
-  if (typeof window === "undefined") {
+  if (typeof window == "undefined") {
     // Si no estamos en un entorno de navegador, retornamos false.
     return false;
   }
@@ -52,7 +52,10 @@ export const isAuthenticated = () => {
   // Verificamos si hay un token almacenado en el localStorage.
   if (userJwt) {
     // Si hay un token, retornamos el token.
-    return userJwt;
+    // return userJwt;
+
+    // o True
+    return true;
   } else {
     // Si no hay un token, retornamos false.
     return false;

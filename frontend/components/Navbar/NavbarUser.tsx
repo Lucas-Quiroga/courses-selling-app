@@ -1,14 +1,37 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { RegisterUser, ModalForm } from "..";
+import { useRouter } from "next/navigation";
+import { isAuthenticated } from "@/coreComponents/helper/auth";
 
 const NavbarUser = () => {
   const { toggleForm, toggleModal, active, setActive } = useAuth();
 
+  const router = useRouter();
+
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  const Logout = () => {
+    localStorage.clear();
+    router.refresh();
+  };
+
+  useEffect(() => {
+    const checkAuth = () => setIsAuth(isAuthenticated());
+    checkAuth(); // Verifica la autenticación inmediatamente
+    const id = setInterval(checkAuth, 1000); // Verifica la autenticación cada segundo
+
+    return () => clearInterval(id); // Limpia el intervalo cuando se desmonta el componente
+  }, []);
+
   return (
     <header>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav
+        className={`${
+          isAuth ? "bg-green-300" : "bg-white border-gray-200 dark:bg-gray-900"
+        } `}
+      >
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           {/* <a href="https://flowbite.com/" className="flex items-center">
           <img
@@ -131,6 +154,7 @@ const NavbarUser = () => {
                   href="#"
                   className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                   aria-current="page"
+                  onClick={() => router.push("/")}
                 >
                   Home
                 </a>
@@ -147,20 +171,34 @@ const NavbarUser = () => {
                 <a
                   href="#"
                   className="block py-2 pl-3 pr-4 text-white rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark-text-white md-dark:hover-text-blue-500 dark-hover-bg-gray-700 dark-hover-text-white md-dark:hover-bg-transparent dark-border-gray-700"
+                  onClick={() => router.push("/Courses")}
                 >
                   Services
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                  aria-current="page"
-                  onClick={() => setActive(!active)}
-                >
-                  Login
-                </a>
-              </li>
+              {!isAuth ? (
+                <li>
+                  <a
+                    href="#"
+                    className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                    aria-current="page"
+                    onClick={() => setActive(!active)}
+                  >
+                    Login
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href="#"
+                    className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                    aria-current="page"
+                    onClick={() => Logout()}
+                  >
+                    Logout
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
