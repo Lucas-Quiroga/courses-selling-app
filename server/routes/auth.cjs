@@ -5,11 +5,12 @@ const {
   signup,
   adminSignin,
   adminSignup,
+  authenticateSecret,
 } = require("../controllers/auth.cjs");
 
 router.post("/user/signup", signup);
 router.post("/user/signin", signin);
-router.post("/admin/signup", adminSignup);
+router.post("/admin/signup", authenticateSecret, adminSignup);
 router.post("/admin/signin", adminSignin);
 
 module.exports = router;

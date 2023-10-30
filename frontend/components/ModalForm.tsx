@@ -1,9 +1,19 @@
-import React from "react";
-import { RegisterUser, LoginUser } from ".";
+"use client";
+import React, { useEffect } from "react";
+import { RegisterUser, LoginUser, LoginAdmin } from ".";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
-const Modal = () => {
+interface ModalProps {
+  currentPath: string;
+}
+
+const Modal = ({ currentPath }: ModalProps) => {
   const { toggleModal, isLogin } = useAuth();
+
+  const router = useRouter();
+
+  // useEffect(() => {}, [currentPath]);
 
   return (
     <div
@@ -13,7 +23,6 @@ const Modal = () => {
       className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full bg-gray-900 bg-opacity-75"
     >
       <div className="relative w-full max-w-md max-h-full m-auto">
-        {/* Modal content */}
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <button
             type="button"
@@ -38,12 +47,28 @@ const Modal = () => {
             </svg>
             <span className="sr-only">Close modal</span>
           </button>
-          <div className="px-6 py-6 lg:px-8 mx-auto m-auto mt-[11rem]">
-            <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-              {isLogin ? "Sign in to our platform" : "Register for an account"}
-            </h3>
-            {isLogin ? <LoginUser /> : <RegisterUser />}
-          </div>
+
+          {currentPath === "/admin" && (
+            <>
+              <h1>Welcome admin</h1>
+              <button onClick={() => router.push("/admin/signin")}>
+                Go to login
+              </button>
+            </>
+          )}
+
+          {currentPath === "/admin/signin" && <LoginAdmin />}
+
+          {currentPath !== "/admin" && currentPath !== "/admin/signin" && (
+            <div className="px-6 py-6 lg:px-8 mx-auto m-auto mt-[11rem]">
+              <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                {isLogin
+                  ? "Sign in to our platform"
+                  : "Register for an account"}
+              </h3>
+              {isLogin ? <LoginUser /> : <RegisterUser />}
+            </div>
+          )}
         </div>
       </div>
     </div>

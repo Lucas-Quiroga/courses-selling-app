@@ -7,6 +7,7 @@ import RegisterUser from "./Register/RegisterUser";
 import LoginUser from "./Login/LoginUser";
 import ModalForm from "./ModalForm";
 import Tabs from "./Tabs";
+import LoginAdmin from "./Login/LoginAdmin";
 
 export {
   NavbarUser,
@@ -18,4 +19,5 @@ export {
   ModalForm,
   LoginUser,
   Tabs,
+  LoginAdmin,
 };
