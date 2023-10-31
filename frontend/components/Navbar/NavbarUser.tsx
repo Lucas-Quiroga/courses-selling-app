@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { RegisterUser, ModalForm } from "..";
 import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
 
@@ -33,7 +33,7 @@ const NavbarUser = () => {
         } `}
       >
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          {/* <a href="https://flowbite.com/" className="flex items-center">
+          {/* <Link href="https://flowbite.com/" className="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             className="h-8 mr-3"
@@ -42,7 +42,7 @@ const NavbarUser = () => {
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Flowbite
           </span>
-        </a> */}
+        </Link> */}
           <div className="flex md:order-1">
             <button
               type="button"
@@ -150,61 +150,56 @@ const NavbarUser = () => {
             </div>
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/"
                   className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                   aria-current="page"
-                  onClick={() => router.push("/")}
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover-bg-gray-700 dark:hover-text-white md:dark:hover-bg-transparent dark:border-gray-700"
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/Courses"
                   className="block py-2 pl-3 pr-4 text-white rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark-text-white md-dark:hover-text-blue-500 dark-hover-bg-gray-700 dark-hover-text-white md-dark:hover-bg-transparent dark-border-gray-700"
-                  onClick={() => router.push("/Courses")}
                 >
                   Services
-                </a>
+                </Link>
               </li>
               {!isAuth ? (
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/user/signin"
                     className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                     aria-current="page"
-                    onClick={() => setActive(!active)}
                   >
                     Login
-                  </a>
+                  </Link>
                 </li>
               ) : (
                 <li>
-                  <a
+                  <Link
                     href="#"
                     className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                     aria-current="page"
                     onClick={() => Logout()}
                   >
                     Logout
-                  </a>
+                  </Link>
                 </li>
               )}
             </ul>
           </div>
         </div>
       </nav>
-
-      {active && <ModalForm />}
     </header>
   );
 };

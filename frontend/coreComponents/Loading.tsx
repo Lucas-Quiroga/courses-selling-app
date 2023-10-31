@@ -52,7 +52,7 @@ const Loading: React.FC<LoadingProps> = ({ number = 1 }) => {
       {Array(number) // Crea un nuevo array de longitud 'number'
         .fill(null) // Llena cada elemento del array con un valor nulo (no se utiliza)
         .map((_, index) => {
-          return renderLoader();
+          return <div key={index}>{renderLoader()}</div>;
         })}
     </div>
   );

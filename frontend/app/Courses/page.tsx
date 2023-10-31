@@ -31,12 +31,12 @@ const Page = () => {
   return (
     <div className="mt-5">
       {loading ? (
-        <Loading number={3} />
+        <Loading number={1} />
       ) : courses.length > 0 ? (
         // Renderiza tus cursos aquí.
-        courses.map((course: Course, index) => (
+        courses.map((course: Course) => (
           <Cards
-            key={index}
+            key={course._id}
             image={course.image}
             name={course.name}
             description={course.description}

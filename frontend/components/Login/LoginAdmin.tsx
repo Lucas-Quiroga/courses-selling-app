@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useForm, FieldError, SubmitHandler } from "react-hook-form";
-import { signin } from "@/coreComponents/helper/auth";
+import { adminSignin } from "@/coreComponents/helper/auth";
+import Link from "next/link";
 
 interface IFormInput {
   email: string;
@@ -24,13 +25,13 @@ const LoginAdmin = () => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const user = {
+    const admin = {
       email: data.email,
       password: data.password,
     };
 
     try {
-      const response = await signin(user);
+      const response = await adminSignin(admin);
       if (response.status === 200) {
         setSuccess("Ingreso exitoso!");
         setTimeout(() => {
@@ -206,13 +207,13 @@ const LoginAdmin = () => {
         </button>
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered?{" "}
-          <a
-            href="#"
+          <Link
+            href="signup"
             className="text-blue-700 hover:underline dark:text-blue-500"
             onClick={toggleForm}
           >
             Create account
-          </a>
+          </Link>
         </div>
       </form>
     </>

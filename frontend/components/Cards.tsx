@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface CardsProps {
   image: string;
@@ -14,7 +14,6 @@ interface CardsProps {
 const Cards = ({ image, name, description, price, _id }: CardsProps) => {
   image = image ? image : "/cardimg.png";
 
-  const router = useRouter();
   return (
     <div className="w-80 p-4 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
       <Image
@@ -35,12 +34,12 @@ const Cards = ({ image, name, description, price, _id }: CardsProps) => {
         </p>
         <p className="text-black">{price || "$300"}</p>
         <div className="flex justify-between items-center mt-4">
-          <button
+          <Link
+            href={`/Courses/${_id}`}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onClick={() => router.push(`/Courses/${_id}`)}
           >
             Learn More
-          </button>
+          </Link>
         </div>
       </div>
     </div>

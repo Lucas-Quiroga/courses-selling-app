@@ -6,6 +6,7 @@ import { AuthProvider } from "@/context/AuthContext";
 export const metadata: Metadata = {
   title: "Couses selling",
   description: "Paula tarot courses",
+  keywords: "Tarot, course, learning",
 };
 
 export default function RootLayout({

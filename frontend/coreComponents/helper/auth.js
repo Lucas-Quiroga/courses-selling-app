@@ -65,7 +65,6 @@ export const isAuthenticated = () => {
 // Registro de administrador:
 export const adminSignup = async (admin) => {
   try {
-    admin.secret = process.env.SECRET_ADMIN;
     const response = await http.post("api/admin/signup", admin);
     return response;
   } catch (error) {
@@ -77,9 +76,9 @@ export const adminSignup = async (admin) => {
 // Inicio de sesión de administrador:
 export const adminSignin = async (admin, successCallBack) => {
   try {
-    admin.secret = process.env.SECRET_ADMIN;
     const response = await http.post("api/admin/signin", admin);
     adminAuthenticate(response.data, successCallBack);
+
     return response;
   } catch (error) {
     console.log("Admin signin error:", error);

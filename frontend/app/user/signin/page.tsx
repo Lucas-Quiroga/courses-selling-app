@@ -1,6 +1,5 @@
-"use client";
 import React from "react";
-import { LoginAdmin } from "@/components";
+import { LoginUser } from "@/components";
 
 const page = () => {
   return (
@@ -10,7 +9,7 @@ const page = () => {
           <div className="relative left-0 right-0 w-full overflow-y-auto md:inset-0 max-h-full bg-gray-900 bg-opacity-75">
             <div className="relative w-full max-w-md max-h-full m-auto">
               <div className="relative rounded-lg shadow dark-bg-gray-700">
-                <LoginAdmin />
+                <LoginUser />
               </div>
             </div>
           </div>

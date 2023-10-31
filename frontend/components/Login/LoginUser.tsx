@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useForm, FieldError, SubmitHandler } from "react-hook-form";
 import { signin } from "@/coreComponents/helper/auth";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface IFormInput {
   email: string;
@@ -11,6 +13,8 @@ interface IFormInput {
 
 const LoginUser = () => {
   const { toggleForm } = useAuth();
+
+  const router = useRouter();
 
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -45,7 +49,6 @@ const LoginUser = () => {
         setError(""); // Borra el mensaje de éxito después de 2 segundos
       }, 3000); // 2000 milisegundos (2 segundos)
     }
-
     reset();
   };
 
@@ -207,13 +210,13 @@ const LoginUser = () => {
         </button>
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered?{" "}
-          <a
-            href="#"
+          <Link
+            href="signup"
             className="text-blue-700 hover:underline dark:text-blue-500"
             onClick={toggleForm}
           >
             Create account
-          </a>
+          </Link>
         </div>
       </form>
     </>

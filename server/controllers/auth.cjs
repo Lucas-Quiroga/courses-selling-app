@@ -167,7 +167,7 @@ exports.adminSignin = async (req, res) => {
     const { email, password } = req.body;
 
     // Buscar al administrador en la base de datos por correo electrónico y contraseña
-    const admin = await Admin.findOne({ email, password });
+    const admin = await Admin.findOne({ email });
 
     if (!admin) {
       return res.status(422).json({ error: "Correo o contraseña inválidos" });
@@ -197,7 +197,6 @@ exports.adminSignin = async (req, res) => {
 
 exports.authenticateSecret = async (req, res, next) => {
   const { secret } = req.body;
-
   if (secret !== process.env.SECRET_ADMIN) {
     return res.status(422).json({ error: "Secreto incorrect" });
   }

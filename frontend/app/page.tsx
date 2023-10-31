@@ -1,5 +1,6 @@
 import { Sidebar, Banner, SearchBar, Cards } from "@/components";
 import { getCourses } from "@/coreComponents/helper/apiCalls";
+import ViewHomeForm from "@/components/ViewHomeForm";
 
 type Course = {
   image: string;

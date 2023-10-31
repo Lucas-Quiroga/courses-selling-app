@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useForm, FieldError, SubmitHandler } from "react-hook-form";
-import { signup } from "@/coreComponents/helper/auth";
+import { adminSignup } from "@/coreComponents/helper/auth";
 import Link from "next/link";
 
 interface IFormInput {
@@ -10,9 +10,10 @@ interface IFormInput {
   email: string;
   password: string | number;
   confirmPassword: string | number;
+  secret: string | number;
 }
 
-const RegisterUser = () => {
+const RegisterAdmin = () => {
   const { toggleForm } = useAuth();
 
   const [success, setSuccess] = useState("");
@@ -27,15 +28,15 @@ const RegisterUser = () => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const user = {
+    const admin = {
       firstName: data.firstName,
       email: data.email,
       password: data.password,
       confirmPassword: data.confirmPassword,
+      secret: data.secret,
     };
-
     try {
-      const response = await signup(user);
+      const response = await adminSignup(admin);
       if (response.status === 200) {
         setSuccess("Registro exitoso!");
         setTimeout(() => {
@@ -52,9 +53,6 @@ const RegisterUser = () => {
     }
     reset();
   };
-
-  // await signup(user);
-
   return (
     <>
       {success && (
@@ -257,6 +255,31 @@ const RegisterUser = () => {
             </span>
           )}
         </div>
+        <div>
+          <label
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Enter secret key
+          </label>
+          <input
+            type="password"
+            id="secret"
+            {...register("secret", {
+              required: {
+                value: true,
+                message: "Secret code is required",
+              },
+            })}
+            placeholder="••••••••"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          />
+          {errors.secret && (
+            <span className="block text-red-600 text-[15px] font-bold">
+              {(errors.secret as FieldError).message}
+            </span>
+          )}
+        </div>
         <button
           type="submit"
           className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -279,4 +302,4 @@ const RegisterUser = () => {
   );
 };
 
-export default RegisterUser;
+export default RegisterAdmin;
