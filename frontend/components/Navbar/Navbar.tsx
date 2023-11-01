@@ -29,7 +29,7 @@ const Navbar = () => {
     return null;
   }
   return (
-    <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow">
+    <nav className="top-0 relative z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow">
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
           <Link
@@ -56,23 +56,23 @@ const Navbar = () => {
                 className="hover:text-gray-500 text-gray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                 aria-current="page"
               >
-                Home
+                Inicio
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="#"
                 className="hover:text-gray-500 text-gray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
               >
                 About
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/Courses"
                 className="hover:text-gray-500 text-gray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
               >
-                Services
+                Cursos
               </Link>
             </li>
             {!isAuth ? (

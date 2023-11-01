@@ -1,0 +1,107 @@
+[] Perfil de usuario:
+
+- [] Rutas para que los usuarios puedan ver y editar su perfil.
+- [] Cambio de contraseña.
+- [] Actualización de la información del usuario.
+
+-------------------------------------------------------------------------
+
+[] Búsqueda y filtrado de cursos:
+
+- [] Rutas para buscar cursos por categoría, precio, nivel, etc.
+- [] Filtros avanzados para facilitar la búsqueda.
+
+-------------------------------------------------------------------------
+
+[] Carrito de compras:
+
+- [] Rutas para agregar cursos al carrito.
+- [] Rutas para gestionar el carrito (eliminar cursos, actualizar cantidades, realizar compras).
+
+-------------------------------------------------------------------------
+
+[] Historial de compras:
+
+- [] Rutas para que los usuarios puedan ver los cursos que han comprado anteriormente.
+
+-------------------------------------------------------------------------
+
+[] Calificaciones y reseñas:
+
+- [] Rutas para que los usuarios califiquen y escriban reseñas de los cursos que han comprado.
+
+-------------------------------------------------------------------------
+
+[] Sistema de notificaciones:
+
+- [] Rutas para enviar notificaciones a los usuarios, como confirmaciones de compra, actualizaciones de cursos, recordatorios, etc.
+
+-------------------------------------------------------------------------
+
+[] Gestión de contenido:
+
+- [] Rutas para que los administradores puedan agregar, editar y eliminar cursos.
+- [] Rutas para gestionar categorías y etiquetas de cursos.
+
+-------------------------------------------------------------------------
+
+[] Gestión de usuarios (admin):
+
+- [] Rutas para que los administradores puedan ver, editar y eliminar usuarios.
+- [] Desactivación de cuentas de usuario en caso de comportamiento inapropiado.
+
+-------------------------------------------------------------------------
+
+[] Sistema de pagos:
+
+- [] Integración con servicios de pago, como Stripe o PayPal, para procesar transacciones de compra de cursos.
+
+-------------------------------------------------------------------------
+
+[] Sistema de análisis y estadísticas:
+
+- [] Rutas para mostrar estadísticas a los administradores, como ingresos, usuarios registrados, cursos más populares, etc.
+
+-------------------------------------------------------------------------
+
+[] Recuperación de contraseña:
+
+- [] Rutas para permitir a los usuarios restablecer su contraseña en caso de olvido.
+
+-------------------------------------------------------------------------
+
+[] Soporte y ayuda:
+
+- [] Rutas para enviar preguntas o problemas a un servicio de soporte.
+
+-------------------------------------------------------------------------
+
+[] Autenticación social:
+
+- [] Inicio de sesión y registro mediante redes sociales como Google, Facebook, etc.
+
+-------------------------------------------------------------------------
+
+[] Seguridad y autorización avanzada:
+
+- [] Implementar roles de usuario (por ejemplo, estudiante y profesor) y asegurarte de que los usuarios solo puedan acceder a las rutas y recursos permitidos según su rol.
+
+-------------------------------------------------------------------------
+
+[] Integración de API de terceros:
+
+- [] Conectar con otras plataformas de educación o servicios externos para enriquecer la oferta de cursos.
+
+-------------------------------------------------------------------------
+
+[] Chat en vivo:
+
+- [] Agregar una funcionalidad de chat en vivo para soporte o discusiones entre estudiantes y profesores.
+
+-------------------------------------------------------------------------
+
+[] Sistema de puntuación y logros:
+
+- [] Implementar un sistema de puntuación y logros para motivar a los estudiantes a continuar su educación.
+
+-------------------------------------------------------------------------

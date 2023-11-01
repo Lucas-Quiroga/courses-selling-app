@@ -21,9 +21,9 @@ const Layout = ({ children }: any) => {
                 <svg
                   className="w-5 text-gray-600 h-5 cursor-pointer"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -39,15 +39,8 @@ const Layout = ({ children }: any) => {
                 className="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent"
               />
               <div className="select">
-                <select
-                  name=""
-                  id=""
-                  x-model="image_type"
-                  className="text-sm outline-none focus:outline-none bg-transparent"
-                >
-                  <option value="all" selected>
-                    All
-                  </option>
+                <select defaultValue="all">
+                  <option value="all">All</option>
                   <option value="photo">Photo</option>
                   <option value="illustration">Illustration</option>
                   <option value="vector">Vector</option>

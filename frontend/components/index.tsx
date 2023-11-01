@@ -1,7 +1,7 @@
 import NavbarUser from "./Navbar/NavbarUser";
 import Sidebar from "./Sidebar";
 import Banner from "./Banner";
-import SearchBar from "./SearchBar";
+// import SearchBar from "./SearchBar";
 import Cards from "./Cards";
 import RegisterUser from "./Register/RegisterUser";
 import LoginUser from "./Login/LoginUser";
@@ -12,15 +12,19 @@ import HomeWeb from "./Home";
 import ViewHomeForm from "./ViewHomeForm";
 import Hero from "./Hero";
 import Navbar from "./Navbar/Navbar";
+import NavbarAdmin from "./Navbar/NavbarAdmin";
 import SectionOneCourse from "./SectionOneCourse";
 import SectionCoursesAll from "./SectionCoursesAll";
 import Footer from "./Footer";
+import Searchbar from "./AdminComponents/Searchbar";
+import UsersTable from "./AdminComponents/Table";
+import Chart from "./AdminComponents/Chart";
 
 export {
   NavbarUser,
   Sidebar,
   Banner,
-  SearchBar,
+  // SearchBar,
   Cards,
   RegisterUser,
   LoginUser,
@@ -34,4 +38,8 @@ export {
   SectionOneCourse,
   SectionCoursesAll,
   Footer,
+  NavbarAdmin,
+  Searchbar,
+  UsersTable,
+  Chart,
 };
