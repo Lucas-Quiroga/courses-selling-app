@@ -150,7 +150,7 @@ const RegisterUser = () => {
         <div>
           <label
             htmlFor="firstName"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Your firstName
           </label>
@@ -175,7 +175,7 @@ const RegisterUser = () => {
         <div>
           <label
             htmlFor="email"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Your email
           </label>
@@ -204,7 +204,7 @@ const RegisterUser = () => {
         <div>
           <label
             htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Your password
           </label>
@@ -233,7 +233,7 @@ const RegisterUser = () => {
         <div>
           <label
             htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Repeat your password
           </label>
@@ -266,13 +266,12 @@ const RegisterUser = () => {
 
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
           Have an account?{" "}
-          <Link
-            href="signin"
+          <button
             className="text-blue-700 hover:underline dark:text-blue-500"
             onClick={toggleForm}
           >
             Log in
-          </Link>
+          </button>
         </div>
       </form>
     </>

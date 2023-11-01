@@ -25,6 +25,10 @@ const NavbarUser = () => {
     return () => clearInterval(id); // Limpia el intervalo cuando se desmonta el componente
   }, []);
 
+  if (!isAuth) {
+    return null;
+  }
+
   return (
     <header>
       <nav

@@ -147,7 +147,7 @@ const LoginUser = () => {
         <div>
           <label
             htmlFor="email"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Your email
           </label>
@@ -175,7 +175,7 @@ const LoginUser = () => {
         <div>
           <label
             htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Your password
           </label>
@@ -210,13 +210,12 @@ const LoginUser = () => {
         </button>
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered?{" "}
-          <Link
-            href="signup"
+          <button
             className="text-blue-700 hover:underline dark:text-blue-500"
             onClick={toggleForm}
           >
             Create account
-          </Link>
+          </button>
         </div>
       </form>
     </>
