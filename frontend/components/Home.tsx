@@ -12,6 +12,7 @@ import {
 } from "@/components";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
 import { ViewHomeForm } from "@/components";
+import { useSession } from "next-auth/react";
 
 type Course = {
   image: string;
@@ -24,6 +25,9 @@ type Course = {
 const HomeWeb = ({ courses }: { courses: Course[] }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
+  //data del usuario ingresado por google
+  const { data: session } = useSession();
+
   useEffect(() => {
     const checkAuth = () => setIsAuth(isAuthenticated());
     checkAuth(); // Verifica la autenticación inmediatamente
@@ -34,7 +38,7 @@ const HomeWeb = ({ courses }: { courses: Course[] }) => {
 
   return (
     <>
-      {!isAuth ? (
+      {!isAuth && !session?.user ? (
         <ViewHomeForm />
       ) : (
         <>

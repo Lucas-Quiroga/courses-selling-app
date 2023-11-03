@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const { toggleForm, toggleModal, active, setActive } = useAuth();
@@ -11,6 +12,9 @@ const Navbar = () => {
   const router = useRouter();
 
   const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  //data del usuario ingresado por google
+  const { data: session } = useSession();
 
   const Logout = () => {
     localStorage.clear();
@@ -25,7 +29,7 @@ const Navbar = () => {
     return () => clearInterval(id); // Limpia el intervalo cuando se desmonta el componente
   }, []);
 
-  if (!isAuth) {
+  if (!isAuth && !session?.user) {
     return null;
   }
   return (
@@ -75,7 +79,7 @@ const Navbar = () => {
                 Cursos
               </Link>
             </li>
-            {!isAuth ? (
+            {!isAuth && !session?.user ? (
               <li>
                 <Link
                   href="/user/signin"
@@ -91,10 +95,12 @@ const Navbar = () => {
                   href="#"
                   className="hover:text-gray-500 text-gray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   aria-current="page"
-                  onClick={() => {
-                    router.push("/");
-                    router.refresh();
+                  onClick={async () => {
                     Logout();
+                    await signOut({
+                      callbackUrl: "/",
+                    });
+                    router.push("/");
                   }}
                 >
                   Logout

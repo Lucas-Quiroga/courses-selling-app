@@ -2,7 +2,7 @@ import { useAuth } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import "./globals.css";
 import { NavbarUser, Navbar, Footer } from "@/components";
-import { AuthProvider } from "@/context/AuthContext";
+import ProvidersAuth from "./ProvidersAuth";
 
 export const metadata: Metadata = {
   title: "Couses selling",
@@ -18,10 +18,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="relative">
-        <AuthProvider>
+        <ProvidersAuth>
           <Navbar />
           {children}
-        </AuthProvider>
+        </ProvidersAuth>
         <Footer />
       </body>
     </html>

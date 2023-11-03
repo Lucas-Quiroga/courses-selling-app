@@ -35,11 +35,11 @@ exports.purchasesCourse = async (req, res) => {
 };
 
 exports.createCourse = async (req, res) => {
-  const { name, description, price } = req.body;
+  const { name, description, price, modules, thumbnail } = req.body;
 
-  if (!name || !description || !price) {
-    res.status(400).json({
-      error: "Please include all fields",
+  if (!name || !description || !price || !thumbnail) {
+    return res.status(400).json({
+      error: "Por favor, completa todos los campos requeridos.",
     });
   }
 

@@ -16,7 +16,10 @@ const courseSchema = new moongose.Schema({
     required: true,
     trim: true,
   },
-  modules: [],
+  modules: {
+    type: Array,
+    default: [], // valor por defecto
+  },
   thumbnail: {
     type: String,
   },
