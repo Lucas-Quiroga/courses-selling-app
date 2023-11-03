@@ -33,17 +33,7 @@ const Page = () => {
       {loading ? (
         <Loading number={1} />
       ) : courses.length > 0 ? (
-        // Renderiza tus cursos aquí.
-        courses.map((course: Course) => (
-          <Cards
-            key={course._id}
-            image={course.image}
-            name={course.name}
-            description={course.description}
-            price={course.price}
-            _id={course._id}
-          />
-        ))
+        <Cards courses={courses} />
       ) : (
         <div>Not found</div>
       )}

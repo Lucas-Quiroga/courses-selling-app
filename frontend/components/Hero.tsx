@@ -8,17 +8,20 @@ const Hero = () => {
         <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
           <div className="pt-32 sm:pt-0">
             <h2 className="font-semibold text-4xl text-gray-600">
-              Notus Tailwind JS - A beautiful extension for Tailwind CSS.
+              Cursos de Tarot con Paula Domínguez
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-600">
-              Notus Tailwind JS is Free and Open Source. It does not change any
-              of the CSS from
+              Descubre el fascinante mundo del tarot con los cursos de Paula
+              Domínguez. Nuestros cursos te brindarán un profundo conocimiento
+              del tarot y te guiarán en tu viaje espiritual. Aprende a
+              interpretar las cartas y descubre sus misterios en un ambiente de
+              aprendizaje enriquecedor.
               <a
                 href="https://tailwindcss.com/?ref=creativetim"
                 className="text-blueGray-600"
                 target="_blank"
               >
-                Tailwind CSS.
+                ¡Explora nuestros cursos ahora!
               </a>
               It features multiple HTML elements and it comes with dynamic
               components for ReactJS, Vue and Angular.

@@ -40,7 +40,7 @@ const LoginUser = () => {
         setSuccess("Ingreso exitoso!");
         setTimeout(() => {
           setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
-        }, 3000); // 2000 milisegundos (2 segundos)
+        }, 5000); // 2000 milisegundos (2 segundos)
       }
     } catch (error) {
       setError(
@@ -48,7 +48,7 @@ const LoginUser = () => {
       );
       setTimeout(() => {
         setError(""); // Borra el mensaje de éxito después de 2 segundos
-      }, 3000); // 2000 milisegundos (2 segundos)
+      }, 5000); // 2000 milisegundos (2 segundos)
     }
     reset();
   };

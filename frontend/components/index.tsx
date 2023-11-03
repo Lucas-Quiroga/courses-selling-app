@@ -19,6 +19,11 @@ import Footer from "./Footer";
 import Searchbar from "./AdminComponents/Searchbar";
 import UsersTable from "./AdminComponents/Table";
 import Chart from "./AdminComponents/Chart";
+import Teachers from "./Teachers/Teachers";
+import Testimonials from "./Testimonials";
+import Contact from "./Contact";
+import Faqs from "./Faqs";
+import RadioButtons from "./RadioButtons";
 
 export {
   NavbarUser,
@@ -42,4 +47,9 @@ export {
   Searchbar,
   UsersTable,
   Chart,
+  Teachers,
+  Testimonials,
+  Contact,
+  Faqs,
+  RadioButtons,
 };

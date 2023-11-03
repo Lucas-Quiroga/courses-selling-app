@@ -1,6 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { useForm, FieldError, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  FieldError,
+  SubmitHandler,
+  useFieldArray,
+} from "react-hook-form";
 import { createCourse } from "@/coreComponents/helper/course";
 
 interface IFormInput {
@@ -8,12 +13,10 @@ interface IFormInput {
   description: string;
   price: string;
   thumbnail: string;
-  modules: Module[];
-}
-
-interface Module {
-  title: string;
-  description: string;
+  modules: {
+    title: string;
+    description: string;
+  }[];
 }
 
 const page = () => {
@@ -26,7 +29,13 @@ const page = () => {
     reset,
     formState: { errors },
     watch,
+    control,
   } = useForm<IFormInput>();
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "modules",
+  });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const course = {
@@ -233,6 +242,29 @@ const page = () => {
               </span>
             )}
           </div>
+          {fields.map((field, index) => (
+            <div key={field.id}>
+              <input
+                type="text"
+                {...register(`modules.${index}.title`)}
+                placeholder="Título del módulo"
+              />
+              <textarea
+                {...register(`modules.${index}.description`)}
+                placeholder="Descripción del módulo"
+              />
+              <button type="button" onClick={() => remove(index)}>
+                Eliminar Módulo
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() => append({ title: "", description: "" })}
+            className="text-blue-500"
+          >
+            Agregar Módulo
+          </button>
           <button
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
