@@ -7,7 +7,12 @@ const connectedDataBase = require("./db/mongodb.cjs");
 const authRoutes = require("./routes/auth.cjs");
 const courseRoutes = require("./routes/course.cjs");
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000", // Reemplaza con el origen de tu aplicación frontend
+  credentials: true, // Habilita el envío de cookies y credenciales en las solicitudes
+};
+
+app.use(cors(corsOptions));
 dotenv.config();
 // Analiza datos codificados en formato URL.
 app.use(bodyParser.urlencoded({ extended: true }));

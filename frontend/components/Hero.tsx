@@ -1,15 +1,48 @@
-import React from "react";
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect } from "react";
+import Loading from "@/coreComponents/Loading";
+import { getCourses } from "@/coreComponents/helper/apiCalls";
+import { Cards, Filters } from "@/components";
+// import axios from "axios";
+
+type Course = {
+  image: string;
+  name: string;
+  description: string;
+  price: number;
+  _id: number;
+};
 
 const Hero = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true); //indicador de carga.
+  const [showMore, setShowMore] = useState(false);
+
+  useEffect(() => {
+    getCourses()
+      .then((res) => {
+        setCourses(res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
+  }, []);
+
+  const initialCourses = courses.slice(0, 5);
+  const handleShowMore = () => {
+    setShowMore(!showMore);
+  };
+
   return (
-    <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
+    <div className="mt-5">
       <div className="container mx-auto items-center flex flex-wrap">
-        <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
+        <div className="w-full px-4">
           <div className="pt-32 sm:pt-0">
-            <h2 className="font-semibold text-4xl text-gray-600">
-              Cursos de Tarot con Paula Domínguez
-            </h2>
+            <h1 className="text-3xl font-semibold text-center text-gray-800 lg:text-3xl ">
+              Tu lugar donde <span className="text-indigo-600 ">aprender</span>{" "}
+            </h1>
             <p className="mt-4 text-lg leading-relaxed text-gray-600">
               Descubre el fascinante mundo del tarot con los cursos de Paula
               Domínguez. Nuestros cursos te brindarán un profundo conocimiento
@@ -26,34 +59,28 @@ const Hero = () => {
               It features multiple HTML elements and it comes with dynamic
               components for ReactJS, Vue and Angular.
             </p>
-            <div className="mt-12">
-              <a
-                href="https://www.creative-tim.com/learning-lab/tailwind/js/overview/notus?ref=njs-index"
-                target="_blank"
-                className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-pink-500 active:bg-pink-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-              >
-                Get started
-              </a>
-              <a
-                href="https://github.com/creativetimofficial/notus-js?ref=njs-index"
-                className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-700 active:bg-gray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                target="_blank"
-              >
-                Github Star
-              </a>
-            </div>
           </div>
         </div>
       </div>
-
-      <Image
-        className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
-        src="/hero.png"
-        alt="..."
-        height={1437}
-        width={1440}
-      />
-    </section>
+      {loading ? (
+        <Loading number={1} />
+      ) : courses.length > 0 ? (
+        <div className="flex flex-col justify-center items-center">
+          <Filters />
+          <Cards courses={showMore ? courses : initialCourses} />
+          {courses.length > initialCourses.length && (
+            <button
+              onClick={handleShowMore}
+              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+            >
+              {showMore ? "Show Less" : "Show More"}
+            </button>
+          )}
+        </div>
+      ) : (
+        <div>Not found</div>
+      )}
+    </div>
   );
 };
 

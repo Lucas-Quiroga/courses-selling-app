@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RadioButtons } from ".";
+import { usePathname } from "next/navigation";
 
 interface CardsProps {
   image: string;
@@ -15,12 +16,15 @@ interface CardsProps {
 
 const Cards = ({ courses }: any) => {
   courses.image = courses.image ? courses.image : "/cardimg.png";
+  const pathname = usePathname();
 
   const router = useRouter();
 
   return (
     <div className="flex items-center flex-col">
-      <RadioButtons />
+      <div className={`${pathname === "/" ? "hidden" : ""}`}>
+        <RadioButtons />
+      </div>
 
       <div className="flex flex-wrap justify-center overflow-hidden items-center gap-5 my-5">
         {courses.map((course: CardsProps) => (

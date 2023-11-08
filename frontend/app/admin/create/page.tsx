@@ -46,7 +46,7 @@ const page = () => {
       modules: data.modules,
     };
 
-    console.log("desde el cliente", course);
+    // console.log("desde el cliente", course);
 
     try {
       const response = await createCourse(course);

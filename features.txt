@@ -1,8 +1,9 @@
 [] Perfil de usuario:
 
-- [] Rutas para que los usuarios puedan ver y editar su perfil.
-- [] Cambio de contraseña.
+- [X] Rutas para que los usuarios puedan ver y editar su perfil.
+- [] logica de cambio de contraseña.
 - [] Actualización de la información del usuario.
+- [] Logica de botón de borrar cuenta
 
 -------------------------------------------------------------------------
 

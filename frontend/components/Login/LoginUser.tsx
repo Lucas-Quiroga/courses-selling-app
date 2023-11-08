@@ -38,6 +38,7 @@ const LoginUser = () => {
       const response = await signin(user);
       if (response.status === 200) {
         setSuccess("Ingreso exitoso!");
+        router.push("/");
         setTimeout(() => {
           setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
         }, 5000); // 2000 milisegundos (2 segundos)

@@ -2,6 +2,9 @@ const Admin = require("../models/admin");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const cookie = require("cookie");
+
+const { serialize } = cookie;
 
 // Registro de usuario
 exports.signup = async (req, res) => {
@@ -39,7 +42,7 @@ exports.signup = async (req, res) => {
 
     // Generar un token JWT para el usuario registrado
     const token = jwt.sign({ email, role: "user" }, process.env.SECRET_USER, {
-      expiresIn: "3h",
+      expiresIn: 60 * 60 * 24 * 7,
     });
 
     // Devolver una respuesta exitosa con el token
@@ -75,11 +78,23 @@ exports.signin = async (req, res) => {
 
     // Generar un token JWT válido para el usuario
     const token = jwt.sign({ email, role: "user" }, process.env.SECRET_USER, {
-      expiresIn: "3h",
+      expiresIn: 60 * 60 * 24 * 7,
     });
 
+    if (user) {
+      const serialized = serialize("userJwt", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "none",
+        maxAge: 60 * 60 * 24 * 7, // Duración de la cookie en segundos
+        path: "/", // Ruta de acceso
+      });
+
+      res.cookie("userJwt", serialized);
+    }
+
     // Devolver una respuesta exitosa con el token
-    return res.status(200).json({ message: "Inicio de sesión exitoso", token });
+    return res.json({ message: "login succesfully", token });
   } catch (error) {
     // Si ocurre un error durante el proceso, devolver un error 500 (Internal Server Error)
     console.error("Error en el inicio de sesión:", error);
@@ -88,33 +103,127 @@ exports.signin = async (req, res) => {
 };
 
 // Middleware para autenticar token JWT de usuario
-exports.authenticateJwtUser = async (req, res, next) => {
+exports.authenticateJwtUser = (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(401).json({ error: "Acceso denegado" });
+    }
 
-    if (authHeader) {
-      const token = authHeader.split(" ")[1];
+    const tokenWithoutBearer = token.replace("Bearer ", "");
 
-      jwt.verify(token, process.env.SECRET_USER, (err, user) => {
-        if (err) {
-          // Si el token expira o no es válido, devolver un error 403 (Forbidden)
+    jwt.verify(tokenWithoutBearer, process.env.SECRET_USER, (err, user) => {
+      if (err) {
+        if (err.name === "TokenExpiredError") {
           return res.status(403).json({
             error: "Token caducado. Por favor, inicie sesión nuevamente",
           });
+        } else {
+          return res.status(403).json({
+            error: "Token no válido. Inicie sesión para obtener un nuevo token",
+          });
         }
+      }
 
-        // Si el token es válido, asignar los datos del usuario al objeto 'req.user' para su uso posterior
-        req.user = user;
-        next();
-      });
-    } else {
-      // Si no se proporciona un encabezado de autorización, devolver un error 401 (Unauthorized)
-      res.status(401).json({ error: "Acceso denegado" });
-    }
+      // Si el token es válido, asignar los datos del usuario al objeto 'req.user' para su uso posterior
+      req.user = user;
+
+      next();
+    });
   } catch (error) {
     // Si ocurre un error durante el proceso, devolver un error 500 (Internal Server Error)
     console.error("Error en la autenticación JWT de usuario:", error);
     res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+// Recuperar perfil de usuario
+exports.getUserProfile = async (req, res) => {
+  try {
+    // Verifica si el usuario autenticado está disponible en req.user
+    if (!req.user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Obtiene el correo electrónico del usuario autenticado
+    const { email } = req.user;
+
+    // Busca al usuario en la base de datos por su correo electrónico
+    const userSearchInDb = await User.findOne({ email });
+
+    if (!userSearchInDb) {
+      return res
+        .status(404)
+        .json({ error: "Usuario no encontrado en la base de datos" });
+    }
+
+    // Filtra los campos que deseas incluir en el perfil del usuario
+    const userProfile = {
+      firstName: userSearchInDb.firstName,
+      email: userSearchInDb.email,
+      // Agrega otros campos de perfil que necesites
+    };
+
+    return res.status(200).json(userProfile);
+  } catch (error) {
+    console.error("Error al recuperar el perfil de usuario:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+// Actualizar perfil de usuario
+exports.updateUserProfile = async (req, res) => {
+  const { firstName, password, phoneNo } = req.body;
+
+  try {
+    const { user } = req;
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    const { email } = user;
+
+    const userInDb = await User.findOne({ email });
+
+    if (!userInDb) {
+      return res
+        .status(404)
+        .json({ error: "Usuario no encontrado en la base de datos" });
+    }
+
+    // Actualiza los campos del perfil que necesitas cambiar
+    if (firstName) {
+      userInDb.firstName = firstName;
+    }
+
+    if (phoneNo) {
+      userInDb.phoneNo = phoneNo;
+    }
+
+    if (password) {
+      // Verificar que la contraseña sea una cadena válida
+      if (typeof password !== "string") {
+        return res.status(400).json({ error: "Contraseña inválida" });
+      }
+
+      // Generar un hash de contraseña seguro
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // Actualizar la contraseña en la base de datos
+      userInDb.password = hashedPassword;
+    }
+
+    // Guarda los cambios en la base de datos
+    await userInDb.save();
+
+    return res
+      .status(200)
+      .json({ message: "Perfil actualizado correctamente" });
+  } catch (error) {
+    console.error("Error al actualizar el perfil de usuario:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
 };
 

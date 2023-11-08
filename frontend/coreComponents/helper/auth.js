@@ -3,7 +3,7 @@ import http from "./http";
 // Registro de usuario
 export const signup = async (user) => {
   try {
-    console.log("User data:", user);
+    // console.log("User data:", user);
     // Realiza una solicitud HTTP POST para registrar un nuevo usuario
     const response = await http.post("api/user/signup", user);
     console.log("Signup response:", response);
@@ -18,14 +18,16 @@ export const signup = async (user) => {
 export const signin = async (user) => {
   console.log(user);
   try {
-    console.log("User data:", user);
+    // console.log("User data:", user);
     // Realiza una solicitud HTTP POST para iniciar sesión
-    const response = await http.post("api/user/signin", user);
+    const response = await http.post("api/user/signin", user, {
+      withCredentials: "include",
+    });
     console.log(response);
     // Llama a la función 'authenticate' para manejar la autenticación del usuario
     authenticate(response.data.token);
-    window.location.reload(); // Recarga la página después de iniciar sesión
-    console.log("Signin response:", response);
+    // window.location.reload(); // Recarga la página después de iniciar sesión
+    // console.log("Signin response:", response);
     return response;
   } catch (error) {
     console.error("Signin error:", error);
@@ -59,6 +61,41 @@ export const isAuthenticated = () => {
   } else {
     // Si no hay un token, retornamos false.
     return false;
+  }
+};
+
+// Recuperar datos del usuario
+export const getUserProfile = async (token) => {
+  const cleanToken = token.replace(/['"]+/g, "");
+  try {
+    // Realiza una solicitud HTTP GET para obtener los datos del perfil del usuario
+    const response = await http.get("api/user/profile", {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`, //token JWT válido
+      },
+    });
+
+    return response.data; // Devuelve los datos del perfil del usuario
+  } catch (error) {
+    console.error("User profile error:", error);
+    throw error;
+  }
+};
+
+//Modificar datos del usuario
+export const updateProfileUser = async (token, newData) => {
+  const cleanToken = token.replace(/['"]+/g, "");
+  try {
+    const updateResponse = await http.put("api/user/profile", newData, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`, // Token JWT válido
+      },
+    });
+
+    return updateResponse.data;
+  } catch (error) {
+    console.error("User profile error:", error);
+    throw error;
   }
 };
 

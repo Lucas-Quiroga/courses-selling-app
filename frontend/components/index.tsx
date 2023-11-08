@@ -24,6 +24,8 @@ import Testimonials from "./Testimonials";
 import Contact from "./Contact";
 import Faqs from "./Faqs";
 import RadioButtons from "./RadioButtons";
+import UserProfileSection from "./UserProfileSection";
+import Filters from "./Filters";
 
 export {
   NavbarUser,
@@ -52,4 +54,6 @@ export {
   Contact,
   Faqs,
   RadioButtons,
+  UserProfileSection,
+  Filters,
 };
