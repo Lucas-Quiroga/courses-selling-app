@@ -1,27 +1,44 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   useForm,
   FieldError,
   SubmitHandler,
   useFieldArray,
 } from "react-hook-form";
-import { createCourse } from "@/coreComponents/helper/course";
+import { useParams } from "next/navigation";
+// import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
+import { createCourse, updateCourse } from "@/coreComponents/helper/course";
+import axios from "axios";
 
 interface IFormInput {
   name: string;
   description: string;
-  price: string;
+  price: number;
   thumbnail: string;
   modules: {
     title: string;
     description: string;
   }[];
+  duration: string | number;
+  level: string;
 }
 
 const page = () => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+
+  const params = useParams();
+
+  async function getCourseDetail() {
+    try {
+      const response = await axios.get(`api/user/course/${params.id}`);
+      console.log(response.data); // Mueve este console.log antes del return
+      return response?.data?.course || null;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const {
     register,
@@ -44,17 +61,28 @@ const page = () => {
       price: data.price,
       thumbnail: data.thumbnail,
       modules: data.modules,
+      duration: data.duration,
+      level: data.level,
     };
-
     // console.log("desde el cliente", course);
 
     try {
-      const response = await createCourse(course);
-      if (response.status === 200) {
-        setSuccess("Curso creado con exito!");
-        setTimeout(() => {
-          setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
-        }, 3000); // 2000 milisegundos (2 segundos)
+      if (!params.id) {
+        const response = await createCourse(course);
+        if (response.status === 200) {
+          setSuccess("Curso creado con exito!");
+          setTimeout(() => {
+            setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
+          }, 3000); // 2000 milisegundos (2 segundos)
+        }
+      } else {
+        const response = await updateCourse(params.id, course);
+        if (response.status === 200) {
+          setSuccess("Curso actualizado con exito!");
+          setTimeout(() => {
+            setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
+          }, 3000); // 2000 milisegundos (2 segundos)
+        }
       }
     } catch (error) {
       setError(
@@ -66,6 +94,12 @@ const page = () => {
     }
     reset();
   };
+
+  useEffect(() => {
+    if (params.id) {
+      getCourseDetail();
+    }
+  }, []);
 
   return (
     <>
@@ -160,7 +194,9 @@ const page = () => {
       )}
 
       <div className="p-4 items-center flex flex-col">
-        <h2 className="text-2xl font-semibold mb-4">Crear un nuevo curso</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          {params.id ? "Editar el curso" : "Crear un nuevo curso"}
+        </h2>
         <form className="max-w-md space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label htmlFor="name">Nombre del curso:</label>
@@ -206,8 +242,9 @@ const page = () => {
           </div>
           <div>
             <label htmlFor="price">Precio:</label>
+
             <input
-              type="text"
+              type="number"
               id="price"
               {...register("price", {
                 required: {
@@ -258,6 +295,53 @@ const page = () => {
               </button>
             </div>
           ))}
+          <div>
+            <label htmlFor="duration">Duración del curso:</label>
+            <select
+              id="duration"
+              {...register("duration", {
+                required: {
+                  value: true,
+                  message: "Duration is required",
+                },
+              })}
+              className="w-full border border-gray-300 rounded p-2"
+            >
+              <option value="">Selecciona la duración</option>
+              <option value="Corto">Corto</option>
+              <option value="Medio">Medio</option>
+              <option value="Largo">Largo</option>
+            </select>
+            {errors.duration && (
+              <span className="block text-red-600 text-[15px] font-bold">
+                {(errors.duration as FieldError).message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="level">Nivel del curso:</label>
+            <select
+              id="level"
+              {...register("level", {
+                required: {
+                  value: true,
+                  message: "Level is required",
+                },
+              })}
+              className="w-full border border-gray-300 rounded p-2"
+            >
+              <option value="">Selecciona el nivel</option>
+              <option value="Principiante">Principiante</option>
+              <option value="Intermedio">Intermedio</option>
+              <option value="Avanzado">Avanzado</option>
+            </select>
+            {errors.level && (
+              <span className="block text-red-600 text-[15px] font-bold">
+                {(errors.level as FieldError).message}
+              </span>
+            )}
+          </div>
           <button
             type="button"
             onClick={() => append({ title: "", description: "" })}

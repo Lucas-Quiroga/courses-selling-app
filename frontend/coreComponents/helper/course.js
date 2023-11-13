@@ -14,3 +14,22 @@ export const createCourse = async (courseData) => {
     throw error?.response?.data;
   }
 };
+
+export const updateCourse = async (courseId, courseData) => {
+  const adminToken = JSON.parse(localStorage.getItem("adminJwt")).token;
+  try {
+    const response = await http.put(
+      `api/admin/update/${courseId}`,
+      courseData,
+      {
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+        },
+      }
+    );
+    console.log("desde el servidor", response?.data || null);
+    return response?.data || null;
+  } catch (error) {
+    throw error?.response?.data;
+  }
+};

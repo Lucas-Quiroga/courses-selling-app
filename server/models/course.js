@@ -12,7 +12,7 @@ const courseSchema = new moongose.Schema({
     required: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
     trim: true,
   },
@@ -22,6 +22,16 @@ const courseSchema = new moongose.Schema({
   },
   thumbnail: {
     type: String,
+  },
+  duration: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  level: {
+    type: String,
+    required: true,
+    trim: true,
   },
 });
 

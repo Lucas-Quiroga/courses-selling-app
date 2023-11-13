@@ -52,3 +52,41 @@ exports.createCourse = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+exports.updateCourse = async (req, res) => {
+  const courseId = req.params.courseId;
+  const updatedCourseData = req.body;
+
+  if (!courseId || !updatedCourseData) {
+    return res.status(400).json({
+      error:
+        "Por favor, proporciona el courseId y los datos actualizados del curso.",
+    });
+  }
+
+  try {
+    const existingCourse = await Courses.findById(courseId);
+
+    if (!existingCourse) {
+      return res.status(404).json({ error: "Curso no encontrado" });
+    }
+
+    // Actualiza los campos del curso con los nuevos datos
+    existingCourse.name = updatedCourseData.name || existingCourse.name;
+    existingCourse.description =
+      updatedCourseData.description || existingCourse.description;
+    existingCourse.price = updatedCourseData.price || existingCourse.price;
+    existingCourse.modules =
+      updatedCourseData.modules || existingCourse.modules;
+    existingCourse.thumbnail =
+      updatedCourseData.thumbnail || existingCourse.thumbnail;
+
+    // Guarda los cambios en la base de datos
+    await existingCourse.save();
+
+    res.json({ message: "Curso actualizado exitosamente" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};

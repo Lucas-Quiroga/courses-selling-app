@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { usePathname } from "next/navigation";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const navigation = [
   { name: "dashboard", href: "dashboard" },
@@ -48,7 +49,7 @@ const NavbarAdmin = () => {
               </div>
               <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className={classNames(
@@ -60,7 +61,7 @@ const NavbarAdmin = () => {
                     aria-current={pathname === item.href ? "page" : undefined}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

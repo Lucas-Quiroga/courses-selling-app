@@ -15,8 +15,8 @@ const Filters = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
           <select className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
             <option value="">Todo</option>
-            <option value="for-rent">For Rent</option>
-            <option value="for-sale">For Sale</option>
+            <option value="for-rent">Más populares</option>
+            <option value="for-sale">Más vendidos</option>
           </select>
 
           <select className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
@@ -27,18 +27,17 @@ const Filters = () => {
           </select>
 
           <select className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Categoria</option>
-            <option value="1000">Tarot Rider</option>
-            <option value="2000">Interpretación del Tarot</option>
-            <option value="3000">Diferentes tiradas del Tarot</option>
-            <option value="4000">Sanación espiritual y energética</option>
+            <option value="">Duración</option>
+            <option value="Corto">Corto</option>
+            <option value="Medio">Medio</option>
+            <option value="Largo">Largo</option>
           </select>
 
           <select className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
             <option value="">Nivel</option>
-            <option value="200">Principiante</option>
-            <option value="400">Intermedio</option>
-            <option value="600">Avanzado</option>
+            <option value="Principiante">Principiante</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Avanzado">Avanzado</option>
           </select>
         </div>
       </div>
