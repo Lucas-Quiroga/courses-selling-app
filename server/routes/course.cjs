@@ -6,6 +6,7 @@ const {
   purchasesCourse,
   createCourse,
   updateCourse,
+  deleteCourse,
 } = require("../controllers/course.cjs");
 const {
   authenticateJwtUser,
@@ -20,6 +21,6 @@ router.post("/user/purchased", authenticateJwtUser, purchasesCourse);
 // Rutas protegidas para administradores
 router.post("/admin/create", authenticateJwtAdmin, createCourse);
 router.put("/admin/update/:courseId", authenticateJwtAdmin, updateCourse);
-// router.delete("/admin/delete/:courseId", authenticateJwtAdmin, deleteCourse);
+router.delete("/admin/delete/:courseId", authenticateJwtAdmin, deleteCourse);
 
 module.exports = router;

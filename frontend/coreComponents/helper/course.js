@@ -8,7 +8,7 @@ export const createCourse = async (courseData) => {
         Authorization: `Bearer ${adminToken}`,
       },
     });
-    console.log("desde el servidor", response?.data || null);
+    // console.log("desde el servidor", response?.data || null);
     return response?.data || null;
   } catch (error) {
     throw error?.response?.data;
@@ -27,7 +27,22 @@ export const updateCourse = async (courseId, courseData) => {
         },
       }
     );
-    console.log("desde el servidor", response?.data || null);
+    // console.log("desde el servidor", response?.data || null);
+    return response?.data || null;
+  } catch (error) {
+    throw error?.response?.data;
+  }
+};
+
+export const deleteCourse = async (courseId) => {
+  const adminToken = JSON.parse(localStorage.getItem("adminJwt")).token;
+  try {
+    const response = await http.delete(`api/admin/delete/${courseId}`, {
+      headers: {
+        Authorization: `Bearer ${adminToken}`,
+      },
+    });
+    // console.log("desde el servidor", response?.data || null);
     return response?.data || null;
   } catch (error) {
     throw error?.response?.data;

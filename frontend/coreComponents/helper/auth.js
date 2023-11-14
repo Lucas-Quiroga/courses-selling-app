@@ -6,7 +6,7 @@ export const signup = async (user) => {
     // console.log("User data:", user);
     // Realiza una solicitud HTTP POST para registrar un nuevo usuario
     const response = await http.post("api/user/signup", user);
-    console.log("Signup response:", response);
+    // console.log("Signup response:", response);
     return response;
   } catch (error) {
     console.error("Signup error:", error);
@@ -16,14 +16,14 @@ export const signup = async (user) => {
 
 // Inicio de sesión de usuario
 export const signin = async (user) => {
-  console.log(user);
+  // console.log(user);
   try {
     // console.log("User data:", user);
     // Realiza una solicitud HTTP POST para iniciar sesión
     const response = await http.post("api/user/signin", user, {
       withCredentials: "include",
     });
-    console.log(response);
+    // console.log(response);
     // Llama a la función 'authenticate' para manejar la autenticación del usuario
     authenticate(response.data.token);
     // window.location.reload(); // Recarga la página después de iniciar sesión
@@ -105,7 +105,7 @@ export const adminSignup = async (admin) => {
     const response = await http.post("api/admin/signup", admin);
     return response;
   } catch (error) {
-    console.log("Admin signup error:", error);
+    // console.log("Admin signup error:", error);
     throw error;
   }
 };
@@ -118,7 +118,7 @@ export const adminSignin = async (admin, successCallBack) => {
 
     return response;
   } catch (error) {
-    console.log("Admin signin error:", error);
+    // console.log("Admin signin error:", error);
     throw error;
   }
 };

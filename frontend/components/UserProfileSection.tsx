@@ -44,7 +44,7 @@ const UserProfileSection = () => {
       const updatedUserProfile = await updateProfileUser(token, userUpdates);
 
       // Realizar otras acciones necesarias, como mostrar un mensaje de éxito
-      console.log("Perfil actualizado con éxito", updatedUserProfile);
+      // console.log("Perfil actualizado con éxito", updatedUserProfile);
 
       reset(); // Restablecer el formulario
     } catch (error) {
@@ -64,8 +64,6 @@ const UserProfileSection = () => {
         );
     }
   }, []);
-
-  console.log("llego la info:", userProfile);
 
   return (
     <>

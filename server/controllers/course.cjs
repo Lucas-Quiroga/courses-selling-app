@@ -9,6 +9,7 @@ exports.courses = async (req, res) => {
 
 //detalle del curso individual
 exports.course = async (req, res) => {
+  // console.log("desde el servidor", req.params.courseId);
   try {
     const course = await Courses.findById(req.params.courseId);
     if (course) {
@@ -53,6 +54,7 @@ exports.createCourse = async (req, res) => {
   }
 };
 
+// Función para actualizar el curso
 exports.updateCourse = async (req, res) => {
   const courseId = req.params.courseId;
   const updatedCourseData = req.body;
@@ -85,6 +87,26 @@ exports.updateCourse = async (req, res) => {
     await existingCourse.save();
 
     res.json({ message: "Curso actualizado exitosamente" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+// Función para eliminar un curso
+exports.deleteCourse = async (req, res) => {
+  const courseId = req.params.courseId;
+
+  try {
+    // Verifica si el curso existe y lo elimina
+    const courseDelete = await Courses.findByIdAndDelete(courseId);
+
+    if (!courseDelete) {
+      return res.status(404).json({ error: "Curso no encontrado" });
+    }
+
+    // Elimina el curso de la base de datos
+    res.json({ message: "Curso eliminado exitosamente", courseDelete });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Error interno del servidor" });

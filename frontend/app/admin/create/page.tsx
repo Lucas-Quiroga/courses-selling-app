@@ -9,7 +9,8 @@ import {
 import { useParams } from "next/navigation";
 // import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
 import { createCourse, updateCourse } from "@/coreComponents/helper/course";
-import axios from "axios";
+import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
+import { useRouter } from "next/navigation";
 
 interface IFormInput {
   name: string;
@@ -27,18 +28,14 @@ interface IFormInput {
 const page = () => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-
-  const params = useParams();
-
-  async function getCourseDetail() {
-    try {
-      const response = await axios.get(`api/user/course/${params.id}`);
-      console.log(response.data); // Mueve este console.log antes del return
-      return response?.data?.course || null;
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    thumbnail: "",
+    duration: "",
+    level: "",
+  });
 
   const {
     register,
@@ -47,12 +44,40 @@ const page = () => {
     formState: { errors },
     watch,
     control,
+    setValue,
   } = useForm<IFormInput>();
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "modules",
   });
+
+  const params = useParams();
+  const router = useRouter();
+
+  const fetchData = async () => {
+    if (params.id) {
+      try {
+        const course = await getCourseDetail(params.id);
+        const { name, description, price, thumbnail, duration, level } = course;
+        setData({
+          name,
+          description,
+          price,
+          thumbnail,
+          duration,
+          level,
+        });
+
+        // Configura los valores iniciales en el controlador de React Hook Form
+        setValue("duration", duration);
+        setValue("level", level);
+      } catch (error) {
+        console.error("Error fetching course data:", error);
+        // Manejar el error de alguna manera si es necesario
+      }
+    }
+  };
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const course = {
@@ -64,7 +89,6 @@ const page = () => {
       duration: data.duration,
       level: data.level,
     };
-    // console.log("desde el cliente", course);
 
     try {
       if (!params.id) {
@@ -73,6 +97,7 @@ const page = () => {
           setSuccess("Curso creado con exito!");
           setTimeout(() => {
             setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
+            router.push("/admin/courses");
           }, 3000); // 2000 milisegundos (2 segundos)
         }
       } else {
@@ -81,7 +106,13 @@ const page = () => {
           setSuccess("Curso actualizado con exito!");
           setTimeout(() => {
             setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
+            router.refresh();
           }, 3000); // 2000 milisegundos (2 segundos)
+
+          setTimeout(() => {
+            router.push("/admin/courses");
+            router.refresh();
+          }, 3001);
         }
       }
     } catch (error) {
@@ -97,7 +128,7 @@ const page = () => {
 
   useEffect(() => {
     if (params.id) {
-      getCourseDetail();
+      fetchData();
     }
   }, []);
 
@@ -192,7 +223,6 @@ const page = () => {
           </button>
         </div>
       )}
-
       <div className="p-4 items-center flex flex-col">
         <h2 className="text-2xl font-semibold mb-4">
           {params.id ? "Editar el curso" : "Crear un nuevo curso"}
@@ -209,6 +239,7 @@ const page = () => {
                   message: "Name is required",
                 },
               })}
+              defaultValue={data.name}
               className="w-full border border-gray-300 rounded p-2"
             />
             {errors.name && (
@@ -233,6 +264,7 @@ const page = () => {
                 },
               })}
               className="w-full border border-gray-300 rounded p-2"
+              defaultValue={data.description}
             ></textarea>
             {errors.description && (
               <span className="block text-red-600 text-[15px] font-bold">
@@ -253,6 +285,7 @@ const page = () => {
                 },
               })}
               className="w-full border border-gray-300 rounded p-2"
+              defaultValue={data.price}
             />
             {errors.price && (
               <span className="block text-red-600 text-[15px] font-bold">
@@ -272,6 +305,7 @@ const page = () => {
                 },
               })}
               className="w-full border border-gray-300 rounded p-2"
+              defaultValue={data.thumbnail}
             />
             {errors.thumbnail && (
               <span className="block text-red-600 text-[15px] font-bold">
@@ -306,6 +340,7 @@ const page = () => {
                 },
               })}
               className="w-full border border-gray-300 rounded p-2"
+              defaultValue={data.duration}
             >
               <option value="">Selecciona la duración</option>
               <option value="Corto">Corto</option>
@@ -330,6 +365,7 @@ const page = () => {
                 },
               })}
               className="w-full border border-gray-300 rounded p-2"
+              defaultValue={data.level}
             >
               <option value="">Selecciona el nivel</option>
               <option value="Principiante">Principiante</option>
@@ -353,7 +389,7 @@ const page = () => {
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
-            Crear Curso
+            {params.id ? "Editar curso" : "Crear Curso"}
           </button>
         </form>
       </div>
