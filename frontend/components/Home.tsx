@@ -39,10 +39,6 @@ const HomeWeb = ({ courses }: { courses: Course[] }) => {
 
   return (
     <>
-      {/* {isAuth && session?.user ? (
-        <ViewHomeForm />
-      ) : (
-        <> */}{" "}
       <Hero />
       <SectionCoursesAll />
       <Teachers />

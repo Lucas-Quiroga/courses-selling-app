@@ -6,18 +6,52 @@ import { Cards, Filters } from "@/components";
 // import axios from "axios";
 
 type Course = {
-  image: string;
+  _id: string;
   name: string;
   description: string;
   price: number;
-  _id: number;
+  modules: any[]; // Tipo real de modules puede ser diferente, ajusta según sea necesario
+  thumbnail: string;
+  duration: string;
+  level: string;
+  __v: number;
 };
 
 const Hero = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true); //indicador de carga.
   const [showMore, setShowMore] = useState(false);
+  const [filter, setFilter] = useState({ price: "", duration: "", level: "" });
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
 
+  // Obtener los primeros 5 cursos
+  const initialCourses = courses.slice(0, 5);
+
+  // Manejar la visualización de más cursos
+  const handleShowMore = () => {
+    setShowMore(!showMore);
+  };
+
+  // Manejar cambios en los filtros y actualizar los cursos filtrados
+  const handleFilterChange = (newFilter: any) => {
+    setFilter(newFilter);
+
+    if (newFilter) {
+      const filtered = courses.filter((course) => {
+        return (
+          (newFilter.price === "" ||
+            course.price <= parseInt(newFilter.price)) &&
+          (newFilter.duration === "" ||
+            course.duration === newFilter.duration) &&
+          (newFilter.level === "" || course.level === newFilter.level)
+        );
+      });
+      // Actualizar el estado con los cursos filtrados
+      setFilteredCourses(filtered);
+    }
+  };
+
+  // Efecto para cargar los cursos cuando el componente se monta
   useEffect(() => {
     getCourses()
       .then((res) => {
@@ -29,11 +63,6 @@ const Hero = () => {
         console.error(error);
       });
   }, []);
-
-  const initialCourses = courses.slice(0, 5);
-  const handleShowMore = () => {
-    setShowMore(!showMore);
-  };
 
   return (
     <div className="mt-5">
@@ -66,8 +95,14 @@ const Hero = () => {
         <Loading number={1} />
       ) : courses.length > 0 ? (
         <div className="flex flex-col justify-center items-center">
-          <Filters />
-          <Cards courses={showMore ? courses : initialCourses} />
+          <Filters filter={filter} onFilterChange={handleFilterChange} />
+          <Cards
+            courses={
+              !showMore
+                ? filteredCourses
+                : initialCourses.slice(0, showMore ? filteredCourses.length : 5)
+            }
+          />
           {courses.length > initialCourses.length && (
             <button
               onClick={handleShowMore}

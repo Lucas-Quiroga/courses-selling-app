@@ -4,7 +4,7 @@ const Layout = ({ children }: any) => {
   return (
     <>
       <div className="hero">
-        <div className="hero-headline flex flex-col items-center justify-center pt-24 text-center">
+        {/* <div className="hero-headline flex flex-col items-center justify-center pt-24 text-center">
           <h1 className="font-bold text-3xl text-gray-900">
             Stunning free images & royalty free stock
           </h1>
@@ -48,7 +48,7 @@ const Layout = ({ children }: any) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {children}
       </div>
     </>

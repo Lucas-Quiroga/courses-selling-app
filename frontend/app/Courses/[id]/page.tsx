@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
 import CardDetails from "@/components/CardDetails";
 import Courses from "@/app/Courses/page";
+import { Banner } from "@/components";
 
 const Page = async ({ params }: any) => {
   const course = await getCourseDetail(params.id);
@@ -13,7 +14,7 @@ const Page = async ({ params }: any) => {
         <>
           <CardDetails course={course} />
           <hr />
-          <h5>Otros cursos relacionados</h5>
+          <Banner />
           <Suspense fallback={<p>Loading...</p>}>
             <Courses />
           </Suspense>
