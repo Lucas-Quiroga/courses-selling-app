@@ -40,8 +40,8 @@ const HomeWeb = ({ courses }: { courses: Course[] }) => {
   return (
     <>
       <Hero />
-      <SectionCoursesAll />
-      <Teachers />
+      {/* <SectionCoursesAll /> */}
+      {/* <Teachers /> */}
       <Testimonials />
     </>
   );

@@ -23,9 +23,10 @@ import Teachers from "./Teachers/Teachers";
 import Testimonials from "./Testimonials";
 import Contact from "./Contact";
 import Faqs from "./Faqs";
-import RadioButtons from "./RadioButtons";
+// import RadioButtons from "./RadioButtons";
 import UserProfileSection from "./UserProfileSection";
 import Filters from "./Filters";
+import Cart from "./Cart";
 
 export {
   NavbarUser,
@@ -53,7 +54,8 @@ export {
   Testimonials,
   Contact,
   Faqs,
-  RadioButtons,
+  // RadioButtons,
   UserProfileSection,
   Filters,
+  Cart,
 };

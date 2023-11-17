@@ -99,6 +99,34 @@ export const updateProfileUser = async (token, newData) => {
   }
 };
 
+// Eliminar cuenta de usuario
+export const deleteAccount = async () => {
+  try {
+    const token = localStorage.getItem("userJwt");
+
+    if (!token) {
+      throw new Error("No se encontró un token de usuario");
+    }
+
+    const cleanToken = token.replace(/['"]+/g, "");
+
+    // Realiza una solicitud HTTP DELETE para eliminar la cuenta
+    const response = await http.delete("api/user/delete", {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`, // Token JWT válido
+      },
+    });
+
+    // Elimina el token de usuario del almacenamiento local después de la eliminación de cuenta
+    localStorage.removeItem("userJwt");
+
+    return response.data;
+  } catch (error) {
+    console.error("Delete account error:", error);
+    throw error;
+  }
+};
+
 // Registro de administrador:
 export const adminSignup = async (admin) => {
   try {

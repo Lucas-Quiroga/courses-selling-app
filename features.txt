@@ -1,16 +1,16 @@
-[] Perfil de usuario:
+[X] Perfil de usuario:
 
 - [X] Rutas para que los usuarios puedan ver y editar su perfil.
-- [] logica de cambio de contraseña.
-- [] Actualización de la información del usuario.
-- [] Logica de botón de borrar cuenta
+- [X] logica de cambio de contraseña.
+- [X] Actualización de la información del usuario.
+- [X] Logica de botón de borrar cuenta
 
 -------------------------------------------------------------------------
 
 [] Búsqueda y filtrado de cursos:
 
 - [] Rutas para buscar cursos por categoría, precio, nivel, etc.
-- [] Filtros avanzados para facilitar la búsqueda.
+- [X] Filtros avanzados para facilitar la búsqueda.
 
 -------------------------------------------------------------------------
 

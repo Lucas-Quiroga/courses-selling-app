@@ -91,6 +91,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
       {loading ? (
         <Loading number={1} />
       ) : courses.length > 0 ? (

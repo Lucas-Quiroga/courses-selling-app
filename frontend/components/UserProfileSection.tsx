@@ -4,8 +4,10 @@ import {
   getUserProfile,
   isAuthenticated,
   updateProfileUser,
+  deleteAccount,
 } from "@/coreComponents/helper/auth";
 import { useForm, FieldError, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 interface UserProfile {
   firstName: string;
@@ -22,6 +24,8 @@ const UserProfileSection = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   const {
     register,
@@ -43,13 +47,32 @@ const UserProfileSection = () => {
       // Llamar a la función para actualizar el perfil del usuario
       const updatedUserProfile = await updateProfileUser(token, userUpdates);
 
-      // Realizar otras acciones necesarias, como mostrar un mensaje de éxito
-      // console.log("Perfil actualizado con éxito", updatedUserProfile);
+      // Mostrar mensaje de éxito
+      setSuccess("Perfil actualizado con éxito");
+      setUserProfile(updatedUserProfile);
+
+      // Esperar 5 segundos y luego recargar la página
+      setTimeout(() => {
+        setSuccess(""); // Limpiar el mensaje de éxito después de 5 segundos
+        window.location.reload(); // Recargar la página
+      }, 5000);
 
       reset(); // Restablecer el formulario
     } catch (error) {
       console.error("Error al actualizar el perfil del usuario:", error);
       // Manejar el error, mostrar un mensaje de error, etc.
+      setError("Error al actualizar el perfil del usuario");
+    }
+  };
+
+  const handleDeleteAccount = () => {
+    const confirmDelete = window.confirm(
+      "¿Estás seguro de que quieres eliminar tu cuenta?"
+    );
+    if (confirmDelete) {
+      // Lógica para eliminar la cuenta
+      router.push("/");
+      deleteAccount();
     }
   };
 
@@ -67,96 +90,98 @@ const UserProfileSection = () => {
 
   return (
     <>
-      {success && (
-        <div
-          id="toast-success"
-          className="flex items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-          role="alert"
-        >
-          <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200 ">
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-            </svg>
-            <span className="sr-only">Check icon</span>
-          </div>
-          <div className="ml-3 text-sm font-normal">{success}</div>
-          <button
-            type="button"
-            className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-            data-dismiss-target="#toast-success"
-            aria-label="Close"
-          >
-            <span className="sr-only">Close</span>
-            <svg
-              className="w-3 h-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-          </button>
-        </div>
-      )}
-
-      {error && (
-        <div
-          id="toast-warning"
-          className="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-          role="alert"
-        >
-          <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
-            </svg>
-            <span className="sr-only">Warning icon</span>
-          </div>
-          <div className="ml-3 text-sm font-normal">{error}</div>
-          <button
-            type="button"
-            className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-            data-dismiss-target="#toast-warning"
-            aria-label="Close"
-          >
-            <span className="sr-only">Close</span>
-            <svg
-              className="w-3 h-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-          </button>
-        </div>
-      )}
       <section className="py-40 bg-gray-100  bg-opacity-50 h-screen">
+        <div className="mx-auto container max-w-2xl md:w-3/4 shadow-md">
+          {success && (
+            <div
+              id="toast-success"
+              className="flex items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+              role="alert"
+            >
+              <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200 ">
+                <svg
+                  className="w-5 h-5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <span className="sr-only">Check icon</span>
+              </div>
+              <div className="ml-3 text-sm font-normal">{success}</div>
+              <button
+                type="button"
+                className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                data-dismiss-target="#toast-success"
+                aria-label="Close"
+              >
+                <span className="sr-only">Close</span>
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {error && (
+            <div
+              id="toast-warning"
+              className="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+              role="alert"
+            >
+              <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+                <svg
+                  className="w-5 h-5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
+                </svg>
+                <span className="sr-only">Warning icon</span>
+              </div>
+              <div className="ml-3 text-sm font-normal">{error}</div>
+              <button
+                type="button"
+                className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                data-dismiss-target="#toast-warning"
+                aria-label="Close"
+              >
+                <span className="sr-only">Close</span>
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+        </div>
         <form action="#" onSubmit={handleSubmit(onSubmit)}>
           <div className="mx-auto container max-w-2xl md:w-3/4 shadow-md">
             <div className="bg-gray-100 p-4 border-t-2 bg-opacity-5 border-indigo-400 rounded-t">
@@ -349,7 +374,7 @@ const UserProfileSection = () => {
               <div className="w-full p-4 text-right text-gray-500">
                 <button
                   className="inline-flex items-center focus:outline-none mr-4"
-                  disabled
+                  onClick={handleDeleteAccount}
                 >
                   <svg
                     fill="none"

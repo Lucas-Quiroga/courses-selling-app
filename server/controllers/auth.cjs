@@ -173,7 +173,7 @@ exports.getUserProfile = async (req, res) => {
 
 // Actualizar perfil de usuario
 exports.updateUserProfile = async (req, res) => {
-  const { firstName, password, phoneNo } = req.body;
+  const { firstName, newPassword, phoneNo } = req.body;
 
   try {
     const { user } = req;
@@ -184,46 +184,98 @@ exports.updateUserProfile = async (req, res) => {
 
     const { email } = user;
 
-    const userInDb = await User.findOne({ email });
+    const getUserDb = await User.findOne({ email });
 
-    if (!userInDb) {
+    if (!getUserDb) {
       return res
         .status(404)
         .json({ error: "Usuario no encontrado en la base de datos" });
     }
 
-    // Actualiza los campos del perfil que necesitas cambiar
-    if (firstName) {
-      userInDb.firstName = firstName;
+    // Ejemplo de validación de entrada para la nueva contraseña
+    if (
+      !newPassword ||
+      typeof newPassword !== "string" ||
+      newPassword.length < 8
+    ) {
+      return res
+        .status(400)
+        .json({ error: "La nueva contraseña no es válida" });
     }
 
-    if (phoneNo) {
-      userInDb.phoneNo = phoneNo;
-    }
-
-    if (password) {
+    // Hash de la nueva contraseña
+    let hashedPassword;
+    if (newPassword !== undefined) {
       // Verificar que la contraseña sea una cadena válida
-      if (typeof password !== "string") {
-        return res.status(400).json({ error: "Contraseña inválida" });
+      if (typeof newPassword !== "string") {
+        return res
+          .status(400)
+          .json({ error: "La contraseña debe ser una cadena de texto" });
       }
 
-      // Generar un hash de contraseña seguro
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-
-      // Actualizar la contraseña en la base de datos
-      userInDb.password = hashedPassword;
+      try {
+        // Generar un hash de contraseña seguro
+        const salt = await bcrypt.genSalt(10);
+        hashedPassword = await bcrypt.hash(newPassword, salt);
+      } catch (error) {
+        console.error("Error al hashear la contraseña:", error);
+        return res
+          .status(500)
+          .json({ error: "Error al hashear la contraseña" });
+      }
     }
+    // Actualiza el documento en base a la búsqueda por el campo `_id` (identificador)
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: getUserDb._id },
+      {
+        $set: {
+          firstName: firstName || user.firstName,
+          phoneNo: phoneNo || user.phoneNo,
+          ...(hashedPassword && { password: hashedPassword }),
+        },
+      },
+      { new: true } // Devuelve el documento actualizado
+    );
 
-    // Guarda los cambios en la base de datos
-    await userInDb.save();
+    if (!updatedUser) {
+      return res
+        .status(404)
+        .json({ error: "Usuario no encontrado en la base de datos" });
+    }
 
     return res
       .status(200)
       .json({ message: "Perfil actualizado correctamente" });
   } catch (error) {
     console.error("Error al actualizar el perfil de usuario:", error);
-    return res.status(500).json({ error: "Error interno del servidor" });
+    return res
+      .status(500)
+      .json({ error: "Error al actualizar el perfil de usuario" });
+  }
+};
+
+// Eliminar al usuario
+exports.deleteUser = async (req, res) => {
+  try {
+    const { user } = req;
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    const { email } = user;
+
+    // Implementa la lógica de eliminación de cuenta en la base de datos
+    await User.findOneAndDelete({ email });
+
+    // Añade cualquier otra lógica necesaria (como cerrar sesión, limpiar tokens, etc.)
+
+    return res.status(200).json({ message: "Cuenta eliminada correctamente" });
+  } catch (error) {
+    console.error("Error al eliminar la cuenta de usuario:", error);
+    return res
+      .status(500)
+      .json({ error: "Error al eliminar la cuenta de usuario" });
   }
 };
 

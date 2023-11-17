@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 // import { RadioButtons } from ".";
 import { usePathname } from "next/navigation";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 interface CardsProps {
   image: string;
@@ -17,10 +18,38 @@ interface CardsProps {
 }
 
 const Cards = ({ courses }: any) => {
+  const [tooltipIndex, setTooltipIndex] = useState<number | null>(null);
   courses.image = courses.image ? courses.image : "/cardimg.png";
+
   const pathname = usePathname();
 
   const router = useRouter();
+
+  const generateRating = (rating: number) => {
+    if (rating < 1 || rating > 5) {
+      return null;
+    }
+
+    const stars = (
+      <div className="flex gap-1 text-[20px] text-[#FF9529]">
+        {Array.from({ length: 5 }, (_, index) => (
+          <div key={index}>
+            {index < rating ? <AiFillStar /> : <AiOutlineStar />}
+          </div>
+        ))}
+      </div>
+    );
+
+    return stars;
+  };
+
+  const showTooltip = (index: number) => {
+    setTooltipIndex(index);
+  };
+
+  const hideTooltip = () => {
+    setTooltipIndex(null);
+  };
 
   return (
     <div>
@@ -208,7 +237,7 @@ const Cards = ({ courses }: any) => {
         id="Projects"
         className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
       >
-        {courses.map((course: CardsProps) => {
+        {courses.map((course: CardsProps, index: any) => {
           const formattedPrice = new Intl.NumberFormat("es-AR", {
             style: "currency",
             currency: "ARS",
@@ -219,9 +248,11 @@ const Cards = ({ courses }: any) => {
           return (
             <div
               key={course._id}
-              className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
+              className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl cursor-pointer"
+              onMouseOver={() => showTooltip(index)}
+              onMouseOut={hideTooltip}
             >
-              <a href="#">
+              <a onClick={() => router.push(`/Courses/${course._id}`)}>
                 <img
                   src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                   alt="Product"
@@ -234,41 +265,44 @@ const Cards = ({ courses }: any) => {
                   <p className="text-lg font-bold text-black truncate block capitalize">
                     {course.name}
                   </p>
+                  {/* <div className="flex mt-2 item-center">
+                    <svg
+                      className="w-5 h-5 text-gray-700 fill-current "
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                    </svg>
+
+                    <svg
+                      className="w-5 h-5 text-gray-700 fill-current "
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                    </svg>
+
+                    <svg
+                      className="w-5 h-5 text-gray-700 fill-current "
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                    </svg>
+
+                    <svg
+                      className="w-5 h-5 text-gray-500 fill-current"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                    </svg>
+
+                    <svg
+                      className="w-5 h-5 text-gray-500 fill-current"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                    </svg>
+                  </div> */}
                   <div className="flex mt-2 item-center">
-                    <svg
-                      className="w-5 h-5 text-gray-700 fill-current "
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                    </svg>
-
-                    <svg
-                      className="w-5 h-5 text-gray-700 fill-current "
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                    </svg>
-
-                    <svg
-                      className="w-5 h-5 text-gray-700 fill-current "
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                    </svg>
-
-                    <svg
-                      className="w-5 h-5 text-gray-500 fill-current"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                    </svg>
-
-                    <svg
-                      className="w-5 h-5 text-gray-500 fill-current"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                    </svg>
+                    {generateRating(4)}
                   </div>
                   <div className="flex items-center justify-between ">
                     <p className="text-lg font-semibold text-black cursor-auto my-3">
@@ -382,20 +416,77 @@ const Cards = ({ courses }: any) => {
                       <p>{course.level || "not level"}</p>
                     </div>
                   </div>
-                  <div className="flex justify-between mt-2">
-                    <button className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded  hover:bg-gray-700  focus:outline-none focus:bg-gray-700 ">
-                      Comprar
-                    </button>
-                    <button
-                      onClick={() => router.push(`/Courses/${course._id}`)}
-                      className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded  hover:bg-gray-700  focus:outline-none focus:bg-gray-700 "
-                    >
-                      Detalles
-                    </button>
-                    {/* <button className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded  hover:bg-gray-700  focus:outline-none focus:bg-gray-700 ">
-                      Add to Cart
-                    </button> */}
-                  </div>
+
+                  {tooltipIndex === index && (
+                    <div className="z-20 rounded-xl absolute top-0 left-0 right-0 w-full h-full bg-black bg-opacity-5 flex items-center justify-center">
+                      <a
+                        tabIndex={0}
+                        role="link"
+                        aria-label="tooltip 1"
+                        className="focus:outline-none focus:ring-gray-300 rounded-full focus:ring-offset-2 focus:ring-2 focus:bg-gray-200 relative mt-20 md:mt-0 over"
+                        onMouseOut={hideTooltip}
+                        onBlur={hideTooltip}
+                      >
+                        <div className="cursor-pointer">
+                          <svg
+                            aria-haspopup="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-info-circle"
+                            width="25"
+                            height="25"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="#A0AEC0"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            {/* SVG path here */}
+                          </svg>
+                        </div>
+                        <div
+                          id="tooltip1"
+                          role="tooltip"
+                          className="z-20 -mt-20 w-64 absolute transition duration-150 ease-in-out left-32 ml-8 shadow-lg bg-white p-4 rounded"
+                        >
+                          <svg
+                            className="absolute left-0 -ml-2 bottom-0 top-0 h-full"
+                            width="9px"
+                            height="16px"
+                            viewBox="0 0 9 16"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            {/* SVG path here */}
+                          </svg>
+                          <p className="text-sm font-bold text-gray-800 pb-1">
+                            Keep track of follow ups
+                          </p>
+                          <p className="text-xs leading-4 text-gray-600 pb-3">
+                            Reach out to more prospects at the right moment.
+                          </p>
+                          <div className="flex justify-between">
+                            <div className="flex items-center">
+                              <span className="text-xs font-bold text-indigo-700">
+                                Step 1 of 4
+                              </span>
+                            </div>
+                            <div className="flex items-center">
+                              <button className="focus:outline-none focus:text-gray-400 text-xs text-gray-600 underline mr-2 cursor-pointer">
+                                Skip Tour
+                              </button>
+                              <button
+                                onBlur={hideTooltip}
+                                className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-400 focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs"
+                              >
+                                Next
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  )}
                 </div>
               </a>
             </div>
