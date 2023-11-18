@@ -30,6 +30,14 @@ const userSchema = new moongose.Schema({
       ref: "Course",
     },
   ],
+  cart: [
+    {
+      course: {
+        type: moongose.Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    },
+  ],
 });
 
 module.exports = moongose.model("User", userSchema);

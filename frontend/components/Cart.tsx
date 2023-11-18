@@ -1,19 +1,45 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
+import { getCart } from "@/coreComponents/helper/cart";
+
+// Define la interfaz CartItem
+interface CartItem {
+  _id: string;
+  name: string;
+  price: number;
+  image?: string;
+}
 
 const Cart = () => {
+  const [cart, setCart] = useState<CartItem[]>([]);
   const { state, dispatch } = useCart();
+
+  console.log(cart);
 
   const router = useRouter();
 
-  const handleRemoveClick = (courseId: number) => {
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: { _id: courseId },
-    });
-  };
+  // const handleRemoveClick = (courseId: number) => {
+  //   dispatch({
+  //     type: "REMOVE_FROM_CART",
+  //     payload: { _id: courseId },
+  //   });
+  // };
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const cartData = await getCart();
+        // Actualiza el estado con cartData.cart en lugar de cartData directamente
+        setCart(cartData.cart);
+      } catch (error) {
+        console.error("Error al obtener el carrito:", error);
+      }
+    };
+
+    fetchCart();
+  }, []);
 
   return (
     <div className="bg-gray-100 h-screen py-8">
@@ -33,7 +59,7 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {state.items.map((item) => (
+                  {cart.map((item) => (
                     <tr key={item._id}>
                       <td className="py-4">
                         <div className="flex items-center">
@@ -62,9 +88,7 @@ const Cart = () => {
                       </td> */}
                       <td className="py-4">${item.price}</td>
                       <td className="py-4">
-                        <button onClick={() => handleRemoveClick(item._id)}>
-                          delete
-                        </button>
+                        <button>delete</button>
                       </td>
                     </tr>
                   ))}

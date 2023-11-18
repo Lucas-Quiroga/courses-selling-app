@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Tabs } from ".";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import { addToCart } from "@/coreComponents/helper/cart";
 
 interface CardDetailsProps {
   course: {
@@ -20,12 +21,26 @@ const CardDetails = ({ course }: CardDetailsProps) => {
 
   const { dispatch } = useCart();
 
-  const handleBuyClick = () => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: course,
-    });
-    router.push("/cart/checkout");
+  // const handleBuyClick = () => {
+  //   dispatch({
+  //     type: "ADD_TO_CART",
+  //     payload: course,
+  //   });
+  //   router.push("/cart/checkout");
+  // };
+
+  const handleBuyClick = async (_id: number) => {
+    try {
+      // Llamada a la función addToCart del cliente
+      const cartData = await addToCart(course._id);
+      console.log("Curso agregado al carrito:", cartData);
+
+      // Redirigir o realizar otras acciones según sea necesario
+      router.push("/cart/checkout");
+    } catch (error) {
+      console.error("Error al agregar al carrito:", error);
+      // Manejar el error según sea necesario
+    }
   };
 
   return (
@@ -215,7 +230,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                   ${course.price}
                 </span>
                 <button
-                  onClick={handleBuyClick}
+                  onClick={() => handleBuyClick(course._id)}
                   className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
                 >
                   Comprar

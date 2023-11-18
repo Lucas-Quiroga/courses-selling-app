@@ -6,6 +6,7 @@ const app = express();
 const connectedDataBase = require("./db/mongodb.cjs");
 const authRoutes = require("./routes/auth.cjs");
 const courseRoutes = require("./routes/course.cjs");
+const cartRoutes = require("./routes/cart.cjs");
 
 const corsOptions = {
   origin: "http://localhost:3000", // Reemplaza con el origen de tu aplicación frontend
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 
 app.use("/api", authRoutes);
 app.use("/api", courseRoutes);
+app.use("/api", cartRoutes);
 
 app.get("/ping", (req, res) => {
   res.send("pong");

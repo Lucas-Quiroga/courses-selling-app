@@ -104,6 +104,7 @@ exports.signin = async (req, res) => {
 
 // Middleware para autenticar token JWT de usuario
 exports.authenticateJwtUser = (req, res, next) => {
+  console.log("soy el token", req.headers.authorization);
   try {
     const token = req.headers.authorization;
     if (!token) {
