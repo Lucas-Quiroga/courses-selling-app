@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { NavbarUser, Navbar, Footer } from "@/components";
 import ProvidersAuth from "./ProvidersAuth";
+import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
   title: "Couses selling",
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="relative">
-        <ProvidersAuth>
-          <Navbar />
-          {children}
-        </ProvidersAuth>
+        <CartProvider>
+          <ProvidersAuth>
+            <Navbar />
+            {children}
+          </ProvidersAuth>
+        </CartProvider>
         <Footer />
       </body>
     </html>

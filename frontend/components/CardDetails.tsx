@@ -3,19 +3,30 @@ import React from "react";
 import Image from "next/image";
 import { Tabs } from ".";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/context/CartContext";
 
 interface CardDetailsProps {
   course: {
     _id: number;
     name: string;
     description: string;
-    price: string | number;
-    // image: string;
+    price: number;
+    image: string;
   };
 }
 
 const CardDetails = ({ course }: CardDetailsProps) => {
   const router = useRouter();
+
+  const { dispatch } = useCart();
+
+  const handleBuyClick = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: course,
+    });
+    router.push("/cart/checkout");
+  };
 
   return (
     <>
@@ -204,7 +215,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                   ${course.price}
                 </span>
                 <button
-                  onClick={() => router.push("/cart/checkout")}
+                  onClick={handleBuyClick}
                   className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
                 >
                   Comprar
