@@ -49,3 +49,26 @@ export const getCart = async () => {
     throw error;
   }
 };
+
+// Eliminar curso del carrito
+export const removeFromCart = async (courseId) => {
+  try {
+    const token = localStorage.getItem("userJwt");
+
+    if (!token) {
+      throw new Error("No se encontró un token de usuario");
+    }
+    const cleanToken = token.replace(/['"]+/g, "");
+    // Realiza una solicitud HTTP DELETE para eliminar un curso del carrito
+    const response = await http.delete(`api/cart/checkout/${courseId}`, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`, // Token JWT válido
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Remove from cart error:", error);
+    throw error;
+  }
+};

@@ -3,20 +3,27 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { getCart } from "@/coreComponents/helper/cart";
+import { MdDelete } from "react-icons/md";
+import { removeFromCart } from "@/coreComponents/helper/cart";
+
+// Define la interfaz Course
+interface Course {
+  _id: string;
+  name: string;
+  price: number;
+  thumbnail?: string;
+  level: string;
+  // Agrega aquí cualquier otra propiedad que necesites de Course
+}
 
 // Define la interfaz CartItem
 interface CartItem {
   _id: string;
-  name: string;
-  price: number;
-  image?: string;
+  course: Course;
 }
-
 const Cart = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const { state, dispatch } = useCart();
-
-  console.log(cart);
 
   const router = useRouter();
 
@@ -27,11 +34,25 @@ const Cart = () => {
   //   });
   // };
 
+  const handleRemoveClick = async (courseId: string) => {
+    try {
+      // Llamada a la función removeFromCart del cliente
+      await removeFromCart(courseId);
+
+      // Actualiza el estado del carrito
+      const updatedCart = await getCart();
+      setCart(updatedCart.cart);
+    } catch (error) {
+      console.error("Error al eliminar del carrito:", error);
+      // Manejar el error según sea necesario
+    }
+  };
+
   useEffect(() => {
     const fetchCart = async () => {
       try {
         const cartData = await getCart();
-        // Actualiza el estado con cartData.cart en lugar de cartData directamente
+
         setCart(cartData.cart);
       } catch (error) {
         console.error("Error al obtener el carrito:", error);
@@ -51,47 +72,47 @@ const Cart = () => {
               <table className="w-full">
                 <thead>
                   <tr>
-                    <th className="text-left font-semibold">Product</th>
-                    <th className="text-left font-semibold">Price</th>
+                    <th className="text-left font-semibold">Producto</th>
+                    <th className="text-left font-semibold">Nivel</th>
+                    <th className="text-left font-semibold">Precio</th>
                     {/* <th className="text-left font-semibold">Quantity</th> */}
-                    <th className="text-left font-semibold">Total</th>
-                    <th className="text-left font-semibold">ADD / Delete</th>
+                    {/* <th className="text-left font-semibold">Total</th> */}
+                    {/* <th className="text-left font-semibold">ADD / Delete</th> */}
                   </tr>
                 </thead>
                 <tbody>
-                  {cart.map((item) => (
-                    <tr key={item._id}>
-                      <td className="py-4">
-                        <div className="flex items-center">
-                          <img
-                            className="h-16 w-16 mr-4"
-                            src={
-                              item.image ||
-                              "https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                            }
-                            alt="Product image"
-                          />
-                          <span className="font-semibold">{item.name}</span>
-                        </div>
-                      </td>
-                      <td className="py-4">${item.price}</td>
-                      {/* <td className="py-4">
-                        <div className="flex items-center">
-                          <button className="border rounded-md py-2 px-4 mr-2">
-                            -
+                  {cart.length === 0 ? (
+                    <h1>No hay items</h1>
+                  ) : (
+                    cart.map((item) => (
+                      <tr key={item._id}>
+                        <td className="py-4">
+                          <div className="flex items-center">
+                            <img
+                              className="h-16 w-16 mr-4"
+                              src={
+                                item.course.thumbnail ||
+                                "https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                              }
+                              alt="Product image"
+                            />
+                            <span className="font-semibold">
+                              {item.course.name}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="py-4">{item.course.level}</td>
+                        <td className="py-4">${item.course.price}</td>
+                        <td className="py-4">
+                          <button
+                            onClick={() => handleRemoveClick(item.course._id)}
+                          >
+                            <MdDelete size={25} color="red" />
                           </button>
-                          <span className="text-center w-8">1</span>
-                          <button className="border rounded-md py-2 px-4 ml-2">
-                            +
-                          </button>
-                        </div>
-                      </td> */}
-                      <td className="py-4">${item.price}</td>
-                      <td className="py-4">
-                        <button>delete</button>
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                      </tr>
+                    ))
+                  )}
                   {/* <!-- More product rows --> */}
                 </tbody>
               </table>
@@ -99,23 +120,19 @@ const Cart = () => {
           </div>
           <div className="md:w-1/4">
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-lg font-semibold mb-4">Summary</h2>
-              <div className="flex justify-between mb-2">
-                <span>Subtotal</span>
-                <span>$19.99</span>
-              </div>
-              <div className="flex justify-between mb-2">
-                <span>Taxes</span>
-                <span>$1.99</span>
-              </div>
-              <div className="flex justify-between mb-2">
-                <span>Shipping</span>
-                <span>$0.00</span>
-              </div>
+              <h2 className="text-lg font-semibold mb-4">Resumen</h2>
+              {cart.map((item) => (
+                <div className="flex justify-between mb-2" key={item._id}>
+                  <span>{item.course.name}</span>
+                  <span>${item.course.price}</span>
+                </div>
+              ))}
               <hr className="my-2" />
               <div className="flex justify-between mb-2">
                 <span className="font-semibold">Total</span>
-                <span className="font-semibold">$21.98</span>
+                <span className="font-semibold">
+                  ${cart.reduce((total, item) => total + item.course.price, 0)}
+                </span>
               </div>
               <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
                 Checkout

@@ -1,8 +1,11 @@
 const User = require("../models/user");
 
+//añade al carrito
 exports.addToCart = async (req, res) => {
   try {
     const { courseId } = req.params;
+
+    console.log(courseId);
 
     const user = await User.findOne({ email: req.user.email });
 
@@ -32,13 +35,45 @@ exports.addToCart = async (req, res) => {
 exports.getCart = async (req, res) => {
   try {
     // Encuentra al usuario por su correo electrónico
-    const user = await User.findOne({ email: req.user.email });
+    //popule: le dice a Mongoose que busque en la base de datos los detalles completos del curso para cada ID de curso en el carrito del usuario.
+    const user = await User.findOne({ email: req.user.email }).populate(
+      "cart.course"
+    );
 
     if (!user) {
       return res.status(403).json({ error: "User not found" });
     }
 
     // Devuelve el carrito del usuario
+    res.json({ cart: user.cart });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+//elimina del carrito
+exports.removeFromCart = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+
+    const user = await User.findOne({ email: req.user.email });
+
+    if (!user) {
+      return res.status(403).json({ error: "User not found" });
+    }
+
+    // Encuentra el índice del curso en el carrito
+    const courseIndexInCart = user.cart.findIndex((item) =>
+      item.course.equals(courseId)
+    );
+
+    if (courseIndexInCart > -1) {
+      // Si el curso está en el carrito, elimínalo
+      user.cart.splice(courseIndexInCart, 1);
+      await user.save();
+    }
+
     res.json({ cart: user.cart });
   } catch (err) {
     console.error(err);
