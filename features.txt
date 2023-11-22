@@ -16,8 +16,10 @@
 
 [] Carrito de compras:
 
-- [] Rutas para agregar cursos al carrito.
-- [] Rutas para gestionar el carrito (eliminar cursos, actualizar cantidades, realizar compras).
+- [X] Ruta de carrito para ver lo cursos a comprar.
+- [X] Gestion del carrito (eliminar cursos, realizar compras).
+- [X] Mantener el carrito desde la base de datos
+- [] Implementación del checkout con mercadopago
 
 -------------------------------------------------------------------------
 

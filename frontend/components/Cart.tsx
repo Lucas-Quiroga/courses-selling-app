@@ -81,38 +81,34 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {cart.length === 0 ? (
-                    <h1>No hay items</h1>
-                  ) : (
-                    cart.map((item) => (
-                      <tr key={item._id}>
-                        <td className="py-4">
-                          <div className="flex items-center">
-                            <img
-                              className="h-16 w-16 mr-4"
-                              src={
-                                item.course.thumbnail ||
-                                "https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                              }
-                              alt="Product image"
-                            />
-                            <span className="font-semibold">
-                              {item.course.name}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-4">{item.course.level}</td>
-                        <td className="py-4">${item.course.price}</td>
-                        <td className="py-4">
-                          <button
-                            onClick={() => handleRemoveClick(item.course._id)}
-                          >
-                            <MdDelete size={25} color="red" />
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  )}
+                  {cart.map((item) => (
+                    <tr key={item._id}>
+                      <td className="py-4">
+                        <div className="flex items-center">
+                          <img
+                            className="h-16 w-16 mr-4"
+                            src={
+                              item.course.thumbnail ||
+                              "https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                            }
+                            alt="Product image"
+                          />
+                          <span className="font-semibold">
+                            {item.course.name}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-4">{item.course.level}</td>
+                      <td className="py-4">${item.course.price}</td>
+                      <td className="py-4">
+                        <button
+                          onClick={() => handleRemoveClick(item.course._id)}
+                        >
+                          <MdDelete size={25} color="red" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                   {/* <!-- More product rows --> */}
                 </tbody>
               </table>

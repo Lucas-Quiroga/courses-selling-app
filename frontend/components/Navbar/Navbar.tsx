@@ -18,8 +18,11 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   const Logout = () => {
-    localStorage.clear();
-    router.refresh();
+    return new Promise((resolve) => {
+      localStorage.clear();
+      router.refresh();
+      // No se necesita resolve() aquí
+    });
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -779,19 +782,26 @@ const Navbar = () => {
 
                         <span className="mx-1">
                           {" "}
-                          <Link
-                            href="/"
+                          <button
                             aria-current="page"
-                            onClick={async () => {
-                              Logout();
-                              await signOut({
-                                callbackUrl: "/",
-                              });
-                              router.push("/");
+                            onClick={async (e) => {
+                              e.preventDefault(); // Prevenir la acción predeterminada del enlace
+                              try {
+                                await Logout();
+                                await signOut({
+                                  callbackUrl: "/",
+                                });
+                                router.push("/");
+                              } catch (error) {
+                                console.error(
+                                  "Error durante el cierre de sesión:",
+                                  error
+                                );
+                              }
                             }}
                           >
                             Salir
-                          </Link>
+                          </button>
                         </span>
                       </a>
                     </div>

@@ -7,11 +7,15 @@ const connectedDataBase = require("./db/mongodb.cjs");
 const authRoutes = require("./routes/auth.cjs");
 const courseRoutes = require("./routes/course.cjs");
 const cartRoutes = require("./routes/cart.cjs");
+const paymentRoutes = require("./routes/payment.cjs");
+const morgan = require("morgan");
 
 const corsOptions = {
   origin: "http://localhost:3000", // Reemplaza con el origen de tu aplicación frontend
   credentials: true, // Habilita el envío de cookies y credenciales en las solicitudes
 };
+
+app.use(morgan("dev"));
 
 app.use(cors(corsOptions));
 dotenv.config();
@@ -23,6 +27,7 @@ app.use(bodyParser.json());
 app.use("/api", authRoutes);
 app.use("/api", courseRoutes);
 app.use("/api", cartRoutes);
+app.use("/api", paymentRoutes);
 
 app.get("/ping", (req, res) => {
   res.send("pong");

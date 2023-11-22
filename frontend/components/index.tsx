@@ -27,6 +27,9 @@ import Faqs from "./Faqs";
 import UserProfileSection from "./UserProfileSection";
 import Filters from "./Filters";
 import Cart from "./Cart";
+import VideoGallery from "./VideoGallery";
+import Video from "./Video";
+import Data from "./Data";
 
 export {
   NavbarUser,
@@ -58,4 +61,7 @@ export {
   UserProfileSection,
   Filters,
   Cart,
+  VideoGallery,
+  Video,
+  Data,
 };
