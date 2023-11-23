@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { createOrder } = require("./../controllers/payment.cjs");
+const { createOrder, receiveWebhook } = require("../controllers/payment.cjs");
 
-router.get("/create-order", createOrder);
+router.post("/create-order", createOrder);
 
 router.get("/success", (req, res) => res.send("Creating order"));
 
-router.get("/webhook", (req, res) => res.send("webhook"));
+router.get("/failure", (req, res) => res.send("Failure"));
+
+router.get("/pending", (req, res) => res.send("Pending"));
+
+router.post("/webhook", receiveWebhook);
 
 module.exports = router;

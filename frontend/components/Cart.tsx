@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import { getCart } from "@/coreComponents/helper/cart";
+import { getCart, createOrder } from "@/coreComponents/helper/cart";
 import { MdDelete } from "react-icons/md";
 import { removeFromCart } from "@/coreComponents/helper/cart";
 
@@ -44,6 +44,31 @@ const Cart = () => {
       setCart(updatedCart.cart);
     } catch (error) {
       console.error("Error al eliminar del carrito:", error);
+      // Manejar el error según sea necesario
+    }
+  };
+
+  const handleCheckout = async () => {
+    try {
+      // Obtén la información de los cursos desde el estado local
+      const courses = cart.map((item) => item.course);
+
+      // Crea la orden en MercadoPago
+      const orderResponse = await createOrder(courses);
+
+      // Verifica si la respuesta de MercadoPago tiene el campo 'init_point'
+      if (orderResponse && orderResponse.init_point) {
+        // Redirige al usuario al init_point de MercadoPago
+        window.location.href = orderResponse.init_point;
+      } else {
+        // Maneja el caso en que no se proporciona el init_point
+        console.error(
+          "No se proporcionó el init_point en la respuesta de MercadoPago"
+        );
+        // Puedes mostrar un mensaje de error o redirigir a una página de error
+      }
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
       // Manejar el error según sea necesario
     }
   };
@@ -130,7 +155,10 @@ const Cart = () => {
                   ${cart.reduce((total, item) => total + item.course.price, 0)}
                 </span>
               </div>
-              <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
+              <button
+                onClick={handleCheckout}
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full"
+              >
                 Checkout
               </button>
             </div>

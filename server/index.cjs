@@ -25,9 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/api", authRoutes);
+app.use("/api", paymentRoutes);
 app.use("/api", courseRoutes);
 app.use("/api", cartRoutes);
-app.use("/api", paymentRoutes);
 
 app.get("/ping", (req, res) => {
   res.send("pong");

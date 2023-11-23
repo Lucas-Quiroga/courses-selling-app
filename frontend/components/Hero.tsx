@@ -72,21 +72,12 @@ const Hero = () => {
             <h1 className="text-3xl font-semibold text-center text-gray-800 lg:text-3xl ">
               Tu lugar donde <span className="text-indigo-600 ">aprender</span>{" "}
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-gray-600">
+            <p className="mt-4 text-lg leading-relaxed text-gray-600  mx-auto text-center ">
               Descubre el fascinante mundo del tarot con los cursos de Paula
               Domínguez. Nuestros cursos te brindarán un profundo conocimiento
               del tarot y te guiarán en tu viaje espiritual. Aprende a
               interpretar las cartas y descubre sus misterios en un ambiente de
               aprendizaje enriquecedor.
-              <a
-                href="https://tailwindcss.com/?ref=creativetim"
-                className="text-blueGray-600"
-                target="_blank"
-              >
-                ¡Explora nuestros cursos ahora!
-              </a>
-              It features multiple HTML elements and it comes with dynamic
-              components for ReactJS, Vue and Angular.
             </p>
           </div>
         </div>
