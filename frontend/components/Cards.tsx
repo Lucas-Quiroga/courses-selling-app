@@ -43,6 +43,14 @@ const Cards = ({ courses }: any) => {
     return stars;
   };
 
+  // Función para calcular el precio más caro
+  const calculateOriginalPrice = (price: number): number => {
+    // Puedes agregar lógica aquí para calcular el precio más caro, por ejemplo, sumar un porcentaje
+    // Aquí se asume un incremento del 50% como ejemplo
+    const originalPrice = price + price * 0.2;
+    return originalPrice;
+  };
+
   const showTooltip = (index: number) => {
     setTooltipIndex(index);
   };
@@ -245,6 +253,15 @@ const Cards = ({ courses }: any) => {
             maximumFractionDigits: 0,
           }).format(course.price || 220);
 
+          // Calcular el precio más caro
+          const originalPrice = calculateOriginalPrice(course.price || 220);
+          const formattedOriginalPrice = new Intl.NumberFormat("es-AR", {
+            style: "currency",
+            currency: "ARS",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(originalPrice);
+
           return (
             <div
               key={course._id}
@@ -310,7 +327,7 @@ const Cards = ({ courses }: any) => {
                     </p>
                     <del>
                       <p className="text-sm text-gray-600 cursor-auto ml-2">
-                        $199
+                        {formattedOriginalPrice}
                       </p>
                     </del>
 
@@ -349,9 +366,11 @@ const Cards = ({ courses }: any) => {
                           />
                         </svg>
                       </span>
-                      <p>{course.duration || "1:34:23 Minutes"}</p>
+                      <p className="text-sm">
+                        {course.duration || "1:34:23 Minutes"}
+                      </p>
                     </div>
-                    {/* <div className="flex space-x-1 items-center">
+                    <div className="flex space-x-1 items-center">
                       <span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -368,8 +387,8 @@ const Cards = ({ courses }: any) => {
                           />
                         </svg>
                       </span>
-                      <p>3 Parts</p>
-                    </div> */}
+                      <p className="text-sm">3 Parts</p>
+                    </div>
                     <div className="flex space-x-1 items-center">
                       <span>
                         <svg
@@ -413,7 +432,7 @@ const Cards = ({ courses }: any) => {
                           </g>
                         </svg>
                       </span>
-                      <p>{course.level || "not level"}</p>
+                      <p className="text-sm">{course.level || "not level"}</p>
                     </div>
                   </div>
 
@@ -460,10 +479,10 @@ const Cards = ({ courses }: any) => {
                             {/* SVG path here */}
                           </svg>
                           <p className="text-sm font-bold text-gray-800 pb-1">
-                            Keep track of follow ups
+                            {course.name}
                           </p>
                           <p className="text-xs leading-4 text-gray-600 pb-3">
-                            Reach out to more prospects at the right moment.
+                            {course.description}
                           </p>
                           <div className="flex justify-between">
                             <div className="flex items-center">

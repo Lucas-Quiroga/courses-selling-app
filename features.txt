@@ -43,7 +43,7 @@
 
 [] Gestión de contenido:
 
-- [] Rutas para que los administradores puedan agregar, editar y eliminar cursos.
+- [X] Rutas para que los administradores puedan agregar, editar y eliminar cursos.
 - [] Rutas para gestionar categorías y etiquetas de cursos.
 
 -------------------------------------------------------------------------

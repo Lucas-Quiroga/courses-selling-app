@@ -1,6 +1,14 @@
 const moongose = require("mongoose");
 
 const userSchema = new moongose.Schema({
+  googleId: {
+    type: String,
+    trim: true,
+  },
+  isGoogleUser: {
+    type: Boolean,
+    default: false,
+  },
   firstName: {
     type: String,
     required: true,
@@ -16,9 +24,15 @@ const userSchema = new moongose.Schema({
     trim: true,
     unique: true,
   },
+  image: {
+    type: String,
+    required: false,
+  },
   password: {
     type: String,
-    required: true,
+    required: function () {
+      return !this.isGoogleUser;
+    },
     trim: true,
   },
   phoneNo: {

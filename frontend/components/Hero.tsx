@@ -32,7 +32,7 @@ const Hero = () => {
     setShowMore(!showMore);
   };
 
-  // Manejar cambios en los filtros y actualizar los cursos filtrados
+  // Maneja los cambios en los filtros cuando el usuario realiza alguna acción que modifica los criterios de filtrado
   const handleFilterChange = (newFilter: any) => {
     setFilter(newFilter);
 
@@ -64,6 +64,21 @@ const Hero = () => {
       });
   }, []);
 
+  // Actualizar los cursos filtrados cuando cambia el filtro o se cargan los cursos
+  useEffect(() => {
+    if (filter) {
+      const filtered = courses.filter((course) => {
+        return (
+          (filter.price === "" || course.price <= parseInt(filter.price)) &&
+          (filter.duration === "" || course.duration === filter.duration) &&
+          (filter.level === "" || course.level === filter.level)
+        );
+      });
+      // Actualizar el estado con los cursos filtrados
+      setFilteredCourses(filtered);
+    }
+  }, [filter, courses]);
+
   return (
     <div className="mt-5">
       <div className="container mx-auto items-center flex flex-wrap">
@@ -84,17 +99,21 @@ const Hero = () => {
       </div>
 
       {loading ? (
-        <Loading number={1} />
+        <Loading number={filteredCourses.length} />
       ) : courses.length > 0 ? (
         <div className="flex flex-col justify-center items-center">
           <Filters filter={filter} onFilterChange={handleFilterChange} />
-          <Cards
-            courses={
-              !showMore
-                ? filteredCourses
-                : initialCourses.slice(0, showMore ? filteredCourses.length : 5)
-            }
-          />
+
+          {/* Mostrar mensaje si no hay cursos filtrados */}
+          {filteredCourses.length === 0 && (
+            <div className=" text-red-500 text-xl mt-7">
+              No se encuentra un curso con estas especificaciones.
+            </div>
+          )}
+
+          {/* Mostrar los cursos filtrados */}
+          {filteredCourses.length > 0 && <Cards courses={filteredCourses} />}
+
           {courses.length > initialCourses.length && (
             <button
               onClick={handleShowMore}

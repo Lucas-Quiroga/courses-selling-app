@@ -19,6 +19,7 @@ const Navbar = () => {
 
   const Logout = () => {
     return new Promise((resolve) => {
+      signOut();
       localStorage.clear();
       router.refresh();
       // No se necesita resolve() aquí
@@ -46,6 +47,9 @@ const Navbar = () => {
   if (isAuth && session?.user) {
     return null;
   }
+
+  // console.log("is auth?", isAuth);
+  // console.log("is session?", session?.user);
 
   return (
     <div className="relative bg-white">
@@ -328,12 +332,6 @@ const Navbar = () => {
               aria-current="page"
             >
               Inicio
-            </Link>
-            <Link
-              href="/Courses"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Cursos
             </Link>
 
             <Link
@@ -788,9 +786,7 @@ const Navbar = () => {
                               e.preventDefault(); // Prevenir la acción predeterminada del enlace
                               try {
                                 await Logout();
-                                await signOut({
-                                  callbackUrl: "/",
-                                });
+
                                 router.push("/");
                               } catch (error) {
                                 console.error(

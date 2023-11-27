@@ -405,3 +405,57 @@ exports.authenticateJwtAdmin = (req, res, next) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };
+
+// Inicio de sesión de usuario con Google
+exports.signinWithGoogle = async (req, res) => {
+  console.log("Iniciando sesión con Google...");
+  try {
+    const { googleId, email, name, image } = req.body;
+    // Buscar al usuario en la base de datos por su ID de Google
+    let user = await User.findOne({ googleId });
+
+    if (!user) {
+      // Si el usuario no se encuentra, crea un nuevo usuario en la base de datos
+      user = await new User({
+        googleId: googleId,
+        email: email, // Aquí asigna el valor del email de Google a tu campo email
+        isGoogleUser: true,
+        firstName: name,
+        image: image,
+        // Otros campos que puedas necesitar
+      }).save();
+      console.log("Nuevo usuario creado");
+    } else {
+      // Si el usuario ya existe, actualiza la información del perfil de Google
+      await User.findOneAndUpdate({ googleId }, { email, isGoogleUser: true });
+      console.log("Usuario existente actualizado");
+    }
+
+    // Generar un token JWT válido para el usuario
+    const token = jwt.sign({ email, role: "user" }, process.env.SECRET_USER, {
+      expiresIn: 60 * 60 * 24 * 7,
+    });
+
+    console.log("Token generado:", token);
+
+    // Asignar el token al usuario
+    const serialized = serialize("userJwt", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
+      maxAge: 60 * 60 * 24 * 7, // Duración de la cookie en segundos
+      path: "/", // Ruta de acceso
+    });
+
+    console.log("Cookie configurada:", serialized);
+
+    res.cookie("userJwt", serialized);
+
+    // Devolver una respuesta exitosa con el token
+    return res.json({ message: "Inicio de sesión exitoso con Google", token });
+  } catch (error) {
+    // Si ocurre un error durante el proceso, devolver un error 500 (Internal Server Error)
+    console.error("Error en el inicio de sesión con Google:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};

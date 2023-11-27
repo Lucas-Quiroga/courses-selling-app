@@ -15,7 +15,7 @@ const corsOptions = {
   credentials: true, // Habilita el envío de cookies y credenciales en las solicitudes
 };
 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 app.use(cors(corsOptions));
 dotenv.config();

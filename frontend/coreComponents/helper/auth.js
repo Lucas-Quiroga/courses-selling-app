@@ -45,6 +45,17 @@ export const authenticate = (data, next = () => {}) => {
   }
 };
 
+// // Función para autenticar al usuario y almacenar el token JWT en el almacenamiento local
+// export const authenticate = (user, token, next = () => {}) => {
+//   if (typeof window !== "undefined") {
+//     // Convierte los datos del usuario a formato JSON y almacena el token en el almacenamiento local
+//     const userJson = JSON.stringify(user);
+//     localStorage.setItem("userJwt", userJson);
+//     localStorage.setItem("userJwtToken", token);
+//     next(); // Ejecuta la función 'next' proporcionada (puede ser una función de redireccionamiento, por ejemplo)
+//   }
+// };
+
 export const isAuthenticated = () => {
   if (typeof window == "undefined") {
     // Si no estamos en un entorno de navegador, retornamos false.
@@ -169,4 +180,31 @@ export const isAdminAuthenticated = () => {
   }
   const adminJwt = localStorage.getItem("adminJwt");
   return adminJwt ? true : false;
+};
+
+// Inicio de sesión de usuario con Google
+export const signinWithGoogle = async ({ googleId, email, name, image }) => {
+  try {
+    // Realiza una solicitud HTTP POST para iniciar sesión con Google
+    const response = await http.post(
+      "api/user/saveGoogleUser",
+      {
+        googleId,
+        email,
+        name,
+        image,
+      },
+      { withCredentials: "include" }
+    );
+
+    // Extrae el token de la respuesta y lo almacena en el almacenamiento local
+    const token = response.data.token;
+    authenticate({ email: email, role: "user" }, token);
+
+    // Devuelve la respuesta
+    return response.data;
+  } catch (error) {
+    console.error("Signin with Google error:", error);
+    throw error;
+  }
 };

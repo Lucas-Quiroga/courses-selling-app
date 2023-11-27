@@ -5,8 +5,7 @@ exports.createOrder = async (req, res) => {
 
   // Inicializa el objeto de configuración del cliente
   const client = new MercadoPagoConfig({
-    accessToken:
-      "TEST-21157999888645-112216-8258facdcc5f307f6172d2707eb030e7-1417957197",
+    accessToken: process.env.MERCADOPAGO_TOKEN,
     options: { timeout: 5000, idempotencyKey: "abc" },
   });
 

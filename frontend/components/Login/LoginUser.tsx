@@ -151,14 +151,14 @@ const LoginUser = () => {
             htmlFor="email"
             className="block mb-2 text-sm font-medium text-gray-900 "
           >
-            Your email
+            Tu email
           </label>
           <input
             id="email"
             {...register("email", {
               required: {
                 value: true,
-                message: "Email is required",
+                message: "El email es requerido",
               },
               pattern: {
                 value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -179,7 +179,7 @@ const LoginUser = () => {
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900 "
           >
-            Your password
+            Tu contraseña
           </label>
           <input
             type="password"
@@ -187,7 +187,7 @@ const LoginUser = () => {
             {...register("password", {
               required: {
                 value: true,
-                message: "Password is required",
+                message: "Contraseña es requerida",
               },
               minLength: {
                 value: 10,
@@ -208,7 +208,7 @@ const LoginUser = () => {
           type="submit"
           className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Login to your account
+          Iniciar sesión
         </button>
       </form>
       <button
@@ -238,16 +238,16 @@ const LoginUser = () => {
             d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
           ></path>
         </svg>
-        Continue with Google
+        Iniciar sesión con Google
       </button>
 
       <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-        Not registered?{" "}
+        ¿No está registrado?{" "}
         <button
           className="text-blue-700 hover:underline dark:text-blue-500"
           onClick={toggleForm}
         >
-          Create account
+          Crear una cuenta
         </button>
       </div>
     </>
