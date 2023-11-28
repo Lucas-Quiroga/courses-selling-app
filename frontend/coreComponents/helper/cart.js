@@ -1,26 +1,40 @@
 import http from "./http";
+import { getSession } from "next-auth/react";
 
 // Agregar curso al carrito
 export const addToCart = async (courseId) => {
   try {
-    const token = localStorage.getItem("userJwt");
-
-    if (!token) {
-      throw new Error("No se encontró un token de usuario");
-    }
-    const cleanToken = token.replace(/['"]+/g, "");
-    // Realiza una solicitud HTTP POST para agregar un curso al carrito
-    const response = await http.post(
-      `api/cart/checkout/${courseId}`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`, // Token JWT válido
+    const session = await getSession();
+    // console.log(session);
+    if (session) {
+      // Realizar operaciones necesarias en función de la sesión de usuario de google
+      const response = await http.post(`api/cart/checkout/google/${courseId}`, {
+        data: {
+          email: session.user.email,
         },
-      }
-    );
+      });
+      return response.data;
+    } else {
+      // Si es un usuario normal que me haga la peticion con el token
+      const token = localStorage.getItem("userJwt");
 
-    return response.data;
+      if (!token) {
+        throw new Error("No se encontró un token de usuario");
+      }
+      const cleanToken = token.replace(/['"]+/g, "");
+      // Realiza una solicitud HTTP POST para agregar un curso al carrito
+      const response = await http.post(
+        `api/cart/checkout/${courseId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cleanToken}`, // Token JWT válido
+          },
+        }
+      );
+
+      return response.data;
+    }
   } catch (error) {
     console.error("Add to cart error:", error);
     throw error;

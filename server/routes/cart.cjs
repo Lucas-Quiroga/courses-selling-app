@@ -7,8 +7,11 @@ const {
 } = require("../controllers/cart.cjs");
 const { authenticateJwtUser } = require("../controllers/auth.cjs");
 
-// Ruta para agregar un curso al carrito
+// Ruta para agregar un curso al carrito de usuario
 router.post("/cart/checkout/:courseId", authenticateJwtUser, addToCart);
+
+// Ruta para agregar un curso al carrito de usuario de google
+router.post("/cart/checkout/google/:courseId", addToCart);
 
 // Ruta para obtener el carrito del usuario
 router.get("/cart/checkout", authenticateJwtUser, getCart);

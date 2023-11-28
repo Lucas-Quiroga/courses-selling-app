@@ -4,13 +4,20 @@ const User = require("../models/user");
 exports.addToCart = async (req, res) => {
   try {
     const { courseId } = req.params;
+    const { data } = req.body;
+    let user;
 
-    console.log(courseId);
-
-    const user = await User.findOne({ email: req.user.email });
+    console.log("soy el req.body", req.body);
+    if (data && data.email) {
+      // Si el email viene de Google
+      user = await User.findOne({ email: data.email });
+    } else {
+      // Si el email viene del token de usuario
+      user = await User.findOne({ email: req.user.email });
+    }
 
     if (!user) {
-      return res.status(403).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
     // Verifica si el curso ya está en el carrito

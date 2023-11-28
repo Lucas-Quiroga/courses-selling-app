@@ -22,8 +22,6 @@ const handler = NextAuth({
       try {
         const { user } = params;
 
-        console.log("Soy el perfil:", user);
-
         if (!user) {
           console.error("Perfil no disponible en el inicio de sesión.");
           return false;

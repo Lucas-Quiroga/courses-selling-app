@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Tabs } from ".";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { addToCart } from "@/coreComponents/helper/cart";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { isAuthenticated } from "@/coreComponents/helper/auth";
 
 interface CardDetailsProps {
   course: {
@@ -18,7 +20,9 @@ interface CardDetailsProps {
 }
 
 const CardDetails = ({ course }: CardDetailsProps) => {
+  const [isAuth, setIsAuth] = useState<boolean>(false);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const { dispatch } = useCart();
 
@@ -32,6 +36,11 @@ const CardDetails = ({ course }: CardDetailsProps) => {
 
   const handleBuyClick = async (_id: number) => {
     try {
+      if (!(session?.user || isAuth)) {
+        // Si el usuario no está autenticado, redirige a la página de inicio de sesión
+        router.push("/user/signin");
+        return;
+      }
       // Llamada a la función addToCart del cliente
       const cartData = await addToCart(course._id);
       console.log("Curso agregado al carrito:", cartData);
@@ -44,49 +53,27 @@ const CardDetails = ({ course }: CardDetailsProps) => {
     }
   };
 
+  useEffect(() => {
+    const checkAuth = () => setIsAuth(isAuthenticated());
+    checkAuth(); // Verifica la autenticación inmediatamente
+
+    const intervalId = setInterval(checkAuth, 1000); // Verifica la autenticación cada segundo
+
+    return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta el componente
+  }, []);
+
   return (
     <>
-      {/* <Tabs />
-      <div className="max-w-sm w-full lg:max-w-full lg:flex mx-auto flex justify-center mt-[20rem]">
-        <div
-          className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden bg-url bg-[url('/cardimg.png')]"
-          title="Woman holding a mug"
-        ></div>
-        <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-          <div className="mb-8">
-            <p className="text-sm text-gray-600 flex items-center">
-              <svg
-                className="fill-current text-gray-500 w-3 h-3 mr-2"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-              </svg>
-              Members only
-            </p>
-            <div className="text-gray-900 font-bold text-xl mb-2">
-              {course.name}
-            </div>
-            <p className="text-gray-700 text-base">{course.description}</p>
-          </div>
-          <div className="flex items-center">
-            <Image src="/cardimg.png" alt="img" width={30} height={30} />
-
-            <div className="text-sm">
-              <p className="text-gray-900 leading-none">Jonathan Reinink</p>
-              <p className="text-gray-600">Aug 18</p>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       <section className="text-gray-700 body-font overflow-hidden bg-white">
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
-              src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg"
+              src={
+                course.image ||
+                "https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+              }
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">

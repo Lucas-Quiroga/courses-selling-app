@@ -126,6 +126,12 @@ exports.authenticateJwtUser = (req, res, next) => {
         }
       }
 
+      // Verifica si el usuario es de Google y evita la validación del token si lo es
+      if (user.isGoogleUser) {
+        req.user = user;
+        return next();
+      }
+
       // Si el token es válido, asignar los datos del usuario al objeto 'req.user' para su uso posterior
       req.user = user;
 
@@ -436,7 +442,7 @@ exports.signinWithGoogle = async (req, res) => {
       expiresIn: 60 * 60 * 24 * 7,
     });
 
-    console.log("Token generado:", token);
+    // console.log("Token generado:", token);
 
     // Asignar el token al usuario
     const serialized = serialize("userJwt", token, {
@@ -447,7 +453,7 @@ exports.signinWithGoogle = async (req, res) => {
       path: "/", // Ruta de acceso
     });
 
-    console.log("Cookie configurada:", serialized);
+    // console.log("Cookie configurada:", serialized);
 
     res.cookie("userJwt", serialized);
 
