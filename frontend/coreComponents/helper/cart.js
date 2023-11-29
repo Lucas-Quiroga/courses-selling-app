@@ -44,20 +44,31 @@ export const addToCart = async (courseId) => {
 // Obtener carrito del usuario
 export const getCart = async () => {
   try {
-    const token = localStorage.getItem("userJwt");
+    const session = await getSession();
+    if (session) {
+      // Realizar operaciones necesarias en función de la sesión de usuario de google
+      const response = await http.get(
+        `api/cart/google/checkout?email=${encodeURIComponent(
+          session.user.email
+        )}`
+      );
+      return response.data;
+    } else {
+      const token = localStorage.getItem("userJwt");
 
-    if (!token) {
-      throw new Error("No se encontró un token de usuario");
+      if (!token) {
+        throw new Error("No se encontró un token de usuario");
+      }
+      const cleanToken = token.replace(/['"]+/g, "");
+      // Realiza una solicitud HTTP GET para obtener el carrito del usuario
+      const response = await http.get("api/cart/checkout", {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`, // Token JWT válido
+        },
+      });
+
+      return response.data;
     }
-    const cleanToken = token.replace(/['"]+/g, "");
-    // Realiza una solicitud HTTP GET para obtener el carrito del usuario
-    const response = await http.get("api/cart/checkout", {
-      headers: {
-        Authorization: `Bearer ${cleanToken}`, // Token JWT válido
-      },
-    });
-
-    return response.data;
   } catch (error) {
     console.error("Get cart error:", error);
     throw error;
@@ -67,20 +78,33 @@ export const getCart = async () => {
 // Eliminar curso del carrito
 export const removeFromCart = async (courseId) => {
   try {
-    const token = localStorage.getItem("userJwt");
+    const session = await getSession();
 
-    if (!token) {
-      throw new Error("No se encontró un token de usuario");
+    if (session) {
+      // Realiza una solicitud HTTP DELETE para eliminar un curso del carrito del usuario de Google
+      const response = await http.delete(
+        `api/cart/checkout/google/${courseId}?email=${encodeURIComponent(
+          session.user.email
+        )}`
+      );
+      return response.data;
+    } else {
+      // Si es un usuario normal, eliminar el curso con el token
+      const token = localStorage.getItem("userJwt");
+
+      if (!token) {
+        throw new Error("No se encontró un token de usuario");
+      }
+      const cleanToken = token.replace(/['"]+/g, "");
+      // Realiza una solicitud HTTP DELETE para eliminar un curso del carrito del usuario
+      const response = await http.delete(`api/cart/checkout/${courseId}`, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`, // Token JWT válido
+        },
+      });
+
+      return response.data;
     }
-    const cleanToken = token.replace(/['"]+/g, "");
-    // Realiza una solicitud HTTP DELETE para eliminar un curso del carrito
-    const response = await http.delete(`api/cart/checkout/${courseId}`, {
-      headers: {
-        Authorization: `Bearer ${cleanToken}`, // Token JWT válido
-      },
-    });
-
-    return response.data;
   } catch (error) {
     console.error("Remove from cart error:", error);
     throw error;

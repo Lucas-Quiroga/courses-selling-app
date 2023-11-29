@@ -7,7 +7,6 @@ exports.addToCart = async (req, res) => {
     const { data } = req.body;
     let user;
 
-    console.log("soy el req.body", req.body);
     if (data && data.email) {
       // Si el email viene de Google
       user = await User.findOne({ email: data.email });
@@ -40,12 +39,19 @@ exports.addToCart = async (req, res) => {
 
 // Controlador para obtener el carrito del usuario
 exports.getCart = async (req, res) => {
+  const userEmail = req.query.email;
   try {
-    // Encuentra al usuario por su correo electrónico
-    //popule: le dice a Mongoose que busque en la base de datos los detalles completos del curso para cada ID de curso en el carrito del usuario.
-    const user = await User.findOne({ email: req.user.email }).populate(
-      "cart.course"
-    );
+    let user;
+    // Verifica si el email viene de Google o del token de usuario
+    if (userEmail) {
+      // Si el email viene de Google
+      user = await User.findOne({ email: userEmail }).populate("cart.course");
+    } else {
+      // Si el email viene del token de usuario
+      user = await User.findOne({ email: req.user.email }).populate(
+        "cart.course"
+      );
+    }
 
     if (!user) {
       return res.status(403).json({ error: "User not found" });
@@ -59,12 +65,22 @@ exports.getCart = async (req, res) => {
   }
 };
 
-//elimina del carrito
+// Elimina del carrito
 exports.removeFromCart = async (req, res) => {
+  const userEmail = req.query.email;
+
   try {
     const { courseId } = req.params;
+    let user;
 
-    const user = await User.findOne({ email: req.user.email });
+    // Verifica si el email viene de Google o del token de usuario
+    if (userEmail) {
+      // Si el email viene de Google
+      user = await User.findOne({ email: userEmail });
+    } else {
+      // Si el email viene del token de usuario
+      user = await User.findOne({ email: req.user.email });
+    }
 
     if (!user) {
       return res.status(403).json({ error: "User not found" });

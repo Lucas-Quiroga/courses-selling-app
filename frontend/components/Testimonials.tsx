@@ -18,8 +18,11 @@ const Testimonials = () => {
         <Marquee>
           <div className="container px-6 py-10 mx-auto">
             <section className="grid grid-cols-3 grid-rows-1 gap-8 xl:mt-12 lg:grid-cols-2 xl:grid-cols-3">
-              {Data.map((testimonials) => (
-                <div className="p-8 border rounded-lg flex flex-col justify-between ">
+              {Data.map((testimonials, index) => (
+                <div
+                  className="p-8 border rounded-lg flex flex-col justify-between"
+                  key={index}
+                >
                   <p className="leading-loose text-gray-500 ">
                     “{testimonials.description}”.
                   </p>
