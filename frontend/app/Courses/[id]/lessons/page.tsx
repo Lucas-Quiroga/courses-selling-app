@@ -1,9 +1,9 @@
 import React from "react";
 import MuxVideo from "@/components/MuxVideo";
-import { VideoGallery } from "@/components";
+import { VideoIntroduction } from "@/components";
 
 const page = () => {
-  return <VideoGallery />;
+  return <VideoIntroduction />;
 };
 
 export default page;

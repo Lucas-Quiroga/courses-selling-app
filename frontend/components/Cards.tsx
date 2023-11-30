@@ -51,13 +51,13 @@ const Cards = ({ courses }: any) => {
     return originalPrice;
   };
 
-  const showTooltip = (index: number) => {
-    setTooltipIndex(index);
-  };
+  // const showTooltip = (index: number) => {
+  //   setTooltipIndex(index);
+  // };
 
-  const hideTooltip = () => {
-    setTooltipIndex(null);
-  };
+  // const hideTooltip = () => {
+  //   setTooltipIndex(null);
+  // };
 
   return (
     <div>
@@ -266,8 +266,8 @@ const Cards = ({ courses }: any) => {
             <div
               key={course._id}
               className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl cursor-pointer"
-              onMouseOver={() => showTooltip(index)}
-              onMouseOut={hideTooltip}
+              // onMouseOver={() => showTooltip(index)}
+              // onMouseOut={hideTooltip}
             >
               <a onClick={() => router.push(`/Courses/${course._id}`)}>
                 <img
@@ -443,8 +443,8 @@ const Cards = ({ courses }: any) => {
                         role="link"
                         aria-label="tooltip 1"
                         className="focus:outline-none focus:ring-gray-300 rounded-full focus:ring-offset-2 focus:ring-2 focus:bg-gray-200 relative mt-20 md:mt-0 over"
-                        onMouseOut={hideTooltip}
-                        onBlur={hideTooltip}
+                        // onMouseOut={hideTooltip}
+                        // onBlur={hideTooltip}
                       >
                         <div className="cursor-pointer">
                           <svg
@@ -495,7 +495,7 @@ const Cards = ({ courses }: any) => {
                                 Skip Tour
                               </button>
                               <button
-                                onBlur={hideTooltip}
+                                // onBlur={hideTooltip}
                                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-400 focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs"
                               >
                                 Next

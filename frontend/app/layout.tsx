@@ -1,7 +1,7 @@
 import { useAuth } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import "./globals.css";
-import { NavbarUser, Navbar, Footer } from "@/components";
+import { NavbarOrigen, Footer } from "@/components";
 import ProvidersAuth from "./ProvidersAuth";
 import { CartProvider } from "@/context/CartContext";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className="relative">
         <CartProvider>
           <ProvidersAuth>
-            <Navbar />
+            <NavbarOrigen />
             {children}
           </ProvidersAuth>
         </CartProvider>

@@ -30,6 +30,9 @@ import Cart from "./Cart";
 import VideoGallery from "./VideoGallery";
 import Video from "./Video";
 import Data from "./Data";
+import NavbarOrigen from "./Navbar/NavbarOrigen";
+import VideoIntroduction from "./VideoIntroduction";
+import CheckOut from "./CheckOut";
 
 export {
   NavbarUser,
@@ -64,4 +67,7 @@ export {
   VideoGallery,
   Video,
   Data,
+  NavbarOrigen,
+  VideoIntroduction,
+  CheckOut,
 };
