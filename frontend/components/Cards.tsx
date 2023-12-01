@@ -46,8 +46,7 @@ const Cards = ({ courses }: any) => {
   // Función para calcular el precio más caro
   const calculateOriginalPrice = (price: number): number => {
     // Puedes agregar lógica aquí para calcular el precio más caro, por ejemplo, sumar un porcentaje
-    // Aquí se asume un incremento del 50% como ejemplo
-    const originalPrice = price + price * 0.2;
+    const originalPrice = price * 1.2; // Aumento del 20%
     return originalPrice;
   };
 
@@ -251,10 +250,10 @@ const Cards = ({ courses }: any) => {
             currency: "ARS",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0,
-          }).format(course.price || 220);
+          }).format(course.price);
 
           // Calcular el precio más caro
-          const originalPrice = calculateOriginalPrice(course.price || 220);
+          const originalPrice = calculateOriginalPrice(course.price);
           const formattedOriginalPrice = new Intl.NumberFormat("es-AR", {
             style: "currency",
             currency: "ARS",

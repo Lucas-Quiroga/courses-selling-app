@@ -38,7 +38,7 @@ exports.purchasesCourse = async (req, res) => {
 exports.createCourse = async (req, res) => {
   const { name, description, price, modules, thumbnail } = req.body;
 
-  if (!name || !description || !price || !thumbnail) {
+  if (!name || !description || !price) {
     return res.status(400).json({
       error: "Por favor, completa todos los campos requeridos.",
     });
