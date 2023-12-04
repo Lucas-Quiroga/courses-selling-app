@@ -16,15 +16,16 @@ const courseSchema = new moongose.Schema({
     required: true,
     trim: true,
   },
-  modules: {
-    type: Array,
-    default: [], // valor por defecto
-  },
   thumbnail: {
     type: String,
   },
   duration: {
     type: String,
+    required: true,
+    trim: true,
+  },
+  videos: {
+    type: Number,
     required: true,
     trim: true,
   },

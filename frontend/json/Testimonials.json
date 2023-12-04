@@ -24,7 +24,8 @@
       "id": 4,
       "image": "/marcela.png",
       "name": "Marcela",
-      "description": "Hola, mi nombre es Marcela y soy alumna de Paula. Me encanta porque sus clases son dinámicas, y ella siempre está dispuesta a brindarnos todos sus conocimientos y aclararnos dudas no solo durante las clases, sino en cualquier momento."
+      "description": "Hola, mi nombre es Marcela y soy alumna de Paula. Me encanta porque sus clases son dinámicas, y ella siempre está dispuesta a brindarnos todos sus conocimientos y aclararnos dudas no solo durante las clases, sino en cualquier momento.",
+      "role": "Estudiante"
     },
     {
       "id": 5,

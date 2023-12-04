@@ -7,7 +7,7 @@ const Contact = () => {
         <div className="lg:flex lg:items-center lg:-mx-6">
           <div className="lg:w-1/2 lg:mx-6">
             <h1 className="text-2xl font-semibold text-gray-800 capitalize  lg:text-3xl">
-              Contact us for <br /> more info
+              Contacte con nosotros <br /> Más información
             </h1>
 
             <div className="mt-6 space-y-8 md:mt-8">

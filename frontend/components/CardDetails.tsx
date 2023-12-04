@@ -8,6 +8,7 @@ import { addToCart } from "@/coreComponents/helper/cart";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
+import CustomButton from "@/coreComponents/CustomButton";
 
 interface CardDetailsProps {
   course: {
@@ -15,7 +16,7 @@ interface CardDetailsProps {
     name: string;
     description: string;
     price: number;
-    image: string;
+    thumbnail: string;
   };
 }
 
@@ -74,10 +75,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
-              src={
-                course.image ||
-                "https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-              }
+              src={course.thumbnail}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -154,19 +152,22 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                 </span>
               </div>
 
-              <div className="flex">
-                <button
-                  onClick={() => router.push(`/Courses/${course._id}/checkout`)}
-                  className="flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
-                >
-                  Comprar
-                </button>
-                <button
-                  onClick={() => router.push(`/Courses/${course._id}/lessons`)}
-                  className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
-                >
-                  Ver introduccion
-                </button>
+              <div className="flex justify-between">
+                <CustomButton
+                  title="Comprar"
+                  containerStyles="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  handleClick={() =>
+                    router.push(`/Courses/${course._id}/checkout`)
+                  }
+                />
+
+                <CustomButton
+                  title="Ver introduccion"
+                  containerStyles="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  handleClick={() =>
+                    router.push(`/Courses/${course._id}/lessons`)
+                  }
+                />
               </div>
             </div>
           </div>

@@ -35,7 +35,7 @@ const page = async () => {
           <hr className="my-8 border-gray-200 " />
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {courses.length > 1 ? (
+            {courses.length > 0 ? (
               courses.map((course: Course) => (
                 <CardsCourse key={course._id} course={course} />
               ))

@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 // import { RadioButtons } from ".";
 import { usePathname } from "next/navigation";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { MdOndemandVideo } from "react-icons/md";
 
 interface CardsProps {
-  image: string;
+  thumbnail: string;
   name: string;
   description: string;
   price: number;
@@ -268,11 +269,21 @@ const Cards = ({ courses }: any) => {
               // onMouseOver={() => showTooltip(index)}
               // onMouseOut={hideTooltip}
             >
-              <a onClick={() => router.push(`/Courses/${course._id}`)}>
+              <a
+                onClick={() =>
+                  router.push(
+                    `/Courses/${course._id}`,
+                    {},
+                    {
+                      showProgressBar: true,
+                    }
+                  )
+                }
+              >
                 <img
-                  src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                  src={course.thumbnail}
                   alt="Product"
-                  className="h-25 w-25 object-cover rounded-t-xl"
+                  className=" h-25 w-full object-cover rounded-t-xl"
                 />
                 <div className="px-4 py-3 w-72">
                   <span className="text-gray-400 mr-3 uppercase text-xs">
@@ -370,23 +381,8 @@ const Cards = ({ courses }: any) => {
                       </p>
                     </div>
                     <div className="flex space-x-1 items-center">
-                      <span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-indigo-600 mb-1.5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          />
-                        </svg>
-                      </span>
-                      <p className="text-sm">3 Parts</p>
+                      <MdOndemandVideo className="h-6 w-6 text-indigo-600 mb-1.5" />
+                      <p className="text-sm">3 videos</p>
                     </div>
                     <div className="flex space-x-1 items-center">
                       <span>

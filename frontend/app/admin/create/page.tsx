@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { Cards } from "@/components";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Image from "next/image";
+import { MdOndemandVideo } from "react-icons/md";
 
 interface IFormInput {
   name: string;
@@ -26,6 +27,7 @@ interface IFormInput {
     description: string;
   }[];
   duration: string | number;
+  videos: number;
   level: string;
 }
 
@@ -38,6 +40,7 @@ const page = () => {
     price: "",
     thumbnail: "",
     duration: "",
+    videos: "",
     level: "",
   });
 
@@ -71,6 +74,7 @@ const page = () => {
     "price",
     "thumbnail",
     "duration",
+    "videos",
     "level",
   ]);
 
@@ -125,13 +129,15 @@ const page = () => {
     if (params.id) {
       try {
         const course = await getCourseDetail(params.id);
-        const { name, description, price, thumbnail, duration, level } = course;
+        const { name, description, price, thumbnail, duration, videos, level } =
+          course;
         setData({
           name,
           description,
           price,
           thumbnail,
           duration,
+          videos,
           level,
         });
 
@@ -146,64 +152,69 @@ const page = () => {
   };
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const course = {
-      name: data.name,
-      description: data.description,
-      price: data.price,
-      thumbnail: data.thumbnail,
-      modules: data.modules,
-      duration: data.duration,
-      level: data.level,
-    };
-
     try {
+      let imageUrl = data.thumbnail; // Usa la URL proporcionada en los datos del formulario
+
+      const course = {
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        modules: data.modules,
+        duration: data.duration,
+        videos: data.videos,
+        level: data.level,
+      };
+
       if (!params.id) {
-        //img
+        // Sube la imagen solo si es un nuevo curso
         if (file) {
           const formData = new FormData();
           formData.append("file", file);
-          try {
-            const imgResponse = await fetch("/api/upload", {
-              method: "POST",
-              body: formData,
-            });
-            const data = await imgResponse.json();
-            setImageUrl(data.url);
-          } catch (error) {
-            console.error("Error al enviar la imagen:", error);
+
+          const imgResponse = await fetch("/api/upload", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (imgResponse.status === 200) {
+            const imgData = await imgResponse.json();
+            imageUrl = imgData.url; // Actualiza la URL con la obtenida de Cloudinary
           }
         }
 
-        const response = await createCourse(course);
+        const courseWithImg = {
+          ...course,
+          thumbnail: imageUrl,
+        };
+
+        const response = await createCourse(courseWithImg);
+
         if (response.status === 200) {
-          setSuccess("Curso creado con exito!");
+          setSuccess("Curso creado con éxito!");
           setTimeout(() => {
-            setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
+            setSuccess("");
             router.push("/admin/courses");
-          }, 3000); // 2000 milisegundos (2 segundos)
+          }, 3000);
         }
       } else {
-        const response = await updateCourse(params.id, course);
-        if (response.status === 200) {
-          setSuccess("Curso actualizado con exito!");
-          setTimeout(() => {
-            setSuccess(""); // Borra el mensaje de éxito después de 2 segundos
-            router.refresh();
-          }, 3000); // 2000 milisegundos (2 segundos)
+        // Si es una actualización, solo actualiza la información del curso
+        const response = await updateCourse(params.id, data);
 
+        if (response.status === 200) {
+          setSuccess("Curso actualizado con éxito!");
           setTimeout(() => {
+            setSuccess("");
             router.push("/admin/courses");
-            router.refresh();
-          }, 3001);
+          }, 3000);
         }
       }
     } catch (error) {
       setError(
-        "Ocurrió un error durante la creacion. Por favor, inténtalo de nuevo."
+        "Ocurrió un error durante la creación. Por favor, inténtalo de nuevo."
       );
       setTimeout(() => {
-        setError(""); // Borra el mensaje de éxito después de 2 segundos
-      }, 3000); // 2000 milisegundos (2 segundos)
+        setError("");
+      }, 3000);
     }
     reset();
   };
@@ -389,22 +400,6 @@ const page = () => {
               )}
             </div>
 
-            {fields.map((field, index) => (
-              <div key={field.id}>
-                <input
-                  type="text"
-                  {...register(`modules.${index}.title`)}
-                  placeholder="Título del módulo"
-                />
-                <textarea
-                  {...register(`modules.${index}.description`)}
-                  placeholder="Descripción del módulo"
-                />
-                <button type="button" onClick={() => remove(index)}>
-                  Eliminar Módulo
-                </button>
-              </div>
-            ))}
             <div>
               <label htmlFor="duration">Duración del curso:</label>
               <select
@@ -426,6 +421,27 @@ const page = () => {
               {errors.duration && (
                 <span className="block text-red-600 text-[15px] font-bold">
                   {(errors.duration as FieldError).message}
+                </span>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="videos">Cantidad de videos:</label>
+              <input
+                id="videos"
+                type="number"
+                {...register("videos", {
+                  required: {
+                    value: true,
+                    message: "Videos is required",
+                  },
+                })}
+                className="w-full border border-gray-300 rounded p-2"
+                defaultValue={data.videos}
+              ></input>
+              {errors.level && (
+                <span className="block text-red-600 text-[15px] font-bold">
+                  {(errors.videos as FieldError).message}
                 </span>
               )}
             </div>
@@ -454,13 +470,7 @@ const page = () => {
                 </span>
               )}
             </div>
-            <button
-              type="button"
-              onClick={() => append({ title: "", description: "" })}
-              className="text-blue-500"
-            >
-              Agregar Módulo
-            </button>
+
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -489,7 +499,7 @@ const page = () => {
                   )}
                   <div className="px-4 py-3 w-72">
                     <span className="text-gray-400 mr-3 uppercase text-xs">
-                      CURSO
+                      CURSO DE
                     </span>
                     <p className="text-lg font-bold text-black truncate block ">
                       {watchedFields[0]}
@@ -547,22 +557,9 @@ const page = () => {
                       </div>
                       <div className="flex space-x-1 items-center">
                         <span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 text-indigo-600 mb-1.5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            />
-                          </svg>
+                          <MdOndemandVideo className="h-6 w-6 text-indigo-600 mb-1.5" />
                         </span>
-                        <p className="text-sm">3 Parts</p>
+                        <p className="text-sm">{watchedFields[5]} Videos</p>
                       </div>
                       <div className="flex space-x-1 items-center">
                         <span>
@@ -607,7 +604,7 @@ const page = () => {
                             </g>
                           </svg>
                         </span>
-                        <p className="text-sm"> {watchedFields[5]}</p>
+                        <p className="text-sm"> {watchedFields[6]}</p>
                       </div>
                     </div>
                   </div>

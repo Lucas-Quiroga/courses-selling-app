@@ -4,6 +4,7 @@ import "./globals.css";
 import { NavbarOrigen, Footer } from "@/components";
 import ProvidersAuth from "./ProvidersAuth";
 import { CartProvider } from "@/context/CartContext";
+import Provider from "@/context/ProgressBarContext";
 
 export const metadata: Metadata = {
   title: "Couses selling",
@@ -19,12 +20,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="relative">
-        <CartProvider>
-          <ProvidersAuth>
-            <NavbarOrigen />
-            {children}
-          </ProvidersAuth>
-        </CartProvider>
+        <Provider>
+          <CartProvider>
+            <ProvidersAuth>
+              <NavbarOrigen />
+              {children}
+            </ProvidersAuth>
+          </CartProvider>
+        </Provider>
         <Footer />
       </body>
     </html>

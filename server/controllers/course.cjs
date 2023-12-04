@@ -36,7 +36,9 @@ exports.purchasesCourse = async (req, res) => {
 };
 
 exports.createCourse = async (req, res) => {
-  const { name, description, price, modules, thumbnail } = req.body;
+  const { name, description, price, thumbnail, videos } = req.body;
+
+  console.log(name, description, price, thumbnail, videos);
 
   if (!name || !description || !price) {
     return res.status(400).json({

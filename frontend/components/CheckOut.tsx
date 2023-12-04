@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SiMercadopago } from "react-icons/si";
 import mercadoPagoIcon from "@/public/mercadopago.png";
+import { PurchaseProcessInformation } from ".";
+import Modal from "./Modal";
 
 const CheckOut = () => {
   const countries = ["China", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
+
+  const [toggleModal, setToggleModal] = useState(false);
 
   const changeText = (e: any) => {
     setMenu(false);
@@ -16,57 +20,33 @@ const CheckOut = () => {
 
   const router = useRouter();
 
-  const handleGoBack = () => {
-    router.back(); // Utiliza el método back() para volver a la página anterior
+  const handleToggleModal = () => {
+    setToggleModal(!toggleModal);
   };
   return (
     <div className="flex justify-center items-center">
       <div className="py-16 px-4 md:px-6 2xl:px-0 flex justify-center items-center 2xl:mx-auto 2xl:container">
         <div className="flex flex-col justify-start items-start w-full space-y-9">
-          <div className="flex justify-start flex-col items-start space-y-2">
-            <button className="flex flex-row items-center text-gray-600 hover:text-gray-500 space-x-1">
-              <svg
-                className="fill-stroke"
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.91681 7H11.0835"
-                  stroke="currentColor"
-                  strokeWidth="0.666667"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M2.91681 7L5.25014 9.33333"
-                  stroke="currentColor"
-                  strokeWidth="0.666667"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M2.91681 7.00002L5.25014 4.66669"
-                  stroke="currentColor"
-                  strokeWidth="0.666667"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <p className="text-sm leading-none" onClick={handleGoBack}>
-                Back
-              </p>
-            </button>
-            <p className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">
-              Checkout
-            </p>
-            <p className="text-base leading-normal sm:leading-4 text-gray-600">
-              Home {">"} Electronics {">"} Headphones {">"} Cart {">"} Checkout
-            </p>
-          </div>
+          {/* <button
+            onClick={handleToggleModal}
+            className="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+          >
+            <svg
+              className="w-5 h-5 mx-1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                clipRule="evenodd"
+              />
+            </svg>
 
+            <span className="mx-1">Más información</span>
+          </button> */}
+          <Modal />
           <div className="flex flex-col xl:flex-row justify-center xl:justify-between space-y-6 xl:space-y-0 xl:space-x-6 w-full">
             <div className=" flex flex-col sm:flex-row xl:flex-col justify-center items-center bg-gray-100 py-7 sm:py-0 xl:w-full">
               <div className="py-14 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">

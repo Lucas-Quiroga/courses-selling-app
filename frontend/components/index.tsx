@@ -33,6 +33,8 @@ import Data from "./Data";
 import NavbarOrigen from "./Navbar/NavbarOrigen";
 import VideoIntroduction from "./VideoIntroduction";
 import CheckOut from "./CheckOut";
+import PurchaseProcessInformation from "./PurchaseProcessInformation";
+import Modal from "react-responsive-modal";
 
 export {
   NavbarUser,
@@ -70,4 +72,5 @@ export {
   NavbarOrigen,
   VideoIntroduction,
   CheckOut,
+  PurchaseProcessInformation,
 };
