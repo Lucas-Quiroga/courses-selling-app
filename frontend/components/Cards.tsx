@@ -9,13 +9,17 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
 
 interface CardsProps {
-  thumbnail: string;
+  _id: number;
   name: string;
   description: string;
+  highlights: string[];
   price: number;
-  _id: number;
+  thumbnail: string;
   duration: string;
+  videos: number;
   level: string;
+  details: string;
+  format: string;
 }
 
 const Cards = ({ courses }: any) => {
@@ -63,7 +67,7 @@ const Cards = ({ courses }: any) => {
     <div>
       <section
         id="Projects"
-        className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
+        className="flex flex-wrap w-fit mx-auto items-center justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
       >
         {courses.map((course: CardsProps, index: any) => {
           const formattedPrice = new Intl.NumberFormat("es-AR", {
@@ -107,7 +111,7 @@ const Cards = ({ courses }: any) => {
                 />
                 <div className="px-4 py-3 w-72">
                   <span className="text-gray-400 mr-3 uppercase text-xs">
-                    Brand
+                    {course.format}
                   </span>
                   <p className="text-lg font-bold text-black truncate block capitalize">
                     {course.name}
@@ -161,13 +165,11 @@ const Cards = ({ courses }: any) => {
                           />
                         </svg>
                       </span>
-                      <p className="text-sm">
-                        {course.duration || "1:34:23 Minutes"}
-                      </p>
+                      <p className="text-sm">{course.duration}</p>
                     </div>
                     <div className="flex space-x-1 items-center">
                       <MdOndemandVideo className="h-6 w-6 text-indigo-600 mb-1.5" />
-                      <p className="text-sm">3 videos</p>
+                      <p className="text-sm">{course.videos} videos</p>
                     </div>
                     <div className="flex space-x-1 items-center">
                       <span>
@@ -212,7 +214,7 @@ const Cards = ({ courses }: any) => {
                           </g>
                         </svg>
                       </span>
-                      <p className="text-sm">{course.level || "not level"}</p>
+                      <p className="text-sm">{course.level}</p>
                     </div>
                   </div>
 

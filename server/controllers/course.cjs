@@ -36,9 +36,33 @@ exports.purchasesCourse = async (req, res) => {
 };
 
 exports.createCourse = async (req, res) => {
-  const { name, description, price, thumbnail, videos } = req.body;
+  const {
+    name,
+    description,
+    price,
+    thumbnail,
+    videos,
+    highlights,
+    duration,
+    level,
+    details,
+    format,
+  } = req.body;
 
-  console.log(name, description, price, thumbnail, videos);
+  console.log([
+    {
+      nombre: name,
+      description: description,
+      aspectosDes: highlights,
+      precio: price,
+      imagen: thumbnail,
+      duracion: duration,
+      cantidadVideos: videos,
+      nivel: level,
+      detalles: details,
+      formato: format,
+    },
+  ]);
 
   if (!name || !description || !price) {
     return res.status(400).json({

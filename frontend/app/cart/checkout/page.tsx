@@ -1,8 +1,8 @@
 import React from "react";
-import { Cart } from "@/components";
+import { CheckOut } from "@/components";
 
 const page = () => {
-  return <Cart />;
+  return <CheckOut />;
 };
 
 export default page;

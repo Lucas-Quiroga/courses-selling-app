@@ -17,10 +17,14 @@ interface CardDetailsProps {
     _id: number;
     name: string;
     description: string;
+    highlights: string[];
     price: number;
     thumbnail: string;
     duration: string;
+    videos: number;
     level: string;
+    details: string;
+    format: string;
   };
 }
 
@@ -122,8 +126,8 @@ const CardDetails = ({ course }: CardDetailsProps) => {
               <div className="p-3 rounded border border-gray-200 flex flex-col justify-between ">
                 <div className="w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                      CURSO
+                    <h2 className="text-sm title-font uppercase text-gray-500 tracking-widest">
+                      {course.format}
                     </h2>
                     <h1 className="text-gray-900 uppercase text-3xl title-font font-medium mb-1">
                       {course.name}
@@ -139,19 +143,13 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                   {/* <p className="leading-relaxed">{course.description}</p> */}
                   <div className="lg:col-span-2 lg:col-start-1 lg:pr-8 lg:pt-6">
                     <div>
-                      <h3 className="text-sm font-medium uppercase text-gray-900">
+                      <h3 className="text-sm font-medium uppercase text-gray-900 relative">
                         Descripción
                       </h3>
 
-                      <div className="space-y-6">
-                        <p className="text-base text-gray-900 mt-4">
-                          El paquete de seis camisetas básicas te permite
-                          expresar completamente tu personalidad vibrante con
-                          tres opciones en escala de grises. ¿Te sientes
-                          aventurero? Ponte una camiseta gris jaspeada. ¿Quieres
-                          marcar tendencia? Prueba nuestro color exclusivo:
-                          "Negro". ¿Necesitas agregar un toque extra de color a
-                          tu atuendo? Nuestra camiseta blanca lo tiene cubierto.
+                      <div className="space-y-6 relative">
+                        <p className="text-base text-gray-900 mt-4 break-words relative">
+                          {course.description}
                         </p>
                       </div>
                     </div>
@@ -167,26 +165,13 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                             role="list"
                             className="list-disc space-y-2 pl-4 text-md"
                           >
-                            <li className="text-gray-400">
-                              <span className="text-gray-600">
-                                Cortado y cosido localmente a mano
-                              </span>
-                            </li>
-                            <li className="text-gray-400">
-                              <span className="text-gray-600">
-                                Teñido con nuestros colores patentados
-                              </span>
-                            </li>
-                            <li className="text-gray-400">
-                              <span className="text-gray-600">
-                                Prelavado y preencogido
-                              </span>
-                            </li>
-                            <li className="text-gray-400">
-                              <span className="text-gray-600">
-                                Ultra suave 100% algodón
-                              </span>
-                            </li>
+                            {course.highlights.map((highlight, index) => (
+                              <li key={index} className="text-gray-400">
+                                <span className="text-gray-600">
+                                  {highlight}
+                                </span>
+                              </li>
+                            ))}
                           </ul>
                         </div>
                       </div>
@@ -224,7 +209,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                               <div className="flex items-center">
                                 <MdOndemandVideo className="h-6 w-6 text-indigo-600 mb-1.5 mr-1" />
                                 <p className="text-md text-gray-600">
-                                  Cantidad de videos: <b>3</b>
+                                  Cantidad de videos: <b>{course.videos}</b>
                                 </p>
                               </div>
                             </li>
@@ -289,11 +274,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
 
                       <div className="mt-4 space-y-6">
                         <p className="text-sm text-gray-600">
-                          El paquete de seis incluye dos camisetas negras, dos
-                          blancas y dos grises jaspeadas Basic Tees. Regístrate
-                          en nuestro servicio de suscripción y sé el primero en
-                          obtener nuevos y emocionantes colores, como nuestro
-                          próximo lanzamiento limitado "Gris Carbón".
+                          {course.details}
                         </p>
                       </div>
                     </div>

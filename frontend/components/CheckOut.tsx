@@ -1,17 +1,77 @@
 "use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
+// import { useRouter } from "next/navigation";
 import { SiMercadopago } from "react-icons/si";
 import mercadoPagoIcon from "@/public/mercadopago.png";
 import { PurchaseProcessInformation } from ".";
 import Modal from "./Modal";
+import { getCart, createOrder } from "@/coreComponents/helper/cart";
+import { useRouter } from "next/navigation";
+import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
 
-const CheckOut = () => {
+// Define la interfaz Course
+interface Course {
+  name: string;
+  description: string;
+  price: number;
+  thumbnail: string;
+  duration: string | number;
+  videos: number;
+  level: string;
+  highlights: string[];
+  details: string;
+  format: string;
+  // Agrega aquí cualquier otra propiedad que necesites de Course
+}
+
+// Define la interfaz CartItem
+interface CartItem {
+  _id: string;
+  course: Course;
+}
+
+const CheckOut = ({ idCourse }: any) => {
   const countries = ["China", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [data, setData] = useState<Course | null>(null);
 
   const [toggleModal, setToggleModal] = useState(false);
+  const fetchData = async () => {
+    if (idCourse) {
+      try {
+        const course = await getCourseDetail(idCourse);
+        const {
+          name,
+          description,
+          price,
+          thumbnail,
+          duration,
+          videos,
+          level,
+          highlights,
+          format,
+          details,
+        } = course;
+        setData({
+          name,
+          description,
+          price,
+          thumbnail,
+          duration,
+          videos,
+          level,
+          highlights,
+          format,
+          details,
+        });
+      } catch (error) {
+        console.error("Error fetching course data:", error);
+        // Manejar el error de alguna manera si es necesario
+      }
+    }
+  };
 
   const changeText = (e: any) => {
     setMenu(false);
@@ -19,10 +79,107 @@ const CheckOut = () => {
   };
 
   const router = useRouter();
+  // const { id } = router.query;
+  // console.log(id);
 
   const handleToggleModal = () => {
     setToggleModal(!toggleModal);
   };
+
+  const handleCheckout = async () => {
+    try {
+      // Obtén la información de los cursos desde el estado local
+      const courses = cart.map((item) => item.course);
+
+      // Crea la orden en MercadoPago
+      const orderResponse = await createOrder(courses);
+
+      // Verifica si la respuesta de MercadoPago tiene el campo 'init_point'
+      if (orderResponse && orderResponse.init_point) {
+        // Redirige al usuario al init_point de MercadoPago
+        window.location.href = orderResponse.init_point;
+      } else {
+        // Maneja el caso en que no se proporciona el init_point
+        console.error(
+          "No se proporcionó el init_point en la respuesta de MercadoPago"
+        );
+        // Puedes mostrar un mensaje de error o redirigir a una página de error
+      }
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
+      // Manejar el error según sea necesario
+    }
+  };
+
+  useEffect(() => {
+    if (idCourse) {
+      fetchData();
+    }
+  }, []);
+
+  // Función para calcular el precio más caro con un incremento del 20%
+  const calculateOriginalPrice = (price: number): number => {
+    const originalPrice = price * 1.2; // Aumento del 20%
+    return originalPrice;
+  };
+
+  const formattedPrice = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(data?.price ?? 0); // Proporciona 0 como valor predeterminado si data?.price es undefined
+
+  // Calcular el precio más caro
+  const originalPrice = calculateOriginalPrice(data?.price ?? 0); // Proporciona 0 como valor predeterminado si data?.price es undefined
+  const formattedOriginalPrice = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(originalPrice);
+
+  const resta: number = (data?.price ?? 0) - (originalPrice ?? 0);
+
+  // Calcular el porcentaje de la resta
+  const porcentajeDeLaResta: number =
+    originalPrice !== 0 ? (Math.abs(resta) / originalPrice) * 100 : 0;
+
+  const formattedResta = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(resta);
+
+  const formattedPorcentajeDeLaResta = porcentajeDeLaResta.toFixed(2);
+
+  const cargoServicioWeb = 5000; // Cambiado a $5000
+
+  const formattedPrecioConRecargoWeb = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(cargoServicioWeb);
+
+  // Verificar si data está definido y tiene la propiedad price
+  const precioOriginal = data?.price ?? 0;
+
+  // Calcular el precio con descuento y agregar el cargo del servicio web
+  const precioConDescuentoYCargo = precioOriginal + cargoServicioWeb;
+
+  // Calcular el total sumando el precio con descuento y el cargo del servicio web
+  const total = precioConDescuentoYCargo;
+
+  // Formatear el total en moneda argentina
+  const formattedTotal = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(total);
+
   return (
     <div className="flex justify-center items-center">
       <div className="py-16 px-4 md:px-6 2xl:px-0 flex justify-center items-center 2xl:mx-auto 2xl:container">
@@ -35,105 +192,52 @@ const CheckOut = () => {
                   <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
                     <div className="flex flex-col justify-start items-start bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
                       <p className="text-lg md:text-xl font-semibold leading-6 xl:leading-5 text-gray-800">
-                        Customer’s Cart
+                        Orden de compra # {Math.random()}
                       </p>
+
                       <div className="mt-4 md:mt-6 flex  flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full ">
                         <div className="pb-4 md:pb-8 w-full md:w-40">
                           <img
                             className="w-full hidden md:block"
-                            src="https://i.ibb.co/84qQR4p/Rectangle-10.png"
-                            alt="dress"
-                          />
-                          <img
-                            className="w-full md:hidden"
-                            src="https://i.ibb.co/L039qbN/Rectangle-10.png"
-                            alt="dress"
+                            src={data?.thumbnail}
+                            alt="producto"
                           />
                         </div>
                         <div className="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full  pb-8 space-y-4 md:space-y-0">
                           <div className="w-full flex flex-col justify-start items-start space-y-8">
                             <h3 className="text-xl xl:text-2xl font-semibold leading-6 text-gray-800">
-                              Premium Quaility Dress
+                              {data?.name}
                             </h3>
                             <div className="flex justify-start items-start flex-col space-y-2">
                               <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">Style: </span>{" "}
-                                Italic Minimal Design
+                                <span className="text-gray-300">
+                                  Duración del curso:{" "}
+                                </span>{" "}
+                                {data?.duration}
                               </p>
                               <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">Size: </span>{" "}
-                                Small
+                                <span className="text-gray-300">
+                                  Cantidad de videos:{" "}
+                                </span>{" "}
+                                {data?.videos}
                               </p>
                               <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">Color: </span>{" "}
-                                Light Blue
+                                <span className="text-gray-300">
+                                  Nivel del curso:{" "}
+                                </span>{" "}
+                                {data?.level}
                               </p>
                             </div>
                           </div>
                           <div className="flex justify-between space-x-8 items-start w-full">
                             <p className="text-base xl:text-lg leading-6">
-                              $36.00{" "}
-                              <span className="text-red-300 line-through">
-                                {" "}
-                                $45.00
-                              </span>
+                              {formattedPrice}{" "}
                             </p>
-                            <p className="text-base xl:text-lg leading-6 text-gray-800">
-                              01
-                            </p>
-                            <p className="text-base xl:text-lg font-semibold leading-6 text-gray-800">
-                              $36.00
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mt-6 md:mt-0 flex justify-start flex-col md:flex-row  items-start md:items-center space-y-4  md:space-x-6 xl:space-x-8 w-full ">
-                        <div className="w-full md:w-40">
-                          <img
-                            className="w-full hidden md:block"
-                            src="https://i.ibb.co/s6snNx0/Rectangle-17.png"
-                            alt="dress"
-                          />
-                          <img
-                            className="w-full md:hidden"
-                            src="https://i.ibb.co/BwYWJbJ/Rectangle-10.png"
-                            alt="dress"
-                          />
-                        </div>
-                        <div className="  flex justify-between items-start w-full flex-col md:flex-row space-y-4 md:space-y-0  ">
-                          <div className="w-full flex flex-col justify-start items-start space-y-8">
-                            <h3 className="text-xl xl:text-2xl font-semibold leading-6 text-gray-800">
-                              High Quaility Italic Dress
-                            </h3>
-                            <div className="flex justify-start items-start flex-col space-y-2">
-                              <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">Style: </span>{" "}
-                                Italic Minimal Design
-                              </p>
-                              <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">Size: </span>{" "}
-                                Small
-                              </p>
-                              <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">Color: </span>{" "}
-                                Light Blue
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex justify-between space-x-8 items-start w-full">
-                            <p className="text-base xl:text-lg leading-6">
-                              $20.00{" "}
-                              <span className="text-red-300 line-through">
-                                {" "}
-                                $30.00
-                              </span>
-                            </p>
-                            <p className="text-base xl:text-lg leading-6 text-gray-800">
-                              01
-                            </p>
-                            <p className="text-base xl:text-lg font-semibold leading-6 text-gray-800">
-                              $20.00
-                            </p>
+                            <span className="text-red-300 line-through">
+                              {" "}
+                              {formattedOriginalPrice}
+                            </span>{" "}
+                            ARS
                           </div>
                         </div>
                       </div>
@@ -141,34 +245,35 @@ const CheckOut = () => {
                     <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">
                       <div className="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6   ">
                         <h3 className="text-xl font-semibold leading-5 text-gray-800">
-                          Summary
+                          Resumen
                         </h3>
                         <div className="flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4">
                           <div className="flex justify-between  w-full">
                             <p className="text-base leading-4 text-gray-800">
-                              Subtotal
+                              Producto
                             </p>
                             <p className="text-base leading-4 text-gray-600">
-                              $56.00
+                              {formattedOriginalPrice} ARS
                             </p>
                           </div>
                           <div className="flex justify-between items-center w-full">
                             <p className="text-base leading-4 text-gray-800">
-                              Discount{" "}
+                              Descuento{" "}
                               <span className="bg-gray-200 p-1 text-xs font-medium leading-3  text-gray-800">
-                                STUDENT
+                                ACTIVO
                               </span>
                             </p>
                             <p className="text-base leading-4 text-gray-600">
-                              -$28.00 (50%)
+                              {formattedResta} ({formattedPorcentajeDeLaResta}%)
+                              ARS
                             </p>
                           </div>
                           <div className="flex justify-between items-center w-full">
                             <p className="text-base leading-4 text-gray-800">
-                              Shipping
+                              Cargo servicio web
                             </p>
                             <p className="text-base leading-4 text-gray-600">
-                              $8.00
+                              {formattedPrecioConRecargoWeb}
                             </p>
                           </div>
                         </div>
@@ -177,11 +282,12 @@ const CheckOut = () => {
                             Total
                           </p>
                           <p className="text-base font-semibold leading-4 text-gray-600">
-                            $36.00
+                            {formattedTotal}
                           </p>
                         </div>
                       </div>
                     </div>
+                    {/* hasta aqui */}
                   </div>
                 </div>
               </div>

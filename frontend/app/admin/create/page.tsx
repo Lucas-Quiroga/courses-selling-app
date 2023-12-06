@@ -621,9 +621,9 @@ const page = () => {
                 fill="currentColor"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
 
@@ -647,14 +647,14 @@ const page = () => {
                 </div>
                 {/* Descripción y detalles */}
                 {/* <p className="leading-relaxed">{course.description}</p> */}
-                <div className="lg:col-span-2 lg:col-start-1 lg:pr-8 lg:pt-6">
+                <div className="lg:col-span-2 lg:col-start-1 lg:pr-8 lg:pt-6 relative">
                   <div>
                     <h3 className="text-sm font-medium uppercase text-gray-900">
                       Descripción
                     </h3>
 
-                    <div className="space-y-6">
-                      <p className="text-base text-gray-900 mt-4">
+                    <div className="space-y-6 relative">
+                      <p className="text-base text-gray-900 mt-4 relative break-words">
                         {watchedFields[1]}
                       </p>
                     </div>
@@ -679,6 +679,97 @@ const page = () => {
                         </ul>
                       </div>
                     </div>
+
+                    <div>
+                      <h3 className="text-sm font-medium uppercase text-gray-900">
+                        Información del Curso
+                      </h3>
+
+                      <div className="mt-4">
+                        <ul className="space-y-2 text-md">
+                          <li className="text-gray-400">
+                            <div className="flex items-center">
+                              <span>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-6 w-6 text-indigo-600 mb-1.5 mr-1"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  />
+                                </svg>
+                              </span>
+                              <p className="text-md text-gray-600">
+                                Duración del curso: <b> {watchedFields[4]} </b>
+                              </p>
+                            </div>
+                          </li>
+                          <li className="text-gray-400">
+                            <div className="flex items-center">
+                              <MdOndemandVideo className="h-6 w-6 text-indigo-600 mb-1.5 mr-1" />
+                              <p className="text-md text-gray-600">
+                                Cantidad de videos: <b>{watchedFields[5]}</b>
+                              </p>
+                            </div>
+                          </li>
+                          <li className="text-gray-400">
+                            <div className="flex items-center">
+                              <span>
+                                <svg
+                                  className="h-6 w-6 text-indigo-600 mb-1.5 mr-1"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  stroke="#741f7a"
+                                >
+                                  <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+                                  <g
+                                    id="SVGRepo_tracerCarrier"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+
+                                  <g id="SVGRepo_iconCarrier">
+                                    {" "}
+                                    <path
+                                      d="M10.05 2.53004L4.03002 6.46004C2.10002 7.72004 2.10002 10.54 4.03002 11.8L10.05 15.73C11.13 16.44 12.91 16.44 13.99 15.73L19.98 11.8C21.9 10.54 21.9 7.73004 19.98 6.47004L13.99 2.54004C12.91 1.82004 11.13 1.82004 10.05 2.53004Z"
+                                      stroke="#4f46e5"
+                                      strokeWidth="1.5"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />{" "}
+                                    <path
+                                      d="M5.63 13.08L5.62 17.77C5.62 19.04 6.6 20.4 7.8 20.8L10.99 21.86C11.54 22.04 12.45 22.04 13.01 21.86L16.2 20.8C17.4 20.4 18.38 19.04 18.38 17.77V13.13"
+                                      stroke="#4f46e5"
+                                      strokeWidth="1.5"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />{" "}
+                                    <path
+                                      d="M21.4 15V9"
+                                      stroke="#4f46e5"
+                                      strokeWidth="1.5"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />{" "}
+                                  </g>
+                                </svg>
+                              </span>
+                              <p className="text-md text-gray-600">
+                                Nivel del curso: <b>{watchedFields[6]} </b>
+                              </p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="mt-10">
@@ -687,7 +778,7 @@ const page = () => {
                     </h2>
 
                     <div className="mt-4 space-y-6">
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-600 break-words">
                         {watchedFields[7]}
                       </p>
                     </div>
@@ -731,9 +822,9 @@ const page = () => {
                     fill="currentColor"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
 

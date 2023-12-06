@@ -1,6 +1,39 @@
 import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { sendEmail } from "@/coreComponents/helper/email";
+
+interface IFormInput {
+  from: string;
+  to: string[];
+  html: string;
+}
 
 const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    // Construir los datos del correo electrónico
+    const emailData = {
+      from: "Acme <onboarding@resend.dev>",
+      to: ["quiroga.lucasoffice@gmail.com"], // Cambiar al destinatario deseado
+      subject: "Saludos desde Node.js",
+      html: `<strong> message </strong>`, // Aquí puedes incluir datos del formulario
+    };
+
+    try {
+      await sendEmail(emailData);
+      console.log("Email sent successfully");
+      // Puedes hacer algo aquí después de enviar el correo, como mostrar un mensaje de éxito
+    } catch (error) {
+      console.error("Failed to send email", error);
+      // Puedes manejar el caso de error aquí, como mostrar un mensaje de error
+    }
+  };
+
   return (
     <section className="bg-white ">
       <div className="container px-6 py-12 mx-auto">
@@ -166,26 +199,30 @@ const Contact = () => {
                 What do you want to ask
               </h1>
 
-              <form className="mt-6">
+              <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex-1">
-                  <label className="block mb-2 text-sm text-gray-600 ">
-                    Full Name
+                  <label className="block mb-2 text-sm text-gray-600">
+                    Nombre y/o apellido
                   </label>
                   <input
+                    {...register("from")}
                     type="text"
+                    id="from"
                     placeholder="John Doe"
-                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md   focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div className="flex-1 mt-6">
-                  <label className="block mb-2 text-sm text-gray-600 ">
+                  <label className="block mb-2 text-sm text-gray-600">
                     Email address
                   </label>
                   <input
+                    {...register("to")}
                     type="email"
+                    id="to"
                     placeholder="johndoe@example.com"
-                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
@@ -194,12 +231,17 @@ const Contact = () => {
                     Message
                   </label>
                   <textarea
-                    className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    {...register("html")}
+                    id="html"
+                    className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48 focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Message"
                   ></textarea>
                 </div>
 
-                <button className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                <button
+                  type="submit"
+                  className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                >
                   get in touch
                 </button>
               </form>

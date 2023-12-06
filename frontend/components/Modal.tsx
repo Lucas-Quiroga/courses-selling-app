@@ -16,8 +16,7 @@ const Modal = () => {
         type="button"
         onClick={handleToggleModal}
       >
-        <CiCircleInfo />
-        Más Información
+        <CiCircleInfo size={30} />
       </button>
 
       {isModalVisible && (
