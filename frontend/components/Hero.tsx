@@ -3,19 +3,8 @@ import React, { useState, useEffect } from "react";
 import Loading from "@/coreComponents/Loading";
 import { getCourses } from "@/coreComponents/helper/apiCalls";
 import { Cards, Filters } from "@/components";
+import { CourseType1 as Course } from "@/types/index";
 // import axios from "axios";
-
-type Course = {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  modules: any[]; // Tipo real de modules puede ser diferente, ajusta según sea necesario
-  thumbnail: string;
-  duration: string;
-  level: string;
-  __v: number;
-};
 
 const Hero = () => {
   const [courses, setCourses] = useState<Course[]>([]);

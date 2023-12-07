@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { sendEmail } from "@/coreComponents/helper/email";
@@ -199,7 +200,7 @@ const Contact = () => {
                 What do you want to ask
               </h1>
 
-              <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+              <form className="mt-6">
                 <div className="flex-1">
                   <label className="block mb-2 text-sm text-gray-600">
                     Nombre y/o apellido

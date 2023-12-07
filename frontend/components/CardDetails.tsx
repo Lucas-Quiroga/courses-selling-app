@@ -1,32 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { Tabs } from ".";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { addToCart } from "@/coreComponents/helper/cart";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
 import CustomButton from "@/coreComponents/CustomButton";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
-
-interface CardDetailsProps {
-  course: {
-    _id: number;
-    name: string;
-    description: string;
-    highlights: string[];
-    price: number;
-    thumbnail: string;
-    duration: string;
-    videos: number;
-    level: string;
-    details: string;
-    format: string;
-  };
-}
+import { CardDetailsProps } from "@/types";
 
 const CardDetails = ({ course }: CardDetailsProps) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);

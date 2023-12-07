@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Video } from ".";
-import { Data } from ".";
+import { Video } from "..";
+import { Data } from "..";
 
 const VideoGallery = () => {
   const [activeVid, setActiveVid] = useState(

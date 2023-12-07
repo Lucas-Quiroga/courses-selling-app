@@ -8,17 +8,7 @@ import {
 } from "@/coreComponents/helper/auth";
 import { useForm, FieldError, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
-
-interface UserProfile {
-  firstName: string;
-  email: string;
-}
-
-interface IFormInput {
-  firstName: string;
-  phoneNo: number;
-  newPassword: string | number;
-}
+import { UserProfile, IFormInput } from "@/types";
 
 const UserProfileSection = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);

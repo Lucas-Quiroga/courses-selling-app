@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { LoginUser, RegisterUser } from ".";
+import { LoginUser, RegisterUser } from "..";
 
 const ViewHomeForm = () => {
   const { isLogin } = useAuth();

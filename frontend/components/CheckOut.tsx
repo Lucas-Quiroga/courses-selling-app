@@ -1,39 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
-// import { useRouter } from "next/navigation";
-import { SiMercadopago } from "react-icons/si";
 import mercadoPagoIcon from "@/public/mercadopago.png";
-import { PurchaseProcessInformation } from ".";
 import Modal from "./Modal";
-import { getCart, createOrder } from "@/coreComponents/helper/cart";
-import { useRouter } from "next/navigation";
+import { createOrder } from "@/coreComponents/helper/cart";
 import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
-
-// Define la interfaz Course
-interface Course {
-  name: string;
-  description: string;
-  price: number;
-  thumbnail: string;
-  duration: string | number;
-  videos: number;
-  level: string;
-  highlights: string[];
-  details: string;
-  format: string;
-  // Agrega aquí cualquier otra propiedad que necesites de Course
-}
-
-// Define la interfaz CartItem
-interface CartItem {
-  _id: string;
-  course: Course;
-}
+import {
+  calculatePercentage,
+  calculateOriginalPrice,
+  calculateTotalWithWebCharge,
+  formatCurrency,
+} from "@/math/calculations";
+import { Course, CartItem } from "@/types";
+import { CARGO_SERVICIO_WEB } from "@/constants/constants";
 
 const CheckOut = ({ idCourse }: any) => {
-  const countries = ["China", "Russia", "UK"];
-  const [menu, setMenu] = useState(false);
-  const [country, setCountry] = useState("United States");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [data, setData] = useState<Course | null>(null);
 
@@ -54,17 +34,19 @@ const CheckOut = ({ idCourse }: any) => {
           format,
           details,
         } = course;
+        // Asegúrate de que cada propiedad del curso tenga un valor predeterminado si es opcional
         setData({
-          name,
-          description,
-          price,
-          thumbnail,
-          duration,
-          videos,
-          level,
-          highlights,
-          format,
-          details,
+          _id: "", // Puedes poner un valor predeterminado aquí
+          name: name || "", // Puedes poner un valor predeterminado aquí
+          description: description || "", // Puedes poner un valor predeterminado aquí
+          price: price || 0, // Puedes poner un valor predeterminado aquí
+          thumbnail: thumbnail || "", // Puedes poner un valor predeterminado aquí
+          duration: duration || "", // Puedes poner un valor predeterminado aquí
+          videos: videos || 0, // Puedes poner un valor predeterminado aquí
+          level: level || "", // Puedes poner un valor predeterminado aquí
+          highlights: highlights || [], // Puedes poner un valor predeterminado aquí
+          details: details || "", // Puedes poner un valor predeterminado aquí
+          format: format || "", // Puedes poner un valor predeterminado aquí
         });
       } catch (error) {
         console.error("Error fetching course data:", error);
@@ -72,15 +54,6 @@ const CheckOut = ({ idCourse }: any) => {
       }
     }
   };
-
-  const changeText = (e: any) => {
-    setMenu(false);
-    setCountry(e.target.textContent);
-  };
-
-  const router = useRouter();
-  // const { id } = router.query;
-  // console.log(id);
 
   const handleToggleModal = () => {
     setToggleModal(!toggleModal);
@@ -117,68 +90,35 @@ const CheckOut = ({ idCourse }: any) => {
     }
   }, []);
 
-  // Función para calcular el precio más caro con un incremento del 20%
-  const calculateOriginalPrice = (price: number): number => {
-    const originalPrice = price * 1.2; // Aumento del 20%
-    return originalPrice;
-  };
-
-  const formattedPrice = new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(data?.price ?? 0); // Proporciona 0 como valor predeterminado si data?.price es undefined
-
   // Calcular el precio más caro
   const originalPrice = calculateOriginalPrice(data?.price ?? 0); // Proporciona 0 como valor predeterminado si data?.price es undefined
-  const formattedOriginalPrice = new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(originalPrice);
+  const formattedPrice = formatCurrency(data?.price ?? 0);
+  const formattedOriginalPrice = formatCurrency(originalPrice);
 
   const resta: number = (data?.price ?? 0) - (originalPrice ?? 0);
 
   // Calcular el porcentaje de la resta
-  const porcentajeDeLaResta: number =
-    originalPrice !== 0 ? (Math.abs(resta) / originalPrice) * 100 : 0;
+  const percentageResta: number = calculatePercentage(
+    Math.abs(resta),
+    originalPrice
+  );
 
-  const formattedResta = new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(resta);
+  const formattedResta = formatCurrency(resta);
+  const formattedPorcentajeDeLaResta = percentageResta.toFixed(2);
 
-  const formattedPorcentajeDeLaResta = porcentajeDeLaResta.toFixed(2);
-
-  const cargoServicioWeb = 5000; // Cambiado a $5000
-
-  const formattedPrecioConRecargoWeb = new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(cargoServicioWeb);
+  const formattedPrecioConRecargoWeb = formatCurrency(CARGO_SERVICIO_WEB);
 
   // Verificar si data está definido y tiene la propiedad price
   const precioOriginal = data?.price ?? 0;
 
-  // Calcular el precio con descuento y agregar el cargo del servicio web
-  const precioConDescuentoYCargo = precioOriginal + cargoServicioWeb;
-
   // Calcular el total sumando el precio con descuento y el cargo del servicio web
+  const precioConDescuentoYCargo = calculateTotalWithWebCharge(
+    precioOriginal,
+    CARGO_SERVICIO_WEB
+  );
   const total = precioConDescuentoYCargo;
-
   // Formatear el total en moneda argentina
-  const formattedTotal = new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(total);
+  const formattedTotal = formatCurrency(total);
 
   return (
     <div className="flex justify-center items-center">

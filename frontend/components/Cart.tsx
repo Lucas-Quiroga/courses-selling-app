@@ -5,22 +5,8 @@ import { useRouter } from "next/navigation";
 import { getCart, createOrder } from "@/coreComponents/helper/cart";
 import { MdDelete } from "react-icons/md";
 import { removeFromCart } from "@/coreComponents/helper/cart";
+import { CartItem } from "@/types";
 
-// Define la interfaz Course
-interface Course {
-  _id: string;
-  name: string;
-  price: number;
-  thumbnail?: string;
-  level: string;
-  // Agrega aquí cualquier otra propiedad que necesites de Course
-}
-
-// Define la interfaz CartItem
-interface CartItem {
-  _id: string;
-  course: Course;
-}
 const Cart = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const { state, dispatch } = useCart();

@@ -7,20 +7,7 @@ import { useRouter } from "next-nprogress-bar";
 import { usePathname } from "next/navigation";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
-
-interface CardsProps {
-  _id: number;
-  name: string;
-  description: string;
-  highlights: string[];
-  price: number;
-  thumbnail: string;
-  duration: string;
-  videos: number;
-  level: string;
-  details: string;
-  format: string;
-}
+import { CardsProps } from "@/types";
 
 const Cards = ({ courses }: any) => {
   const [tooltipIndex, setTooltipIndex] = useState<number | null>(null);

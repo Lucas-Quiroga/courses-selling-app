@@ -14,14 +14,7 @@ import {
 import { isAuthenticated } from "@/coreComponents/helper/auth";
 import { ViewHomeForm, Teachers } from "@/components";
 import { useSession } from "next-auth/react";
-
-type Course = {
-  image: string;
-  name: string;
-  description: string;
-  price: number;
-  _id: number;
-};
+import { CourseType2 as Course } from "@/types";
 
 const HomeWeb = ({ courses }: { courses: Course[] }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);

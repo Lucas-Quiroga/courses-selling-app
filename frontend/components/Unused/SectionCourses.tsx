@@ -3,14 +3,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import Link from "next/link";
 import { BsFillStarFill } from "react-icons/bs";
-
-type Course = {
-  image: string;
-  name: string;
-  description: string;
-  price: number;
-  _id: number;
-};
+import { CourseType2 as Course } from "@/types";
 
 const SectionCourses = ({ courses }: { courses: Course[] }) => {
   const settings = {
