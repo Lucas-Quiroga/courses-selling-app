@@ -42,17 +42,19 @@ const Hero = () => {
 
   // Efecto para cargar los cursos cuando el componente se monta
   useEffect(() => {
-    getCourses()
-      .then((res) => {
-        setCourses(res);
+    const fetchData = async () => {
+      try {
+        const coursesData = await getCourses();
+        setCourses(coursesData);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         setLoading(false);
         console.error(error);
-      });
-  }, []);
+      }
+    };
 
+    fetchData();
+  }, []);
   // Actualizar los cursos filtrados cuando cambia el filtro o se cargan los cursos
   useEffect(() => {
     if (filter) {

@@ -1,22 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Sidebar,
-  Banner,
-  // SearchBar,
-  Cards,
-  NavbarUser,
-  Hero,
-  SectionOneCourse,
-  SectionCoursesAll,
-  Testimonials,
-} from "@/components";
+import { Hero, Testimonials } from "@/components";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
-import { ViewHomeForm, Teachers } from "@/components";
 import { useSession } from "next-auth/react";
-import { CourseType2 as Course } from "@/types";
 
-const HomeWeb = ({ courses }: { courses: Course[] }) => {
+const HomeWeb = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   //data del usuario ingresado por google
@@ -31,12 +19,10 @@ const HomeWeb = ({ courses }: { courses: Course[] }) => {
   }, []);
 
   return (
-    <>
+    <div className="bg-gray-50">
       <Hero />
-      {/* <SectionCoursesAll /> */}
-      {/* <Teachers /> */}
       <Testimonials />
-    </>
+    </div>
   );
 };
 

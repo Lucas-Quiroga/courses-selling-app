@@ -14,15 +14,15 @@ const Contact = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     // Construir los datos del correo electrónico
     const emailData = {
       from: "Acme <onboarding@resend.dev>",
-      to: ["quiroga.lucasoffice@gmail.com"], // Cambiar al destinatario deseado
-      subject: "Saludos desde Node.js",
-      html: `<strong> message </strong>`, // Aquí puedes incluir datos del formulario
+      to: "quiroga.lucasoffice@gmail.com",
+      subject: "Nuevo mensaje recibido",
+      html: `<strong> Hola mi nombre es ${data.from} </strong>, mi correo electronico es ${data.to} y mi mensaje es el siguiente: ${data.html}`, // mensaje
     };
 
     try {
@@ -31,7 +31,7 @@ const Contact = () => {
       // Puedes hacer algo aquí después de enviar el correo, como mostrar un mensaje de éxito
     } catch (error) {
       console.error("Failed to send email", error);
-      // Puedes manejar el caso de error aquí, como mostrar un mensaje de error
+      console.log("Error details:", error);
     }
   };
 
@@ -194,16 +194,17 @@ const Contact = () => {
             </div>
           </div>
 
+          {/* datos del correo electronico */}
           <div className="mt-8 lg:w-1/2 lg:mx-6">
             <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-white rounded-lg shadow-2xl  lg:max-w-xl shadow-gray-300/50 ">
               <h1 className="text-lg font-medium text-gray-700">
-                What do you want to ask
+                Infórmanos acerca de cualquier pregunta que puedas tener.
               </h1>
 
-              <form className="mt-6">
+              <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex-1">
                   <label className="block mb-2 text-sm text-gray-600">
-                    Nombre y/o apellido
+                    Tu nombre y/o apellido
                   </label>
                   <input
                     {...register("from")}
@@ -216,7 +217,7 @@ const Contact = () => {
 
                 <div className="flex-1 mt-6">
                   <label className="block mb-2 text-sm text-gray-600">
-                    Email address
+                    Tu correo electrónico
                   </label>
                   <input
                     {...register("to")}
@@ -229,7 +230,7 @@ const Contact = () => {
 
                 <div className="w-full mt-6">
                   <label className="block mb-2 text-sm text-gray-600">
-                    Message
+                    Mensaje
                   </label>
                   <textarea
                     {...register("html")}
