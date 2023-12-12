@@ -19,7 +19,7 @@ const HomeWeb = () => {
   }, []);
 
   return (
-    <div className="bg-gray-50">
+    <div>
       <Hero />
       <Testimonials />
     </div>

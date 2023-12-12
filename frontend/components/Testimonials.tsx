@@ -5,7 +5,7 @@ import Data from "@/json/Testimonials.json";
 
 const Testimonials = () => {
   return (
-    <section className="bg-gray-50relative items-center flex ">
+    <section className="relative items-center flex ">
       <div className="container px-6 py-10 mx-auto">
         <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl ">
           Testimonios de <span className="text-blue-500 ">alumnos</span>

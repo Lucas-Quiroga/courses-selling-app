@@ -2,6 +2,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { sendEmail } from "@/coreComponents/helper/email";
+import { FaWhatsapp } from "react-icons/fa";
 
 interface IFormInput {
   from: string;
@@ -38,14 +39,16 @@ const Contact = () => {
   return (
     <section className="bg-white ">
       <div className="container px-6 py-12 mx-auto">
-        <div className="lg:flex lg:items-center lg:-mx-6">
-          <div className="lg:w-1/2 lg:mx-6">
-            <h1 className="text-2xl font-semibold text-gray-800 capitalize  lg:text-3xl">
-              Contacte con nosotros <br /> Más información
+        <div className="flex justify-between">
+          <div className="flex flex-col justify-around">
+            <h1 className="md:text-5xl text-2xl uppercase font-black">
+              Contacte con nosotros <br />
+              para más información
             </h1>
 
             <div className="mt-6 space-y-8 md:mt-8">
-              <p className="flex items-start -mx-2">
+              {/* UBICACIÓN */}
+              {/* <p className="flex items-start -mx-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-6 h-6 mx-2 text-blue-500 "
@@ -69,26 +72,15 @@ const Contact = () => {
                 <span className="mx-2 text-gray-700 truncate w-72 ">
                   Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522
                 </span>
-              </p>
+              </p> */}
 
               <p className="flex items-start -mx-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 mx-2 text-blue-500 "
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
+                <div className="mx-2">
+                  <FaWhatsapp size={23} color={"green"} />
+                </div>
 
-                <span className="mx-2 text-gray-700 truncate w-72 ">
-                  (257) 563-7401
+                <span className="mx-2 text-gray-700 truncate w-72 font-bold">
+                  +54 9 11 2787-7943
                 </span>
               </p>
 
@@ -108,13 +100,14 @@ const Contact = () => {
                   />
                 </svg>
 
-                <span className="mx-2 text-gray-700 truncate w-72 ">
-                  acb@example.com
+                <span className="mx-2 text-gray-700 truncate w-72 font-bold">
+                  paula.dominguez1946@gmail.com
                 </span>
               </p>
             </div>
 
-            <div className="mt-6 w-80 md:mt-8">
+            {/* REDES SOCIALES */}
+            {/* <div className="mt-6 w-80 md:mt-8">
               <h3 className="text-gray-600 ">Follow us</h3>
 
               <div className="flex mt-4 -mx-1.5 ">
@@ -191,13 +184,13 @@ const Contact = () => {
                   </svg>
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* datos del correo electronico */}
-          <div className="mt-8 lg:w-1/2 lg:mx-6">
+          <div className="mt-8 ">
             <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-white rounded-lg shadow-2xl  lg:max-w-xl shadow-gray-300/50 ">
-              <h1 className="text-lg font-medium text-gray-700">
+              <h1 className="text-lg font-medium text-gray-700 uppercase">
                 Infórmanos acerca de cualquier pregunta que puedas tener.
               </h1>
 

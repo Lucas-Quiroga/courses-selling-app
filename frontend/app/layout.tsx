@@ -5,6 +5,8 @@ import { NavbarOrigen, Footer } from "@/components";
 import ProvidersAuth from "./ProvidersAuth";
 import { CartProvider } from "@/context/CartContext";
 import Provider from "@/context/ProgressBarContext";
+import ScrollToTopButton from "@/coreComponents/ScrollUp";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Couses selling",
@@ -20,15 +22,18 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="relative">
-        <Provider>
-          <CartProvider>
-            <ProvidersAuth>
-              <NavbarOrigen />
-              {children}
-            </ProvidersAuth>
-          </CartProvider>
-        </Provider>
-        <Footer />
+        <ThemeProvider>
+          <Provider>
+            <CartProvider>
+              <ProvidersAuth>
+                <NavbarOrigen />
+                {children}
+              </ProvidersAuth>
+            </CartProvider>
+          </Provider>
+          <Footer />
+          <ScrollToTopButton />
+        </ThemeProvider>
       </body>
     </html>
   );

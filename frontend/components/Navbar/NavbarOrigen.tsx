@@ -1,7 +1,17 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import Link from "next/link";
+import ThemeContext, { ThemeProvider } from "@/context/ThemeContext";
 
 const NavbarOrigen = () => {
+  const contextValue = useContext(ThemeContext);
+
+  if (!contextValue) {
+    throw new Error("useContext must be used within a ThemeProvider");
+  }
+
+  const { theme, toggleTheme } = contextValue;
+
   return (
     <div className="relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -42,6 +52,13 @@ const NavbarOrigen = () => {
             </button>
           </div>
           <nav className="hidden md:flex space-x-10">
+            <label className="ui-switch mt-1">
+              <input type="checkbox" onClick={toggleTheme} />
+              <div className="slider">
+                <div className="circle"></div>
+              </div>
+            </label>
+
             <Link
               href="/"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
