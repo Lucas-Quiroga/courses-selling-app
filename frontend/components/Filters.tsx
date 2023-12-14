@@ -24,9 +24,9 @@ const Filters = ({ filter, onFilterChange }: any) => {
   };
 
   return (
-    <div className="w-full md:w-2/3 shadow p-5 rounded-lg bg-white">
-      <div className="flex items-center justify-between mt-4">
-        <p className="font-medium">Filtros</p>
+    <div className="w-full md:w-2/3 shadow p-5 rounded-lg bg-white mt-7 dark:bg-slate-700">
+      {/* <div className="flex items-center justify-between mt-4">
+        <p className="font-medium text-white dark:text-gray-950">Filtros</p>
 
         <button
           onClick={handleResetFilters}
@@ -34,7 +34,7 @@ const Filters = ({ filter, onFilterChange }: any) => {
         >
           Reiniciar filtros
         </button>
-      </div>
+      </div> */}
 
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">

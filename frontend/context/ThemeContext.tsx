@@ -20,23 +20,26 @@ interface ThemeProviderProps {
 
 // Proveedor del contexto que manejará el estado del tema
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  // Recuperar el tema del Local Storage o usar el tema predeterminado
-  const storedTheme = localStorage.getItem("theme");
+  const isClient = typeof window !== "undefined"; // Verificar si se está ejecutando en el lado del cliente
+
+  const storedTheme = isClient ? localStorage.getItem("theme") : null;
+
   const initialTheme: Theme = storedTheme
     ? (storedTheme as Theme)
-    : window.matchMedia("(prefers-color-scheme: dark)").matches
+    : isClient && window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
+
   const [theme, setTheme] = useState<Theme>(initialTheme);
 
-  // Aplicar el tema al HTML
   useEffect(() => {
-    document.querySelector("html")?.classList.remove("dark", "light");
-    document.querySelector("html")?.classList.add(theme);
-
-    // Guardar el tema en el Local Storage
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    if (isClient) {
+      // Verificar si se está ejecutando en el lado del cliente antes de acceder a localStorage
+      localStorage.setItem("theme", theme);
+      document.querySelector("html")?.classList.remove("dark", "light");
+      document.querySelector("html")?.classList.add(theme);
+    }
+  }, [theme, isClient]);
 
   // Función para cambiar entre los temas
   const toggleTheme = () => {

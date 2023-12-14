@@ -72,13 +72,16 @@ const Hero = () => {
 
   return (
     <div className="mt-5">
-      <div className="container mx-auto items-center flex flex-wrap">
+      {/* <div className="container mx-auto items-center flex flex-wrap">
         <div className="w-full px-4">
           <div className="pt-32 sm:pt-0">
-            <h1 className="text-3xl font-semibold text-center text-gray-800 lg:text-3xl ">
-              Tu lugar donde <span className="text-indigo-600 ">aprender</span>{" "}
+            <h1 className="text-3xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-gray-50">
+              Tu lugar donde{" "}
+              <span className="text-indigo-600 dark:text-indigo-400">
+                aprender
+              </span>{" "}
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-gray-600  mx-auto text-center ">
+            <p className="mt-4 text-lg leading-relaxed text-gray-600  mx-auto text-center dark:text-gray-50">
               Descubre el fascinante mundo del tarot con los cursos de Paula
               Domínguez. Nuestros cursos te brindarán un profundo conocimiento
               del tarot y te guiarán en tu viaje espiritual. Aprende a
@@ -87,7 +90,7 @@ const Hero = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {loading ? (
         <Loading number={filteredCourses.length} />

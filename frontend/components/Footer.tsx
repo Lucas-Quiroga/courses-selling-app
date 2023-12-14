@@ -4,11 +4,11 @@ const Footer = () => {
   return (
     <footer className="bg-white dark:bg-slate-900 border-t-2 border-gray-200 ">
       <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
-        <nav className="flex flex-wrap justify-center -mx-5 -my-2">
+        <nav className="flex flex-wrap justify-center -mx-5 -my-2 ">
           <div className="px-5 py-2">
             <a
               href="/"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500  hover:text-gray-900 dark:text-white"
             >
               Inicio
             </a>
@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="px-5 py-2">
             <a
               href="/contact"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-white"
             >
               Contacto
             </a>
@@ -96,7 +96,7 @@ const Footer = () => {
             </svg>
           </a>
         </div> */}
-        <p className="mt-8 text-base leading-6 text-center text-gray-400">
+        <p className="mt-8 text-base leading-6 text-center text-gray-400 ">
           © 2023 Quiroga lucas. Todos los derechos reservados.
         </p>
       </div>

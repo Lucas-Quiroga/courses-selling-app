@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="relative">
+      <body className="relative bg-gray-100 dark:bg-slate-800">
         <ThemeProvider>
           <Provider>
             <CartProvider>

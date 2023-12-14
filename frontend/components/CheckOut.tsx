@@ -296,7 +296,10 @@ const CheckOut = ({ idCourse }: any) => {
                 </p>
               </div>
 
-              <button className="mt-8 border border-transparent hover:border-gray-300 bg-blue-500 hover:bg-blue-700 text-white hover:text-white flex justify-center items-center py-4 rounded w-full">
+              <button
+                onClick={handleCheckout}
+                className="mt-8 border border-transparent hover:border-gray-300 bg-blue-500 hover:bg-blue-700 text-white hover:text-white flex justify-center items-center py-4 rounded w-full"
+              >
                 Ir a pagar
                 <img
                   src={mercadoPagoIcon.src}

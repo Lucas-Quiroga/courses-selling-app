@@ -7,10 +7,11 @@ const Testimonials = () => {
   return (
     <section className="relative items-center flex ">
       <div className="container px-6 py-10 mx-auto">
-        <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl ">
-          Testimonios de <span className="text-blue-500 ">alumnos</span>
+        <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-gray-50">
+          Testimonios de{" "}
+          <span className="text-indigo-600 dark:text-indigo-400 ">alumnos</span>
         </h1>
-        <p className="max-w-2xl mx-auto mt-6 text-center text-gray-500">
+        <p className="max-w-2xl mx-auto mt-6 text-center text-gray-500 dark:text-gray-50">
           ¡Inspírate con sus experiencias y unite a nuestra comunidad de
           aprendizaje!
         </p>
@@ -23,7 +24,7 @@ const Testimonials = () => {
                   className="p-8 border rounded-lg flex flex-col justify-between"
                   key={index}
                 >
-                  <p className="leading-loose text-gray-500 ">
+                  <p className="leading-loose text-gray-500 dark:text-gray-200">
                     “{testimonials.description}”.
                   </p>
 
@@ -37,10 +38,10 @@ const Testimonials = () => {
                     />
 
                     <div className="mx-2">
-                      <h1 className="font-semibold text-gray-800 ">
+                      <h1 className="font-semibold text-gray-800 dark:text-gray-200">
                         {testimonials.name}
                       </h1>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
                         {testimonials.role}
                       </span>
                     </div>
