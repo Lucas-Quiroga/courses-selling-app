@@ -9,6 +9,11 @@ const courseRoutes = require("./routes/course.cjs");
 const cartRoutes = require("./routes/cart.cjs");
 const paymentRoutes = require("./routes/payment.cjs");
 const emailRoutes = require("./routes/email.cjs");
+const {
+  appConfig,
+  dataBaseConfig,
+  dataBaseMongoConfig,
+} = require("./config.cjs");
 const morgan = require("morgan");
 
 const corsOptions = {
@@ -16,7 +21,7 @@ const corsOptions = {
   credentials: true, // Habilita el envío de cookies y credenciales en las solicitudes
 };
 
-// app.use(morgan("dev"));
+app.use(morgan("dev"));
 
 app.use(cors(corsOptions));
 dotenv.config();
@@ -35,14 +40,27 @@ app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
-async function initApp() {
+// async function initApp() {
+//   try {
+//     await connectedDataBase(process.env.MONGO_CONNECTION);
+//     const port = process.env.PORT || process.env.APP_PORT;
+//     app.listen(port, () => console.log(`Listen on port ${port}`));
+//   } catch (error) {
+//     console.log(error);
+//     process.exit(0);
+//   }
+// }
+// initApp();
+
+async function initApp(appConfig, dataBaseMongoConfig) {
   try {
-    await connectedDataBase(process.env.MONGO_CONNECTION);
-    const port = process.env.PORT || process.env.APP_PORT;
+    await connectedDataBase(dataBaseMongoConfig);
+    const port = process.env.PORT || appConfig.port;
     app.listen(port, () => console.log(`Listen on port ${port}`));
   } catch (error) {
     console.log(error);
     process.exit(0);
   }
 }
-initApp();
+
+initApp(appConfig, dataBaseMongoConfig);

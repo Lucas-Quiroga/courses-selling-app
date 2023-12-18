@@ -12,10 +12,27 @@ import {
 } from "@/math/calculations";
 import { Course, CartItem } from "@/types";
 import { CARGO_SERVICIO_WEB } from "@/constants/constants";
+import { useForm, FieldError, SubmitHandler } from "react-hook-form";
+
+interface userProps {
+  name: string;
+  surname: string;
+  email: string;
+  phone: number;
+}
 
 const CheckOut = ({ idCourse }: any) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [data, setData] = useState<Course | null>(null);
+  const [user, setUser] = useState({});
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+    watch,
+  } = useForm<userProps>();
 
   const [toggleModal, setToggleModal] = useState(false);
   const fetchData = async () => {
@@ -59,24 +76,33 @@ const CheckOut = ({ idCourse }: any) => {
     setToggleModal(!toggleModal);
   };
 
-  const handleCheckout = async () => {
+  //funcion de pago
+  const handleCheckout: SubmitHandler<userProps> = async (user) => {
+    const userData = {
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+      phone: user.phone,
+    };
+
     try {
-      // Obtén la información de los cursos desde el estado local
-      const courses = cart.map((item) => item.course);
-
-      // Crea la orden en MercadoPago
-      const orderResponse = await createOrder(courses);
-
-      // Verifica si la respuesta de MercadoPago tiene el campo 'init_point'
-      if (orderResponse && orderResponse.init_point) {
-        // Redirige al usuario al init_point de MercadoPago
-        window.location.href = orderResponse.init_point;
+      if (data) {
+        // Crea la orden en MercadoPago
+        const orderResponse = await createOrder(data, userData);
+        // const userDataResponse = await receiveWebhookUserData(userData);
+        // Verifica si la respuesta de MercadoPago tiene el campo 'init_point'
+        if (orderResponse && orderResponse.init_point) {
+          // Redirige al usuario al init_point de MercadoPago
+          window.location.href = orderResponse.init_point;
+        } else {
+          // Maneja el caso en que no se proporciona el init_point
+          console.error(
+            "No se proporcionó el init_point en la respuesta de MercadoPago"
+          );
+          // Puedes mostrar un mensaje de error o redirigir a una página de error
+        }
       } else {
-        // Maneja el caso en que no se proporciona el init_point
-        console.error(
-          "No se proporcionó el init_point en la respuesta de MercadoPago"
-        );
-        // Puedes mostrar un mensaje de error o redirigir a una página de error
+        console.log("No hay datos para procesar en el pago");
       }
     } catch (error) {
       console.error("Error al procesar el pago:", error);
@@ -248,65 +274,115 @@ const CheckOut = ({ idCourse }: any) => {
                 <hr className="border w-full" />
               </div>
 
-              <div className="mt-8">
-                <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
-                  Ingrese su nombre
-                </label>
-                <input
-                  className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="text"
-                  placeholder="Nombre"
-                />
+              <form onSubmit={handleSubmit(handleCheckout)}>
+                <div className="mt-8">
+                  <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
+                    Ingrese su nombre
+                  </label>
+                  <input
+                    className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
+                    type="text"
+                    id="name"
+                    placeholder="Nombre"
+                    {...register("name", {
+                      required: {
+                        value: true,
+                        message: "FirstName is required",
+                      },
+                    })}
+                  />
+                  {errors.name && (
+                    <span className="block text-red-600 text-[15px] font-bold">
+                      {(errors.name as FieldError).message}
+                    </span>
+                  )}
 
-                <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
-                  Ingrese su apellido
-                </label>
-                <input
-                  className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="text"
-                  placeholder="Apellido"
-                />
-              </div>
+                  <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
+                    Ingrese su apellido
+                  </label>
+                  <input
+                    className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
+                    type="text"
+                    placeholder="Apellido"
+                    id="surname"
+                    {...register("surname", {
+                      required: {
+                        value: true,
+                        message: "Surname is required",
+                      },
+                    })}
+                  />
+                  {errors.surname && (
+                    <span className="block text-red-600 text-[15px] font-bold">
+                      {(errors.surname as FieldError).message}
+                    </span>
+                  )}
+                </div>
 
-              <div className="mt-8">
-                <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
-                  {" "}
-                  Ingrese su email
-                </label>
-                <input
-                  className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="email"
-                  placeholder="Email"
-                />
-              </div>
+                <div className="mt-8">
+                  <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
+                    {" "}
+                    Ingrese su email
+                  </label>
+                  <input
+                    className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
+                    type="email"
+                    placeholder="Email"
+                    id="email"
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                    })}
+                  />
+                  {errors.email && (
+                    <span className="block text-red-600 text-[15px] font-bold">
+                      {(errors.email as FieldError).message}
+                    </span>
+                  )}
+                </div>
 
-              <div className="mt-8">
-                <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
-                  Ingrese su número de teléfono
-                </label>
-                <input
-                  className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="tel" // Cambiado el tipo de input a 'tel'
-                  placeholder="Número de teléfono"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" // Patrón para el formato XXX-XXX-XXXX
-                  required
-                />
-                <p className="mt-2 text-xs text-gray-500">
-                  Formato: XXX-XXX-XXXX
-                </p>
-              </div>
+                <div className="mt-8">
+                  <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
+                    Ingrese su número de teléfono
+                  </label>
+                  <input
+                    className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
+                    type="tel" // Cambiado el tipo de input a 'tel'
+                    placeholder="Número de teléfono"
+                    // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" // Patrón para el formato XXX-XXX-XXXX
 
-              <button
-                onClick={handleCheckout}
-                className="mt-8 border border-transparent hover:border-gray-300 bg-blue-500 hover:bg-blue-700 text-white hover:text-white flex justify-center items-center py-4 rounded w-full"
-              >
-                Ir a pagar
-                <img
-                  src={mercadoPagoIcon.src}
-                  alt="iconmp"
-                  className="ml-2 h-8 w-8"
-                />
-              </button>
+                    id="phone"
+                    {...register("phone", {
+                      required: {
+                        value: true,
+                        message: "phone is required",
+                      },
+                    })}
+                  />
+                  {errors.phone && (
+                    <span className="block text-red-600 text-[15px] font-bold">
+                      {(errors.phone as FieldError).message}
+                    </span>
+                  )}
+                  <p className="mt-2 text-xs text-gray-500">
+                    Formato: XXX-XXX-XXXX
+                  </p>
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-8 border border-transparent hover:border-gray-300 bg-blue-500 hover:bg-blue-700 text-white hover:text-white flex justify-center items-center py-4 rounded w-full"
+                >
+                  Ir a pagar
+                  <img
+                    src={mercadoPagoIcon.src}
+                    alt="iconmp"
+                    className="ml-2 h-8 w-8"
+                  />
+                </button>
+              </form>
             </div>
           </div>
         </div>

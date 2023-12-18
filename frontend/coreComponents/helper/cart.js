@@ -113,19 +113,29 @@ export const removeFromCart = async (courseId) => {
 
 //MERCADO PAGO
 
-export const createOrder = async (courses) => {
+export const createOrder = async (data, userData) => {
   try {
     // Aquí puedes procesar la información de los cursos y enviarla a MercadoPago
     // Ten en cuenta que el formato de los datos puede variar según la API de MercadoPago actualizada
 
     // Ejemplo de cómo puedes estructurar el cuerpo para MercadoPago
     const body = {
-      items: courses.map((course) => ({
-        title: course.name,
-        unit_price: course.price,
-        currency_id: "ARS",
-        quantity: 1,
-      })),
+      items: [
+        {
+          title: data.name,
+          unit_price: data.price,
+          currency_id: "ARS",
+          quantity: 1,
+        },
+      ],
+      payer: {
+        phone: {
+          number: userData.phone,
+        },
+        email: userData.email,
+        name: userData.name,
+        surname: userData.surname,
+      },
       back_urls: {
         success: "http://localhost:3002/success",
         failure: "http://localhost:3002/failure",
@@ -137,9 +147,25 @@ export const createOrder = async (courses) => {
     // Realiza la solicitud para crear la preferencia
     const response = await http.post("api/create-order", { body });
 
+    console.log(response);
+
     return response.data;
   } catch (error) {
     console.error("Create order error:", error);
     throw error;
   }
 };
+
+// export const receiveWebhookUserData = async (user) => {
+//   try {
+//     // Realiza la solicitud para crear la preferencia
+//     const response = await http.post("api/webhook", {
+//       data: user,
+//     });
+
+//     return response.data;
+//   } catch (error) {
+//     console.error("Create order error:", error);
+//     throw error;
+//   }
+// };

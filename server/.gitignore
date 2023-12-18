@@ -43,3 +43,6 @@ Thumbs.db
 
 # Cualquier archivo que termine con la extensión .bak
 *.bak
+
+# Notas
+notas.txt
