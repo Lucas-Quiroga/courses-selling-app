@@ -146,9 +146,8 @@ export const createOrder = async (data, userData) => {
 
     // Realiza la solicitud para crear la preferencia
     const response = await http.post("api/create-order", { body });
-
-    console.log(response);
-
+    const responseUserDataSave = await http.post("api/user-save", userData);
+    console.log("soy la respuesta de user save", responseUserDataSave);
     return response.data;
   } catch (error) {
     console.error("Create order error:", error);

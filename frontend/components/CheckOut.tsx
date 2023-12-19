@@ -76,7 +76,7 @@ const CheckOut = ({ idCourse }: any) => {
     setToggleModal(!toggleModal);
   };
 
-  //funcion de pago
+  // Función de pago
   const handleCheckout: SubmitHandler<userProps> = async (user) => {
     const userData = {
       name: user.name,
@@ -86,29 +86,61 @@ const CheckOut = ({ idCourse }: any) => {
     };
 
     try {
-      if (data) {
-        // Crea la orden en MercadoPago
-        const orderResponse = await createOrder(data, userData);
-        // const userDataResponse = await receiveWebhookUserData(userData);
-        // Verifica si la respuesta de MercadoPago tiene el campo 'init_point'
-        if (orderResponse && orderResponse.init_point) {
-          // Redirige al usuario al init_point de MercadoPago
-          window.location.href = orderResponse.init_point;
-        } else {
-          // Maneja el caso en que no se proporciona el init_point
-          console.error(
-            "No se proporcionó el init_point en la respuesta de MercadoPago"
-          );
-          // Puedes mostrar un mensaje de error o redirigir a una página de error
-        }
-      } else {
+      // Verifica la disponibilidad de data
+      if (!data) {
         console.log("No hay datos para procesar en el pago");
+        return;
+      }
+
+      // Agrega el cargo del servicio web al precio del curso
+      const dataWithWebCharge = {
+        ...data,
+        price: data.price + CARGO_SERVICIO_WEB,
+      };
+
+      // Crea la orden en MercadoPago
+      const orderResponse = await createOrder(dataWithWebCharge, userData);
+
+      // Verifica si la respuesta de MercadoPago tiene el campo 'init_point'
+      if (orderResponse && orderResponse.init_point) {
+        // Redirige al usuario al init_point de MercadoPago
+        window.location.href = orderResponse.init_point;
+
+        // // Verifica si el usuario pagó o no
+        // const paymentStatus = await checkPaymentStatus(orderResponse.id);
+
+        // if (paymentStatus === "approved") {
+        //   // El usuario ha pagado, guarda UserData
+        //   console.log("El usuario ha pagado");
+        // } else {
+        //   // El usuario no ha pagado
+        //   console.log("El usuario no ha pagado");
+        // }
+      } else {
+        // Maneja el caso en que no se proporciona el init_point
+        console.error(
+          "No se proporcionó el init_point en la respuesta de MercadoPago"
+        );
+        // Puedes mostrar un mensaje de error o redirigir a una página de error
       }
     } catch (error) {
-      console.error("Error al procesar el pago:", error);
-      // Manejar el error según sea necesario
+      // Maneja errores específicos de la creación de la orden en MercadoPago
+      console.error("Error al procesar el pago en MercadoPago:", error);
+      // Puedes mostrar un mensaje de error o redirigir a una página de error
     }
   };
+
+  // Función para verificar el estado del pago
+  // const checkPaymentStatus = async (orderId: any) => {
+  //   try {
+  //     const payment = await mercadopago.payment.findById(orderId);
+  //     return payment.body.status;
+  //   } catch (error) {
+  //     console.error("Error al verificar el estado del pago:", error);
+  //     // Puedes manejar el error según sea necesario
+  //     return "error";
+  //   }
+  // };
 
   useEffect(() => {
     if (idCourse) {

@@ -1,5 +1,6 @@
 const mercadopago = require("mercadopago");
 const Payment = require("../models/payment");
+const payerOrderSchema = require("../models/payerCreateOrder");
 
 exports.createOrder = async (req, res) => {
   mercadopago.configure({
@@ -32,7 +33,7 @@ exports.createOrder = async (req, res) => {
       pending: "http://localhost:3002/api/pending",
     },
     auto_return: "approved",
-    notification_url: "https://8eea-179-37-81-44.ngrok.io/api/webhook",
+    notification_url: "https://adc5-179-37-81-44.ngrok-free.app/api/webhook",
   });
 
   console.log(JSON.stringify(result.body, null, 2));
@@ -69,13 +70,30 @@ exports.receiveWebhook = async (req, res) => {
       // // // Guardar en la base de datos
       await newPayment.save();
       console.log("Payment saved successfully");
-
-      // Send the paymentId in the response
-      return res.status(200).json({ paymentId: data.body.id });
     }
     // return res.sendStatus(204);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500).json({ error: error.message });
+  }
+};
+
+exports.saveDataUser = async (req, res) => {
+  try {
+    const { name, surname, email, phone } = req.body;
+
+    // Crear un nuevo usuario con los datos proporcionados
+    const newPayer = new payerOrderSchema({ name, surname, email, phone });
+
+    // Guardar el nuevo usuario en la base de datos
+    await newPayer.save();
+
+    // Devolver una respuesta exitosa con el token
+    return res
+      .status(200)
+      .json({ message: "Información registrado con éxito" });
+  } catch (error) {
+    console.error("Error en el registro de usuario:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
 };
