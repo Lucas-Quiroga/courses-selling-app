@@ -33,10 +33,11 @@ exports.createOrder = async (req, res) => {
       pending: "http://localhost:3002/api/pending",
     },
     auto_return: "approved",
-    notification_url: "https://adc5-179-37-81-44.ngrok-free.app/api/webhook",
+    notification_url:
+      "https://e816-2802-8010-8b05-9e00-dcbe-a618-1eb4-e36e.ngrok-free.app/api/webhook",
   });
 
-  console.log(JSON.stringify(result.body, null, 2));
+  // console.log(JSON.stringify(result.body, null, 2));
 
   res.send(result.body);
 };
@@ -71,7 +72,7 @@ exports.receiveWebhook = async (req, res) => {
       await newPayment.save();
       console.log("Payment saved successfully");
     }
-    // return res.sendStatus(204);
+    return res.sendStatus(204);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500).json({ error: error.message });
