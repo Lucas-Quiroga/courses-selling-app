@@ -4,6 +4,8 @@ import Loading from "@/coreComponents/Loading";
 import { getCourses } from "@/coreComponents/helper/apiCalls";
 import { Cards, Filters } from "@/components";
 import { CourseType1 as Course } from "@/types/index";
+import { Categories } from "@/components";
+
 // import axios from "axios";
 
 const Hero = () => {
@@ -97,7 +99,7 @@ const Hero = () => {
       ) : courses.length > 0 ? (
         <div className="flex flex-col justify-center items-center">
           <Filters filter={filter} onFilterChange={handleFilterChange} />
-
+          <Categories />
           {/* Mostrar mensaje si no hay cursos filtrados */}
           {filteredCourses.length === 0 && (
             <div className=" text-red-500 text-xl mt-7">

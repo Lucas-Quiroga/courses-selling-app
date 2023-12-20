@@ -35,6 +35,8 @@ import VideoIntroduction from "./VideoIntroduction";
 import CheckOut from "./CheckOut";
 import PurchaseProcessInformation from "./PurchaseProcessInformation";
 import Modal from "react-responsive-modal";
+import Categories from "./Categories";
+import CategoryItems from "./CategoryItems";
 
 export {
   NavbarUser,
@@ -73,4 +75,6 @@ export {
   VideoIntroduction,
   CheckOut,
   PurchaseProcessInformation,
+  Categories,
+  CategoryItems,
 };

@@ -105,17 +105,6 @@ const CheckOut = ({ idCourse }: any) => {
       if (orderResponse && orderResponse.init_point) {
         // Redirige al usuario al init_point de MercadoPago
         window.location.href = orderResponse.init_point;
-
-        // // Verifica si el usuario pagó o no
-        // const paymentStatus = await checkPaymentStatus(orderResponse.id);
-
-        // if (paymentStatus === "approved") {
-        //   // El usuario ha pagado, guarda UserData
-        //   console.log("El usuario ha pagado");
-        // } else {
-        //   // El usuario no ha pagado
-        //   console.log("El usuario no ha pagado");
-        // }
       } else {
         // Maneja el caso en que no se proporciona el init_point
         console.error(
@@ -129,18 +118,6 @@ const CheckOut = ({ idCourse }: any) => {
       // Puedes mostrar un mensaje de error o redirigir a una página de error
     }
   };
-
-  // Función para verificar el estado del pago
-  // const checkPaymentStatus = async (orderId: any) => {
-  //   try {
-  //     const payment = await mercadopago.payment.findById(orderId);
-  //     return payment.body.status;
-  //   } catch (error) {
-  //     console.error("Error al verificar el estado del pago:", error);
-  //     // Puedes manejar el error según sea necesario
-  //     return "error";
-  //   }
-  // };
 
   useEffect(() => {
     if (idCourse) {

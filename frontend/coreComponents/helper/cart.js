@@ -115,10 +115,6 @@ export const removeFromCart = async (courseId) => {
 
 export const createOrder = async (data, userData) => {
   try {
-    // Aquí puedes procesar la información de los cursos y enviarla a MercadoPago
-    // Ten en cuenta que el formato de los datos puede variar según la API de MercadoPago actualizada
-
-    // Ejemplo de cómo puedes estructurar el cuerpo para MercadoPago
     const body = {
       items: [
         {
@@ -141,30 +137,14 @@ export const createOrder = async (data, userData) => {
         failure: "http://localhost:3002/failure",
         pending: "http://localhost:3002/pending",
       },
-      notification_url: "https://11ac-179-37-57-82.ngrok.io/api/webhook",
     };
 
     // Realiza la solicitud para crear la preferencia
     const response = await http.post("api/create-order", { body });
     const responseUserDataSave = await http.post("api/user-save", userData);
-    console.log("soy la respuesta de user save", responseUserDataSave);
     return response.data;
   } catch (error) {
     console.error("Create order error:", error);
     throw error;
   }
 };
-
-// export const receiveWebhookUserData = async (user) => {
-//   try {
-//     // Realiza la solicitud para crear la preferencia
-//     const response = await http.post("api/webhook", {
-//       data: user,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("Create order error:", error);
-//     throw error;
-//   }
-// };
