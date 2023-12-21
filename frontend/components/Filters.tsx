@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { IoReload } from "react-icons/io5";
 
 const Filters = ({ filter, onFilterChange }: any) => {
   // Manejar cambios en el precio
@@ -24,7 +25,7 @@ const Filters = ({ filter, onFilterChange }: any) => {
   };
 
   return (
-    <div className="w-full md:w-2/3 shadow p-5 rounded-lg bg-white mt-7 dark:bg-slate-700">
+    <div className="">
       {/* <div className="flex items-center justify-between mt-4">
         <p className="font-medium text-white dark:text-gray-950">Filtros</p>
 
@@ -36,47 +37,52 @@ const Filters = ({ filter, onFilterChange }: any) => {
         </button>
       </div> */}
 
-      <div>
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
-          {/* <select className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+        {/* <select className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
             <option value="">Todo</option>
             <option value="Populares">Más populares</option>
             <option value="Vendidos">Más vendidos</option>
           </select> */}
 
-          <select
-            value={filter.price}
-            onChange={handlePriceChange}
-            className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-          >
-            <option value="">Precio</option>
-            <option value="50000">Hasta $50.000</option>
-            <option value="100000">Hasta $100.000</option>
-            <option value="150000">Hasta $150.000</option>
-          </select>
+        <select
+          value={filter.price}
+          onChange={handlePriceChange}
+          className="px-4 py-3 w-full rounded-md  bg-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm  cursor-pointer"
+        >
+          <option value="">Precio</option>
+          <option value="50000">Hasta $50.000</option>
+          <option value="100000">Hasta $100.000</option>
+          <option value="150000">Hasta $150.000</option>
+        </select>
 
-          <select
-            value={filter.duration}
-            onChange={handleDurationChange}
-            className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-          >
-            <option value="">Duración</option>
-            <option value="Corto">Corto</option>
-            <option value="Medio">Medio</option>
-            <option value="Largo">Largo</option>
-          </select>
+        {/* <select
+          value={filter.duration}
+          onChange={handleDurationChange}
+          className="px-4 py-3 w-full rounded-md  bg-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm cursor-pointer"
+        >
+          <option value="">Duración</option>
+          <option value="Corto">Corto</option>
+          <option value="Medio">Medio</option>
+          <option value="Largo">Largo</option>
+        </select> */}
 
-          <select
-            value={filter.level}
-            onChange={handleLevelChange}
-            className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-          >
-            <option value="">Nivel</option>
-            <option value="Principiante">Principiante</option>
-            <option value="Intermedio">Intermedio</option>
-            <option value="Avanzado">Avanzado</option>
-          </select>
-        </div>
+        <select
+          value={filter.level}
+          onChange={handleLevelChange}
+          className="px-4 py-3 w-full rounded-md  bg-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm cursor-pointer"
+        >
+          <option value="">Nivel</option>
+          <option value="Principiante">Principiante</option>
+          <option value="Intermedio">Intermedio</option>
+          <option value="Avanzado">Avanzado</option>
+        </select>
+
+        <button
+          onClick={handleResetFilters}
+          className="px-4 py-3 w-full rounded-md  bg-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm cursor-pointer items-center flex mx-auto justify-center"
+        >
+          <IoReload className="h-5 w-5" />
+        </button>
       </div>
     </div>
   );

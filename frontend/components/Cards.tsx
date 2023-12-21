@@ -54,7 +54,7 @@ const Cards = ({ courses }: any) => {
 
   return (
     <div>
-      <section className="flex flex-wrap w-fit mx-auto items-center justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+      <section className="flex flex-wrap w-fit justify-start gap-y-20 gap-x-14 mt-10 mb-5">
         {courses.map((course: CardsProps, index: any) => {
           const formattedPrice = new Intl.NumberFormat("es-AR", {
             style: "currency",
@@ -235,7 +235,18 @@ const Cards = ({ courses }: any) => {
               </div> */}
 
               {/* CARD NUEVA */}
-              <Link href={`/courses/${course._id}`} key={course._id}>
+              <div
+                onClick={() =>
+                  router.push(
+                    `/Courses/${course._id}`,
+                    {},
+                    {
+                      showProgressBar: true,
+                    }
+                  )
+                }
+                key={course._id}
+              >
                 <div className="group w-72 bg-white hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full duration-500 hover:scale-105 cursor-pointer">
                   <div className="relative w-full aspect-video rounded-md overflow-hidden">
                     <Image
@@ -294,7 +305,7 @@ const Cards = ({ courses }: any) => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             </div>
           );
         })}

@@ -37,6 +37,7 @@ import PurchaseProcessInformation from "./PurchaseProcessInformation";
 import Modal from "react-responsive-modal";
 import Categories from "./Categories";
 import CategoryItems from "./CategoryItems";
+import Breadcrumbs from "./Breadcrumbs";
 
 export {
   NavbarUser,
@@ -77,4 +78,5 @@ export {
   PurchaseProcessInformation,
   Categories,
   CategoryItems,
+  Breadcrumbs,
 };

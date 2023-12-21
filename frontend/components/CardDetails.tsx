@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 import { useCart } from "@/context/CartContext";
 import { addToCart } from "@/coreComponents/helper/cart";
 import { useSession } from "next-auth/react";
@@ -9,6 +9,7 @@ import CustomButton from "@/coreComponents/CustomButton";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
 import { CardDetailsProps } from "@/types";
+import { Breadcrumbs } from ".";
 
 const CardDetails = ({ course }: CardDetailsProps) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -84,11 +85,12 @@ const CardDetails = ({ course }: CardDetailsProps) => {
 
   return (
     <>
-      <div className="flex justify-center items-center">
-        <div className="py-16 px-4 md:px-6 2xl:px-0 flex justify-center items-center 2xl:mx-auto 2xl:container">
-          <div className="flex flex-col justify-start items-start w-full space-y-9">
-            <div className="flex flex-col xl:flex-row justify-center xl:justify-between space-y-6 xl:space-y-0 xl:space-x-6 w-full">
-              <div className="flex flex-col sm:flex-row xl:flex-col justify-center items-center  rounded border border-gray-200 py-7 sm:py-0 xl:w-full">
+      <div className="flexjustify-center items-center">
+        <div className="py-16 px-4 md:px-6 2xl:px-0 flex justify-center items-center 2xl:mx-auto 2xl:container ">
+          <div className="flex flex-col justify-start items-start w-full ">
+            <Breadcrumbs />
+            <div className="flex flex-col xl:flex-row justify-center xl:justify-between space-y-6 xl:space-y-0 xl:space-x-6 w-full bg-white ">
+              {/* <div className="flex flex-col sm:flex-row xl:flex-col justify-center items-center  rounded border border-gray-200 py-7 sm:py-0 xl:w-full">
                 <div className="py-14 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
                   <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                     <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
@@ -99,11 +101,11 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                           src={course.thumbnail}
                         />{" "}
                       </div>
-                      {/* HASTA ACA */}
+                      
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="p-3 rounded border border-gray-200 flex flex-col justify-between ">
                 <div className="w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -266,13 +268,18 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                         {formattedPrice} ARS
                       </span>
                       <div className="flex justify-between">
-                        <CustomButton
-                          title="Comprar"
-                          containerStyles="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                          handleClick={() =>
-                            router.push(`/Courses/${course._id}/checkout`)
+                        <button
+                          className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                          onClick={() =>
+                            router.push(
+                              `/Courses/${course._id}/checkout`,
+                              {},
+                              { showProgressBar: true }
+                            )
                           }
-                        />
+                        >
+                          Comprar
+                        </button>
 
                         <CustomButton
                           title="Ver introduccion"

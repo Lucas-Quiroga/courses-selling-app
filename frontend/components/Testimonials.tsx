@@ -7,21 +7,27 @@ const Testimonials = () => {
   return (
     <section className="relative items-center flex ">
       <div className="container px-6 py-10 mx-auto">
-        <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-gray-50">
-          Testimonios de{" "}
-          <span className="text-indigo-600 dark:text-indigo-400 ">alumnos</span>
-        </h1>
-        <p className="max-w-2xl mx-auto mt-6 text-center text-gray-500 dark:text-gray-50">
-          ¡Inspírate con sus experiencias y unite a nuestra comunidad de
-          aprendizaje!
-        </p>
+        <div className="container px-6 py-10 mx-auto">
+          <div className="mt-6 md:flex md:items-center md:justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
+                Testimonios de alumnos
+              </h1>
 
+              <div className="flex mx-auto mt-6">
+                <span className="inline-block w-40 h-1 bg-blue-500 rounded-full"></span>
+                <span className="inline-block w-3 h-1 mx-1 bg-blue-500 rounded-full"></span>
+                <span className="inline-block w-1 h-1 bg-blue-500 rounded-full"></span>
+              </div>
+            </div>
+          </div>
+        </div>
         <Marquee>
-          <div className="container px-6 py-10 mx-auto">
-            <section className="grid grid-cols-3 grid-rows-1 gap-8 xl:mt-12 lg:grid-cols-2 xl:grid-cols-3">
-              {Data.map((testimonials, index) => (
+          {Data.map((testimonials, index) => (
+            <div className="container px-6 py-10 mx-auto">
+              <section className="flex justify-center max-w-md mb max-h-full ">
                 <div
-                  className="p-8 border rounded-lg flex flex-col justify-between"
+                  className="p-8 mb-0 border rounded-lg flex flex-col justify-between h-full w-100 "
                   key={index}
                 >
                   <p className="leading-loose text-gray-500 dark:text-gray-200">
@@ -47,9 +53,11 @@ const Testimonials = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              </section>
+            </div>
+          ))}
 
-              {/* <div className="p-8 border rounded-lg ">
+          {/* <div className="p-8 border rounded-lg ">
                 <p className="leading-loose text-gray-500 ">
                   “Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Tempore quibusdam ducimus libero ad tempora doloribus expedita
@@ -102,8 +110,6 @@ const Testimonials = () => {
                   </div>
                 </div>
               </div> */}
-            </section>
-          </div>
         </Marquee>
       </div>
     </section>

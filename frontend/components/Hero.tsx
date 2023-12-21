@@ -74,54 +74,56 @@ const Hero = () => {
 
   return (
     <div className="mt-5">
-      {/* <div className="container mx-auto items-center flex flex-wrap">
-        <div className="w-full px-4">
-          <div className="pt-32 sm:pt-0">
-            <h1 className="text-3xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-gray-50">
-              Tu lugar donde{" "}
-              <span className="text-indigo-600 dark:text-indigo-400">
-                aprender
-              </span>{" "}
-            </h1>
-            <p className="mt-4 text-lg leading-relaxed text-gray-600  mx-auto text-center dark:text-gray-50">
-              Descubre el fascinante mundo del tarot con los cursos de Paula
-              Domínguez. Nuestros cursos te brindarán un profundo conocimiento
-              del tarot y te guiarán en tu viaje espiritual. Aprende a
-              interpretar las cartas y descubre sus misterios en un ambiente de
-              aprendizaje enriquecedor.
-            </p>
+      <div className="container px-6 py-10 mx-auto">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
+            Explorá las clases unicas que ofrece{" "}
+            <span className="underline decoration-blue-500">Paula</span>
+          </h1>
+
+          <p className="mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum
+            quam voluptatibus
+          </p>
+        </div>
+
+        <hr className="my-8 border-gray-200 dark:border-gray-700" />
+        <Filters filter={filter} onFilterChange={handleFilterChange} />
+        <div className="">
+          <div className="mt-5">
+            {loading ? (
+              <Loading number={filteredCourses.length} />
+            ) : courses.length > 0 ? (
+              <div className="flex flex-col ">
+                {/* <Filters filter={filter} onFilterChange={handleFilterChange} /> */}
+                {/* <Categories /> */}
+                {/* Mostrar mensaje si no hay cursos filtrados */}
+                {filteredCourses.length === 0 && (
+                  <div className=" text-red-500 text-xl mt-7">
+                    No se encuentra un curso con estas especificaciones.
+                  </div>
+                )}
+
+                {/* Mostrar los cursos filtrados */}
+                {filteredCourses.length > 0 && (
+                  <Cards courses={filteredCourses} />
+                )}
+
+                {courses.length > initialCourses.length && (
+                  <button
+                    onClick={handleShowMore}
+                    className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    {showMore ? "Show Less" : "Show More"}
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div>Not found</div>
+            )}
           </div>
         </div>
-      </div> */}
-
-      {loading ? (
-        <Loading number={filteredCourses.length} />
-      ) : courses.length > 0 ? (
-        <div className="flex flex-col justify-center items-center">
-          <Filters filter={filter} onFilterChange={handleFilterChange} />
-          <Categories />
-          {/* Mostrar mensaje si no hay cursos filtrados */}
-          {filteredCourses.length === 0 && (
-            <div className=" text-red-500 text-xl mt-7">
-              No se encuentra un curso con estas especificaciones.
-            </div>
-          )}
-
-          {/* Mostrar los cursos filtrados */}
-          {filteredCourses.length > 0 && <Cards courses={filteredCourses} />}
-
-          {courses.length > initialCourses.length && (
-            <button
-              onClick={handleShowMore}
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-            >
-              {showMore ? "Show Less" : "Show More"}
-            </button>
-          )}
-        </div>
-      ) : (
-        <div>Not found</div>
-      )}
+      </div>
     </div>
   );
 };
