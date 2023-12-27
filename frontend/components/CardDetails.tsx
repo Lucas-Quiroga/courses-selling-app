@@ -91,13 +91,15 @@ const CardDetails = ({ course }: CardDetailsProps) => {
         <div className="w-full  rounded  shadow-xl lg:p-10 mx-auto text-gray-800 relative md:text-left">
           <div className="grid grid-cols-2 grid-rows-1 gap-4 ">
             <div className="w-full gap-10 bg-white p-5 rounded">
-              <div className="relative">
-                <h2 className="text-sm title-font uppercase text-gray-500 tracking-widest">
-                  {course.format}
-                </h2>
-                <h1 className="font-bold uppercase text-2xl mb-5">
-                  {course.name}
-                </h1>
+              <div className="relative flex justify-between flex-col">
+                <div>
+                  <h2 className="text-sm title-font uppercase text-gray-500 tracking-widest">
+                    {course.format}
+                  </h2>
+                  <h1 className="font-bold uppercase text-2xl mb-5">
+                    {course.name}
+                  </h1>
+                </div>
                 <VideoIntroduction />
               </div>
             </div>
@@ -236,6 +238,9 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                   </div>
                 </div>
               </div>
+
+              <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+
               <div>
                 <div className="flex justify-between align-bottom mr-5">
                   <span className="font-bold text-5xl leading-none align-baseline">

@@ -1,7 +1,8 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
 import ThemeContext, { ThemeProvider } from "@/context/ThemeContext";
+import { OffCanvas } from "..";
 
 const NavbarOrigen = () => {
   const contextValue = useContext(ThemeContext);
@@ -11,6 +12,12 @@ const NavbarOrigen = () => {
   }
 
   const { theme, toggleTheme } = contextValue;
+
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="relative bg-white dark:bg-slate-900">
@@ -30,7 +37,8 @@ const NavbarOrigen = () => {
             <button
               type="button"
               className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-              aria-expanded="false"
+              aria-expanded={isMenuOpen ? "true" : "false"}
+              onClick={toggleMenu}
             >
               <span className="sr-only">Open menu</span>
 
@@ -51,6 +59,9 @@ const NavbarOrigen = () => {
               </svg>
             </button>
           </div>
+
+          {isMenuOpen && <OffCanvas />}
+
           <nav className="hidden md:flex space-x-10">
             <label className="ui-switch mt-1">
               <input type="checkbox" onClick={toggleTheme} />

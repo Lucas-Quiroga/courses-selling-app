@@ -38,8 +38,8 @@ const Contact = () => {
 
   return (
     <section className="bg-white ">
-      <div className="container px-6 py-12 mx-auto">
-        <div className="flex justify-between">
+      <div className="container px-6 py-12 mx-auto ">
+        <div className="flex justify-between flex-col sm:flex-row">
           <div className="flex flex-col justify-around">
             <h1 className="md:text-5xl text-2xl uppercase font-black">
               Contacte con nosotros <br />

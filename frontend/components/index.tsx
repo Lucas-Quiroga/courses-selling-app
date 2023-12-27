@@ -38,6 +38,8 @@ import Modal from "react-responsive-modal";
 import Categories from "./Categories";
 import CategoryItems from "./CategoryItems";
 import Breadcrumbs from "./Breadcrumbs";
+import OffCanvas from "./OffCanvas";
+import Aside from "./Aside";
 
 export {
   NavbarUser,
@@ -79,4 +81,6 @@ export {
   Categories,
   CategoryItems,
   Breadcrumbs,
+  OffCanvas,
+  Aside,
 };

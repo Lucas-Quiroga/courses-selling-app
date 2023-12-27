@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Hero, Testimonials } from "@/components";
+import { Hero, Testimonials, Aside } from "@/components";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
 import { useSession } from "next-auth/react";
 
@@ -20,8 +20,11 @@ const HomeWeb = () => {
 
   return (
     <div>
-      <Hero />
-      <Testimonials />
+      <div className="flex">
+        <Aside />
+        <Hero />
+      </div>
+      {/* <Testimonials /> */}
     </div>
   );
 };

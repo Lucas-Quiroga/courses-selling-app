@@ -6,25 +6,20 @@ import Data from "@/json/Testimonials.json";
 const Testimonials = () => {
   return (
     <section className="relative items-center flex ">
-      <div className="container px-6 py-10 mx-auto">
-        <div className="container px-6 py-10 mx-auto">
+      <div className="container mt-10 px-6 mx-auto">
+        <div className="container px-6  mx-auto">
           <div className="mt-6 md:flex md:items-center md:justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
+              <h1 className="text-blackish text-[24px] lg:text-[28px]">
                 Testimonios de alumnos
               </h1>
-
-              <div className="flex mx-auto mt-6">
-                <span className="inline-block w-40 h-1 bg-blue-500 rounded-full"></span>
-                <span className="inline-block w-3 h-1 mx-1 bg-blue-500 rounded-full"></span>
-                <span className="inline-block w-1 h-1 bg-blue-500 rounded-full"></span>
-              </div>
             </div>
           </div>
+          <hr className="my-8 border-gray-200 dark:border-gray-700" />
         </div>
         <Marquee>
           {Data.map((testimonials, index) => (
-            <div className="container px-6 py-10 mx-auto">
+            <div className="container px-6 py-10 mx-auto" key={index}>
               <section className="flex justify-center max-w-md mb max-h-full ">
                 <div
                   className="p-8 mb-0 border rounded-lg flex flex-col justify-between h-full w-100 "

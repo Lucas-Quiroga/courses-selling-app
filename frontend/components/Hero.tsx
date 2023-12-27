@@ -5,6 +5,8 @@ import { getCourses } from "@/coreComponents/helper/apiCalls";
 import { Cards, Filters } from "@/components";
 import { CourseType1 as Course } from "@/types/index";
 import { Categories } from "@/components";
+import { OffCanvas } from "@/components";
+import { Testimonials } from "@/components";
 
 // import axios from "axios";
 
@@ -74,20 +76,20 @@ const Hero = () => {
 
   return (
     <div className="mt-5">
-      <div className="container px-6 py-10 mx-auto">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
+      <div className="container px-6 mx-auto">
+        {/* <div className="flex items-center justify-between">
+          <h1 className="text-blackish text-[24px] lg:text-[28px]">
             Explorá las clases unicas que ofrece{" "}
             <span className="underline decoration-blue-500">Paula</span>
           </h1>
 
-          <p className="mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">
+          <p className="hidden sm:block mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum
             quam voluptatibus
           </p>
-        </div>
+        </div> */}
 
-        <hr className="my-8 border-gray-200 dark:border-gray-700" />
+        {/* <hr className="my-8 border-gray-200 dark:border-gray-700" /> */}
         <Filters filter={filter} onFilterChange={handleFilterChange} />
         <div className="">
           <div className="mt-5">
@@ -108,7 +110,7 @@ const Hero = () => {
                 {filteredCourses.length > 0 && (
                   <Cards courses={filteredCourses} />
                 )}
-
+                <Testimonials />
                 {courses.length > initialCourses.length && (
                   <button
                     onClick={handleShowMore}
