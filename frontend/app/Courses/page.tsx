@@ -29,7 +29,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 ml-6">
       {loading ? (
         <Loading number={1} />
       ) : courses.length > 0 ? (

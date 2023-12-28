@@ -37,17 +37,11 @@ const Filters = ({ filter, onFilterChange }: any) => {
         </button>
       </div> */}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-        {/* <select className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Todo</option>
-            <option value="Populares">Más populares</option>
-            <option value="Vendidos">Más vendidos</option>
-          </select> */}
-
+      <div className="flex gap-4">
         <select
           value={filter.price}
           onChange={handlePriceChange}
-          className="px-4 py-3 w-full rounded-md  bg-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm  cursor-pointer"
+          className="px-4 py-3 rounded-md  bg-white border  focus:border-gray-500 focus:bg-white text-sm  cursor-pointer shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
         >
           <option value="">Precio</option>
           <option value="50000">Hasta $50.000</option>
@@ -69,7 +63,7 @@ const Filters = ({ filter, onFilterChange }: any) => {
         <select
           value={filter.level}
           onChange={handleLevelChange}
-          className="px-4 py-3 w-full rounded-md  bg-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm cursor-pointer"
+          className="px-4 py-3 rounded-md  bg-white border focus:border-gray-500 focus:bg-white focus:ring-0 text-sm cursor-pointer shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
         >
           <option value="">Nivel</option>
           <option value="Principiante">Principiante</option>
@@ -79,7 +73,7 @@ const Filters = ({ filter, onFilterChange }: any) => {
 
         <button
           onClick={handleResetFilters}
-          className="px-4 py-3 w-full rounded-md  bg-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm cursor-pointer items-center flex mx-auto justify-center"
+          className="px-4 py-3  rounded-md  bg-white border focus:border-gray-500 focus:bg-white focus:ring-0 text-sm cursor-pointer shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
         >
           <IoReload className="h-5 w-5" />
         </button>

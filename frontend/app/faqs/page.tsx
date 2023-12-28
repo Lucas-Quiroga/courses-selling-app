@@ -1,10 +1,10 @@
 import React from "react";
-import { Contact, Faqs } from "@/components";
+import { Faqs } from "@/components";
 
 const page = () => {
   return (
-    <div className="ml-64">
-      <Contact />
+    <div className="ml-64 max-h-screen">
+      <Faqs />
     </div>
   );
 };

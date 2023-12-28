@@ -75,7 +75,7 @@ const Cards = ({ courses }: any) => {
           return (
             <div
               key={index}
-              className="flex justify-center items-center mx-auto sm:justify-start sm:items-start sm:mx-0"
+              className="flex justify-center items-center mx-auto sm:justify-start sm:items-start sm:mx-0 shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] rounded-lg"
             >
               {/* CARD NUEVA */}
               <div

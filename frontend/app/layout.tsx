@@ -1,7 +1,7 @@
 import { useAuth } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import "./globals.css";
-import { NavbarOrigen, Footer } from "@/components";
+import { NavbarOrigen, Footer, Aside } from "@/components";
 import ProvidersAuth from "./ProvidersAuth";
 import { CartProvider } from "@/context/CartContext";
 import Provider from "@/context/ProgressBarContext";
@@ -21,12 +21,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="relative bg-gray-100 dark:bg-slate-800">
+      <body className="relative  dark:bg-slate-800">
         <ThemeProvider>
           <Provider>
             <CartProvider>
               <ProvidersAuth>
                 <NavbarOrigen />
+                <Aside />
                 {children}
               </ProvidersAuth>
             </CartProvider>

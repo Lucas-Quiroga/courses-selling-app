@@ -21,7 +21,7 @@ const HomeWeb = () => {
   return (
     <div>
       <div className="flex">
-        <Aside />
+        {/* <Aside /> */}
         <Hero />
       </div>
       {/* <Testimonials /> */}
