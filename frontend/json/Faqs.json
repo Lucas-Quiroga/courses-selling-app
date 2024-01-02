@@ -1,66 +1,72 @@
-
-   [
+[
+  {
+    "indice": "Sobre cursos",
+    "preguntas": [
       {
-        "indice": "Sobre cursos",
-        "preguntas": [
-          {
-            "id": "0.1",
-            "pregunta": "¿Cuántos cursos ofrece Paula?"
-          },
-          {
-            "id": "0.2",
-            "pregunta": "¿Cuánto tiempo tengo acceso al curso después de la compra?"
-          }
-        ]
+        "id": "0.1",
+        "pregunta": "¿Cuántos cursos ofrece Paula?",
+        "respuesta": "Hay varios cursos disponibles..."
       },
       {
-        "indice": "Servicios",
-        "preguntas": [
-          {
-            "id": "1.1",
-            "pregunta": "¿Cómo puedo programar una consulta con Paula?"
-          },
-          {
-            "id": "1.2",
-            "pregunta": "¿Cómo puedo programar una consulta con Paula?"
-          },
-          {
-            "id": "1.3",
-            "pregunta": "¿Cómo se lleva a cabo una limpieza energética o sanación en las sesiones de Paula?"
-          }
-        ]
-      },
-      {
-        "indice": "Pago y facturacion",
-        "preguntas": [
-          {
-            "id": "2.1",
-            "pregunta": "¿Cuáles son las opciones de pago?"
-          },
-          {
-            "id": "2.2",
-            "pregunta": "¿Qué pasa después de realizar el pago para un curso?"
-          },
-          {
-            "id": "2.3",
-            "pregunta": "¿Desde qué plataforma accedo al curso?"
-          }
-        ]
-      },
-      {
-        "indice": "Proceso de consultas",
-        "preguntas": [
-          {
-            "id": "3.1",
-            "pregunta": "¿Necesito ser referido por alguien para programar una consulta?"
-          },
-          {
-            "id": "3.2",
-            "pregunta": "¿Cuáles son los horarios de atención de Paula?"
-          }
-        ]
+        "id": "0.2",
+        "pregunta": "¿Cuánto tiempo tengo acceso al curso después de la compra?",
+        "respuesta": "El acceso al curso está disponible..."
       }
     ]
-  
-  
-  
+  },
+  {
+    "indice": "Servicios",
+    "preguntas": [
+      {
+        "id": "1.1",
+        "pregunta": "¿Cómo puedo programar una consulta con Paula?",
+        "respuesta": "Puedes programar una consulta..."
+      },
+      {
+        "id": "1.2",
+        "pregunta": "¿Cómo puedo programar una consulta con Paula?",
+        "respuesta": "Puedes programar una consulta..."
+      },
+      {
+        "id": "1.3",
+        "pregunta": "¿Cómo se lleva a cabo una limpieza energética o sanación en las sesiones de Paula?",
+        "respuesta": "En las sesiones de limpieza energética..."
+      }
+    ]
+  },
+  {
+    "indice": "Pago y facturacion",
+    "preguntas": [
+      {
+        "id": "2.1",
+        "pregunta": "¿Cuáles son las opciones de pago?",
+        "respuesta": "Aceptamos tarjetas de crédito, transferencias..."
+      },
+      {
+        "id": "2.2",
+        "pregunta": "¿Qué pasa después de realizar el pago para un curso?",
+        "respuesta": "Después de realizar el pago, recibirás un correo..."
+      },
+      {
+        "id": "2.3",
+        "pregunta": "¿Desde qué plataforma accedo al curso?",
+        "respuesta": "Puedes acceder al curso desde nuestra plataforma en línea..."
+      }
+    ]
+  },
+  {
+    "indice": "Proceso de consultas",
+    "preguntas": [
+      {
+        "id": "3.1",
+        "pregunta": "¿Necesito ser referido por alguien para programar una consulta?",
+        "respuesta": "No es necesario ser referido..."
+      },
+      {
+        "id": "3.2",
+        "pregunta": "¿Cuáles son los horarios de atención de Paula?",
+        "respuesta": "Los horarios de atención varían..."
+      }
+    ]
+  }
+]

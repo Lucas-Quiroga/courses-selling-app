@@ -105,3 +105,11 @@ export interface CardDetailsProps {
     price: number;
     _id: number;
   };
+
+  export type SideNavItem = {
+    title: string;
+    path: string;
+    icon: JSX.Element
+  }
+
+ 

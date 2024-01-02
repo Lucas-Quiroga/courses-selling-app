@@ -1,10 +1,10 @@
 import React from "react";
-import { Contact, Faqs } from "@/components";
+import { Servicios } from "@/components";
 
 const page = () => {
   return (
-    <div>
-      <Contact />
+    <div className="relative">
+      <Servicios />
     </div>
   );
 };

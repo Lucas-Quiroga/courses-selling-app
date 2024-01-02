@@ -9,7 +9,7 @@ const Page = async ({ params }: any) => {
 
   //si muestro course aparece el curso correspondiente
   return (
-    <div className="ml-64">
+    <div>
       {course && (
         <>
           <CardDetails course={course} />

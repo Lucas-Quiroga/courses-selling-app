@@ -40,6 +40,12 @@ import CategoryItems from "./CategoryItems";
 import Breadcrumbs from "./Breadcrumbs";
 import OffCanvas from "./OffCanvas";
 import Aside from "./Aside";
+import Servicios from "./Servicios";
+import Header from "./Header";
+import HeaderMobile from "./Header-mobile";
+import SideNav from "./Side-nav";
+import PageWrapper from "./Page-wrapper";
+import MarginWidthWrapper from "./Margin-width-wrapper";
 
 export {
   NavbarUser,
@@ -83,4 +89,10 @@ export {
   Breadcrumbs,
   OffCanvas,
   Aside,
+  Servicios,
+  Header,
+  HeaderMobile,
+  SideNav,
+  PageWrapper,
+  MarginWidthWrapper,
 };

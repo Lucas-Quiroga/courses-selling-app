@@ -3,7 +3,7 @@ import { Faqs } from "@/components";
 
 const page = () => {
   return (
-    <div className="ml-64 max-h-screen">
+    <div className=" max-h-screen">
       <Faqs />
     </div>
   );

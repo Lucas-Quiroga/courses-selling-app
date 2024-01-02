@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "name": "Lectura de tarot",
+      "price": 5000,
+      "information":
+        "Método de consulta e interpretación de hechos del pasado, presente y futuro.",
+        "detail": "La lectura de tarot es un método de consulta y herramienta de interpretación que se emplea para explorar sucesos en el pasado, presente y futuro de una persona o situación. Este enfoque actúa como un canal para acceder a información espiritual y simbólica, brindando perspectivas y guía en diversos aspectos de la vida. Las lecturas de tarot se convierten frecuentemente en un recurso valioso para obtener visión, reflexionar sobre decisiones cruciales y encontrar dirección en momentos de incertidumbre. Cada carta tiene su propia historia y simbolismo, y el lector de tarot utiliza su conocimiento para interpretar el mensaje que las cartas ofrecen en el contexto de la pregunta o inquietud planteada por el consultante. Cuando alguien busca una lectura de tarot, generalmente se encuentra en un punto de su vida en el que está buscando respuestas, claridad o consejo en relación con un tema específico, como el amor, la carrera, la salud o las relaciones interpersonales. El lector de tarot, a través de la disposición y la interpretación de las cartas, ayuda al consultante a explorar diferentes perspectivas y posibilidades. La lectura de tarot es una herramienta poderosa para la autoexploración y la reflexión. Puede ayudar a las personas a comprender mejor sus propios pensamientos y sentimientos, así como a obtener una visión más profunda de los desafíos y oportunidades que enfrentan en la vida.",
+      "modality": "Presencial o Virtual",
+      "img": "https://images.unsplash.com/photo-1637757960303-6b152b77e161?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {"id": 2,
+      "name": "Limpieza energética",
+      "price": 2300,
+      "information": 
+        "Se utiliza un péndulo para detectar alteraciones vibracionales en el cuerpo energético, para luego corregirlas eliminando bloqueos y reparando circuitos. Como resultado, la energía vuelve a fluir de manera libre y equilibrada.",
+        "detail": "La Limpieza energética es una herramienta utilizada en diversas prácticas espirituales y terapias energéticas para detectar y corregir alteraciones vibracionales en el cuerpo energético de una persona. Esta técnica se basa en la idea de que nuestro cuerpo energético, también conocido como campo energético o aura, es susceptible a desequilibrios y bloqueos que pueden afectar nuestro bienestar físico, emocional y espiritual.  Cuando se utiliza un péndulo en esta práctica, se sostiene sobre el cuerpo de la persona o en su campo energético, y se observa su movimiento. El péndulo responde a las energías sutiles y vibraciones presentes en el cuerpo energético, lo que puede manifestarse a través de movimientos circulares, oscilaciones o cambios en la dirección de su movimiento. Estos patrones de movimiento del péndulo se interpretan como indicadores de áreas problemáticas o bloqueos en el flujo de energía. Una vez que se identifican las alteraciones vibracionales, el terapeuta o practicante trabaja para corregirlas. Esto puede involucrar técnicas de limpieza y purificación energética, como la imposición de manos, la visualización, la meditación o el uso de cristales. El objetivo es eliminar los bloqueos y restablecer un flujo libre y equilibrado de energía en el cuerpo energético de la persona. La restauración del equilibrio energético se considera crucial para el bienestar general, ya que se cree que los bloqueos energéticos pueden contribuir a problemas físicos, emocionales y mentales. Al liberar y armonizar la energía, se busca promover la salud, la vitalidad y el bienestar integral de la persona.",
+      "modality": "Presencial o Virtual",
+      "img": "https://images.unsplash.com/photo-1579291465308-fba6c5db2dfe?q=80&w=1988&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {"id": 3,
+      "name": "Reiki",
+      "price": 4000,
+      "information":
+        "Técnica mediante la cual un Maestro de Reiki canaliza y transmite energía utilizando sus manos. Busca obtener paz y equilibrio a nivel físico, mental, emocional y espiritual.",
+        "detail": "El Reiki es una técnica de sanación y bienestar que se basa en la canalización y transmisión de energía por parte de un Maestro de Reiki a través de sus manos. Esta práctica tiene como objetivo principal restablecer y equilibrar la energía en el cuerpo y la mente, promoviendo la paz y el equilibrio en todos los niveles: físico, mental, emocional y espiritual. Durante una sesión de Reiki, el Maestro de Reiki coloca sus manos en puntos específicos del cuerpo del receptor o los mantiene a una pequeña distancia de la piel. A través de la intención y la concentración, el practicante canaliza la energía vital universal (también conocida como 'Ki' o 'Chi') y la transmite al receptor. Esta energía fluye a través de canales de energía llamados 'meridianos'. La transmisión de Reiki puede ayudar a desbloquear estos canales y restaurar el flujo de energía. El Reiki se utiliza con diversos propósitos, como aliviar el estrés, reducir la ansiedad, promover la relajación profunda, aliviar dolores físicos y emocionales, y acelerar la recuperación después de una enfermedad o lesión. Además, se considera una práctica que puede ayudar en el crecimiento espiritual y la autorreflexión.",
+      "modality": "Presencial",
+      "img": "https://images.unsplash.com/photo-1494386346843-e12284507169?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {"id": 4,
+      "name": "Terapia de sanación",
+      "price": 2000,
+      "information":
+        "Consta de 3 sesiones en las que se busca sanar a través de oraciones y de manera integral al cuerpo espiritual, mental, emocional y físico.Restablece el equilibrio y armonía de los 7 Chakras.",
+      "modality": "Presencial o Virtual",
+      "detail": "La sanación es un proceso que generalmente se divide en tres sesiones y tiene como objetivo restaurar y revitalizar el bienestar de una persona en un nivel integral, abordando tanto su cuerpo espiritual, mental, emocional como físico. Esta práctica se lleva a cabo mediante el uso de oraciones y otras técnicas destinadas a equilibrar y armonizar los siete chakras principales del individuo. Cada uno de los siete chakras, que son centros de energía ubicados a lo largo de la columna vertebral, está relacionado con aspectos específicos de la salud y el bienestar. Cada chakra se asocia con ciertos órganos, emociones y estados mentales. La sanación busca alinear y equilibrar estos chakras, eliminando bloqueos energéticos y promoviendo una distribución armoniosa de la energía vital en todo el cuerpo. Se utiliza la intención y las oraciones como herramientas para canalizar energía curativa hacia los chakras, lo que contribuye a la sanación y la restauración del equilibrio en los niveles espiritual, mental, emocional y físico.",
+      "img": "https://images.unsplash.com/photo-1546308147-8863b59d951f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  ]

@@ -1,7 +1,16 @@
 import { useAuth } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import "./globals.css";
-import { NavbarOrigen, Footer, Aside } from "@/components";
+import {
+  NavbarOrigen,
+  Footer,
+  Aside,
+  Header,
+  HeaderMobile,
+  SideNav,
+  PageWrapper,
+  MarginWidthWrapper,
+} from "@/components";
 import ProvidersAuth from "./ProvidersAuth";
 import { CartProvider } from "@/context/CartContext";
 import Provider from "@/context/ProgressBarContext";
@@ -26,9 +35,16 @@ export default function RootLayout({
           <Provider>
             <CartProvider>
               <ProvidersAuth>
-                <NavbarOrigen />
-                <Aside />
-                {children}
+                <div>
+                  <SideNav />
+                  <main className="flex-1">
+                    <MarginWidthWrapper>
+                      <Header />
+                      <HeaderMobile />
+                      <PageWrapper>{children}</PageWrapper>
+                    </MarginWidthWrapper>
+                  </main>
+                </div>
               </ProvidersAuth>
             </CartProvider>
           </Provider>
