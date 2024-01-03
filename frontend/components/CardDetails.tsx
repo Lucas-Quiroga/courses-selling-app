@@ -89,7 +89,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
     <>
       <div className="min-w-screen flex items-center overflow-hidden relative">
         <div className="w-full  rounded  shadow-xl lg:p-10 mx-auto text-gray-800 relative md:text-left">
-          <div className="grid grid-cols-2 grid-rows-1 gap-4 ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-1 gap-4 ">
             <div className="w-full gap-10 bg-white p-5 rounded">
               <div className="relative flex justify-between flex-col">
                 <div>

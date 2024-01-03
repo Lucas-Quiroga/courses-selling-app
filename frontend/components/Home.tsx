@@ -18,15 +18,7 @@ const HomeWeb = () => {
     return () => clearInterval(id); // Limpia el intervalo cuando se desmonta el componente
   }, []);
 
-  return (
-    <div>
-      <div className="flex">
-        {/* <Aside /> */}
-        <Hero />
-      </div>
-      {/* <Testimonials /> */}
-    </div>
-  );
+  return <Hero />;
 };
 
 export default HomeWeb;

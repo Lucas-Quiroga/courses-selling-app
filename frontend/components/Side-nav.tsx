@@ -16,8 +16,12 @@ const SideNav = () => {
           href="/"
           className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 border-b border-zinc-200 h-12 w-full"
         >
-          <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
-          <span className="font-bold text-xl hidden md:flex">Logo</span>
+          <img
+            src="https://res.cloudinary.com/dncmrwppr/image/upload/v1704313514/luna-creciente_sfarxn.png"
+            className="h-7 w-7 rounded-lg"
+            alt="logo"
+          />
+          <span className="font-bold text-xl flex ">Paula Cursos</span>
         </Link>
 
         <div className="flex flex-col space-y-2  md:px-6 ">

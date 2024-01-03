@@ -54,7 +54,7 @@ const Cards = ({ courses }: any) => {
 
   return (
     <div>
-      <section className="flex flex-wrap w-fit justify-start gap-y-20 gap-x-14 mt-10 mb-5 sm:items-start sm:flex-wrap md:items-start xl:items-start">
+      <section className="flex flex-wrap w-fit justify-start gap-y-20 gap-x-14 mt-10 mb-5 sm:items-start sm:justify-center sm:flex-wrap md:justify-center lg:justify-start xl:justify-start xl:items-start">
         {courses.map((course: CardsProps, index: any) => {
           const formattedPrice = new Intl.NumberFormat("es-AR", {
             style: "currency",

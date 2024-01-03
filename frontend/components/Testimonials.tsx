@@ -10,22 +10,22 @@ const Testimonials = () => {
         <div className="container px-6  mx-auto">
           <div className="mt-6 md:flex md:items-center md:justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">
+              <h1 className="text-3xl font-semibold text-gray-800 lg:text-3xl dark:text-white">
                 Testimonios de alumnos
               </h1>
             </div>
           </div>
           <hr className="my-8 border-gray-200 dark:border-gray-700" />
         </div>
-        <Marquee>
+        <Marquee pauseOnHover>
           {Data.map((testimonials, index) => (
             <div className="container px-6 py-10 mx-auto" key={index}>
               <section className="flex justify-center max-w-md mb max-h-full ">
                 <div
-                  className="p-8 mb-0 border rounded-lg flex flex-col justify-between h-full w-100 "
+                  className="p-8 mb-0 border rounded-lg flex flex-col justify-between h-full w-100 bg-white"
                   key={index}
                 >
-                  <p className="leading-loose text-gray-500 dark:text-gray-200">
+                  <p className="leading-loose text-black dark:text-gray-200">
                     “{testimonials.description}”.
                   </p>
 
