@@ -7,7 +7,7 @@ const Testimonials = () => {
   return (
     <section className="relative items-center flex ">
       <div className="container mt-10 px-6 mx-auto">
-        <div className="container px-6  mx-auto">
+        <div className="container ">
           <div className="mt-6 md:flex md:items-center md:justify-between">
             <div>
               <h1 className="text-3xl font-semibold text-gray-800 lg:text-3xl dark:text-white">

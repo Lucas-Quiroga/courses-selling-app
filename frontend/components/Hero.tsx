@@ -77,20 +77,19 @@ const Hero = () => {
   return (
     <div className="mt-5">
       <div className="container px-6 mx-auto">
-        {/* <div className="flex items-center justify-between">
-          <h1 className="text-blackish text-[24px] lg:text-[28px]">
-            Explorá las clases unicas que ofrece{" "}
-            <span className="underline decoration-blue-500">Paula</span>
-          </h1>
-
-          <p className="hidden sm:block mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum
-            quam voluptatibus
-          </p>
-        </div> */}
-
-        {/* <hr className="my-8 border-gray-200 dark:border-gray-700" /> */}
-        <Filters filter={filter} onFilterChange={handleFilterChange} />
+        <div className="   mx-auto">
+          <div className="mt-6 md:flex md:items-center md:justify-between">
+            <div>
+              <h1 className="text-3xl font-semibold text-gray-800 lg:text-3xl dark:text-white">
+                Aprendiendo con paula
+              </h1>
+            </div>
+          </div>
+          <hr className="my-8 border-gray-200 dark:border-gray-700" />
+        </div>
+        {courses.length > 1 && (
+          <Filters filter={filter} onFilterChange={handleFilterChange} />
+        )}
         <div className="">
           <div className="mt-5">
             {loading ? (

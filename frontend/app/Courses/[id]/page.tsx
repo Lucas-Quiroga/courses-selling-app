@@ -13,11 +13,15 @@ const Page = async ({ params }: any) => {
       {course && (
         <>
           <CardDetails course={course} />
-          <hr />
-          <Banner />
-          <Suspense fallback={<p>Loading...</p>}>
-            <Courses />
-          </Suspense>
+          {course.length > 0 && (
+            <div>
+              <hr />
+              <Banner />
+              <Suspense fallback={<p>Loading...</p>}>
+                <Courses />
+              </Suspense>
+            </div>
+          )}
         </>
       )}
     </div>
