@@ -5,7 +5,7 @@ import { SiCodemagic } from "react-icons/si";
 import { SideNavItem } from "@/types";
 
 //checkout
-export const CARGO_SERVICIO_WEB = 5000;
+export const CARGO_SERVICIO_WEB = 2000;
 
 //navbar
 

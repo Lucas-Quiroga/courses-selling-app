@@ -396,9 +396,8 @@ const CardDetails = ({ course }: CardDetailsProps) => {
               {course.highlights
                 .filter((highlight) => highlight.trim() !== "")
                 .map((highlight, index) => (
-                  <a
+                  <div
                     className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                    href="/accountant"
                     key={index}
                   >
                     <span className="inline-block rounded-lg bg-gray-50 p-3">
@@ -423,7 +422,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
                     <p className=" sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                       {highlight}
                     </p>
-                  </a>
+                  </div>
                 ))}
             </div>
           </div>

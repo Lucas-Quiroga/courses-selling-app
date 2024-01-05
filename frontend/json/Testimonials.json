@@ -1,42 +1,42 @@
 [
     {
       "id": 1,
-      "image": "/camilapablos.png",
+      "image": "https://res.cloudinary.com/dncmrwppr/image/upload/v1704485515/camilapablos_sazqzw.png",
       "name": "Camila Pablos",
       "description": "Me encantó hacer el curso de tarot con Pau. Fue súper entretenido, completo y dinámico. Estuvo explicado con paciencia y dedicándole mucho tiempo. En cuanto a mi tirada personal, me encantó. Volvería a hacer ambas cosas con ella.💗",
       "role": "Estudiante"
     },
     {
       "id": 2,
-      "image": "/isabelsilva.png",
+      "image": "https://res.cloudinary.com/dncmrwppr/image/upload/v1704485515/isabelsilva_f3vac5.png",
       "name": "Isabel Silva",
       "description": "Maravillosa experiencia desde la profesionalidad que conoces, como también desde la capacidad de la profesora para transmitir su conocimiento en la práctica del saber.",
       "role": "Estudiante"
     },
     {
       "id": 3,
-      "image": "/yannina.png",
+      "image": "https://res.cloudinary.com/dncmrwppr/image/upload/v1704485515/yannina_stbanm.png",
       "name": "Yanina Guzman",
       "description": "Desde que conocí a Paula, me ha ayudado a mejorar muchos aspectos de mi vida. Es una gran persona con un don mágico en esta tierra y como paciente y estudiante suyo, agradezco a la vida haberme permitido conocerla.",
       "role": "Estudiante"
     },
     {
       "id": 4,
-      "image": "/marcela.png",
+      "image": "https://res.cloudinary.com/dncmrwppr/image/upload/v1704485514/marcela_sboql4.png",
       "name": "Marcela",
       "description": "Hola, mi nombre es Marcela y soy alumna de Paula. Me encanta porque sus clases son dinámicas, y ella siempre está dispuesta a brindarnos todos sus conocimientos y aclararnos dudas no solo durante las clases, sino en cualquier momento.",
       "role": "Estudiante"
     },
     {
       "id": 5,
-      "image": "/sabrina.png",
+      "image": "https://res.cloudinary.com/dncmrwppr/image/upload/v1704485515/sabrina_nfn27t.png",
       "name": "Sabrina Seijo",
       "description": "Decidí convertirme en su alumna y adentrarme de su mano en este maravilloso mundo! Gracias Pau por tantos conocimientos y hermosas experiencias, por tus palabras justas en cada situación y por estar siempre cerca cuando te necesito! Sos una excelente profesional con un brillo excepcional, te quiero mucho ❤️",
       "role": "Estudiante"
     },
     {
       "id": 6,
-      "image": "/gaby.png",
+      "image": "https://res.cloudinary.com/dncmrwppr/image/upload/v1704485515/gaby_tolyk4.png",
       "name": "Gabriela Mete",
       "description": "¡Hola! Estoy muy contenta y agradecida de haber conocido a Paula. La verdad es que me cambió un montón. Además de tener una claridad increíble tanto en videncia (doy fe de que todo lo que me dijo que iba a pasar sucedió en el mismo día, ¡increíble!). Lo que hace realmente es espectacular, le recomiendo a Paula. 🥰😊🙏💙❤️💜 Es la mejor de todas.",
       "role": "Estudiante"

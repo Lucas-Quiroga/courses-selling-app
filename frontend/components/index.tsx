@@ -46,6 +46,7 @@ import HeaderMobile from "./Header-mobile";
 import SideNav from "./Side-nav";
 import PageWrapper from "./Page-wrapper";
 import MarginWidthWrapper from "./Margin-width-wrapper";
+import HowToPurchase from "./HowToPurchase";
 
 export {
   NavbarUser,
@@ -95,4 +96,5 @@ export {
   SideNav,
   PageWrapper,
   MarginWidthWrapper,
+  HowToPurchase,
 };

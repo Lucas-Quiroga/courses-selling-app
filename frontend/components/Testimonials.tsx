@@ -6,11 +6,11 @@ import Data from "@/json/Testimonials.json";
 const Testimonials = () => {
   return (
     <section className="relative items-center flex ">
-      <div className="container mt-10 px-6 mx-auto">
-        <div className="container ">
+      <div className="container mt-10 mx-auto">
+        <div className="mx-auto ">
           <div className="mt-6 md:flex md:items-center md:justify-between">
             <div>
-              <h1 className="text-3xl font-semibold text-gray-800 lg:text-3xl dark:text-white">
+              <h1 className="text-3xl text-center md:text-left font-semibold text-gray-800 lg:text-3xl dark:text-white">
                 Testimonios de alumnos
               </h1>
             </div>
@@ -19,7 +19,7 @@ const Testimonials = () => {
         </div>
         <Marquee pauseOnHover>
           {Data.map((testimonials, index) => (
-            <div className="container px-6 py-10 mx-auto" key={index}>
+            <div className="container px-6 py-5 mx-auto" key={index}>
               <section className="flex justify-center max-w-md mb max-h-full ">
                 <div
                   className="p-8 mb-0 border rounded-lg flex flex-col justify-between h-full w-100 bg-white"

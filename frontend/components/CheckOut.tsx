@@ -169,7 +169,7 @@ const CheckOut = ({ idCourse }: any) => {
                       <div className="mt-4 md:mt-6 flex  flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full ">
                         <div className="pb-4 md:pb-8 w-full md:w-40">
                           <img
-                            className="w-full hidden md:block"
+                            className="w-full  md:block"
                             src={data?.thumbnail}
                             alt="producto"
                           />
@@ -181,34 +181,24 @@ const CheckOut = ({ idCourse }: any) => {
                             </h3>
                             <div className="flex justify-start items-start flex-col space-y-2">
                               <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">
+                                <span className="text-gray-800">
                                   Duración del curso:{" "}
                                 </span>{" "}
                                 {data?.duration}
                               </p>
                               <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">
+                                <span className="text-gray-800">
                                   Cantidad de videos:{" "}
                                 </span>{" "}
                                 {data?.videos}
                               </p>
                               <p className="text-sm leading-none text-gray-800">
-                                <span className="text-gray-300">
+                                <span className="text-gray-800">
                                   Nivel del curso:{" "}
                                 </span>{" "}
                                 {data?.level}
                               </p>
                             </div>
-                          </div>
-                          <div className="flex justify-between space-x-8 items-start w-full">
-                            <p className="text-base xl:text-lg leading-6">
-                              {formattedPrice}{" "}
-                            </p>
-                            <span className="text-red-300 line-through">
-                              {" "}
-                              {formattedOriginalPrice}
-                            </span>{" "}
-                            ARS
                           </div>
                         </div>
                       </div>
@@ -273,9 +263,7 @@ const CheckOut = ({ idCourse }: any) => {
 
               <div className="flex flex-row justify-center items-center mt-6">
                 <hr className="border w-full" />
-                <p className="flex flex-shrink-0 px-4 text-base leading-4 text-gray-600">
-                  or pay with card
-                </p>
+                <p className="flex flex-shrink-0 px-4 text-base leading-4 text-gray-600"></p>
                 <hr className="border w-full" />
               </div>
 
@@ -292,7 +280,7 @@ const CheckOut = ({ idCourse }: any) => {
                     {...register("name", {
                       required: {
                         value: true,
-                        message: "FirstName is required",
+                        message: "Por favor complete con su nombre",
                       },
                     })}
                   />
@@ -301,8 +289,10 @@ const CheckOut = ({ idCourse }: any) => {
                       {(errors.name as FieldError).message}
                     </span>
                   )}
+                </div>
 
-                  <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
+                <div className="mt-6">
+                  <label className="w-full mt-6 text-base leading-4 placeholder-gray-600 text-gray-600">
                     Ingrese su apellido
                   </label>
                   <input
@@ -313,7 +303,7 @@ const CheckOut = ({ idCourse }: any) => {
                     {...register("surname", {
                       required: {
                         value: true,
-                        message: "Surname is required",
+                        message: "Apellido es requerido",
                       },
                     })}
                   />
@@ -324,7 +314,7 @@ const CheckOut = ({ idCourse }: any) => {
                   )}
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-6">
                   <label className="w-full text-base leading-4 placeholder-gray-600 text-gray-600">
                     {" "}
                     Ingrese su email
@@ -337,7 +327,7 @@ const CheckOut = ({ idCourse }: any) => {
                     {...register("email", {
                       required: {
                         value: true,
-                        message: "Email is required",
+                        message: "Correo electronico es requerido",
                       },
                     })}
                   />
@@ -362,7 +352,7 @@ const CheckOut = ({ idCourse }: any) => {
                     {...register("phone", {
                       required: {
                         value: true,
-                        message: "phone is required",
+                        message: "Número de telefono es requerido",
                       },
                     })}
                   />
@@ -371,9 +361,6 @@ const CheckOut = ({ idCourse }: any) => {
                       {(errors.phone as FieldError).message}
                     </span>
                   )}
-                  <p className="mt-2 text-xs text-gray-500">
-                    Formato: XXX-XXX-XXXX
-                  </p>
                 </div>
 
                 <button
