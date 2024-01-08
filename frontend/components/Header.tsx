@@ -43,7 +43,8 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="hidden md:block">
+        {/* cambiar de color la web */}
+        {/* <div className="hidden md:block">
           <div className="h-8 w-8 rounded-full  flex items-center justify-center text-center">
             <div className="container flex justify-end">
               <label className="toggle" htmlFor="switch">
@@ -83,7 +84,7 @@ const Header = () => {
               </label>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -2,56 +2,63 @@
   {
     "indice": "Sobre cursos",
     "preguntas": [
-      {
-        "id": "0.1",
-        "pregunta": "¿Cuántos cursos ofrece Paula?",
-        "respuesta": "Hay varios cursos disponibles..."
-      },
-      {
-        "id": "0.2",
-        "pregunta": "¿Cuánto tiempo tengo acceso al curso después de la compra?",
-        "respuesta": "El acceso al curso está disponible..."
-      }
+      
+{
+  "id": "0.1",
+  "pregunta": "¿Los cursos de Paula son presenciales o grabados en formato virtual?",
+  "respuesta": "Actualmente, Paula ofrece cursos virtuales ya grabados, y próximamente habrá cursos en vivo."
+  },
+      
+{
+  "id": "0.2",
+  "pregunta": "¿Cuánto tiempo conservo el acceso al curso después de la compra?",
+  "respuesta": "Después de adquirir el curso, mantendrás acceso permanente a las clases."
+  }
     ]
   },
   {
     "indice": "Servicios",
     "preguntas": [
-      {
-        "id": "1.1",
-        "pregunta": "¿Cómo puedo programar una consulta con Paula?",
-        "respuesta": "Puedes programar una consulta..."
-      },
-      {
-        "id": "1.2",
-        "pregunta": "¿Cómo puedo programar una consulta con Paula?",
-        "respuesta": "Puedes programar una consulta..."
-      },
-      {
-        "id": "1.3",
-        "pregunta": "¿Cómo se lleva a cabo una limpieza energética o sanación en las sesiones de Paula?",
-        "respuesta": "En las sesiones de limpieza energética..."
-      }
+      
+{
+  "id": "1.1",
+  "pregunta": "¿Cómo puedo agendar una consulta con Paula?",
+  "respuesta": "Para programar una consulta, puedes enviar un mensaje al siguiente número: +54 9 11 2787-7943. También puedes utilizar la pestaña de 'Contacto' para enviar un correo electrónico y así coordinar la cita."
+  
+  },
+  {
+  "id": "1.2",
+  "pregunta": "¿Cuáles son los servicios que ofrece Paula actualmente?",
+  "respuesta": "Paula ofrece actualmente servicios de lectura de tarot, reiki, limpiezas energéticas y sanación."
+  
+  },
+  {
+  "id": "1.3",
+  "pregunta": "¿Las limpiezas energéticas o la sanación son realizadas de forma presencial?",
+  "respuesta": "Las limpiezas energéticas y la sanación pueden llevarse a cabo tanto de manera presencial como virtual, a través de videollamada de WhatsApp."
+  }
     ]
   },
   {
     "indice": "Pago y facturacion",
     "preguntas": [
-      {
-        "id": "2.1",
-        "pregunta": "¿Cuáles son las opciones de pago?",
-        "respuesta": "Aceptamos tarjetas de crédito, transferencias..."
-      },
-      {
-        "id": "2.2",
-        "pregunta": "¿Qué pasa después de realizar el pago para un curso?",
-        "respuesta": "Después de realizar el pago, recibirás un correo..."
-      },
-      {
-        "id": "2.3",
-        "pregunta": "¿Desde qué plataforma accedo al curso?",
-        "respuesta": "Puedes acceder al curso desde nuestra plataforma en línea..."
-      }
+     
+{
+  "id": "2.1",
+  "pregunta": "¿Cuáles son las opciones de pago disponibles?",
+  "respuesta": "Puedes realizar el pago a través de MercadoPago, mediante transferencias, o en efectivo a través de Rapipago o Pago Fácil (es necesario informar sobre esta última opción de pago)."
+  },
+  {
+  "id": "2.2",
+  "pregunta": "¿Qué ocurre después de realizar el pago para un curso?",
+  "respuesta": "Después de completar el pago, en un lapso de 8 a 12 horas, nos pondremos en contacto contigo para coordinar la habilitación del curso a través de Google Drive."
+  },
+  {
+  "id": "2.3",
+  "pregunta": "¿Desde qué plataforma se accede al curso?",
+  "respuesta": "Actualmente, el acceso al curso se realiza exclusivamente a través de Google Drive."
+  }
+  
     ]
   },
   {
@@ -59,14 +66,14 @@
     "preguntas": [
       {
         "id": "3.1",
-        "pregunta": "¿Necesito ser referido por alguien para programar una consulta?",
-        "respuesta": "No es necesario ser referido..."
-      },
-      {
+        "pregunta": "¿Es necesario ser referido por alguien para agendar una consulta?",
+        "respuesta": "No, no es necesario ser referido. Además, tienes la opción de solicitar un turno para otra persona."
+        },
+        {
         "id": "3.2",
         "pregunta": "¿Cuáles son los horarios de atención de Paula?",
-        "respuesta": "Los horarios de atención varían..."
-      }
+        "respuesta": "Los horarios de atención pueden variar, pero en su mayoría son los lunes, miércoles y viernes de 10:00 a 17:00 horas, y los martes y jueves de 14:00 a 19:00 horas."
+        }
     ]
   }
 ]

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 const PaymentDone = () => {
-  const [paymentId, setPaymentId] = useState("No disponible");
+  const [paymentId, setPaymentId] = useState("Cargando..");
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -33,7 +33,8 @@ const PaymentDone = () => {
             Número de orden: #{paymentId}
           </span>
           <p className="text-gray-600 my-2">
-            Gracias por completar su pago seguro en línea.
+            Gracias por completar su pago seguro en línea, en breves nos
+            pondremos en contacto.
           </p>
           <p> Que tenga un buen día. </p>
           <div className="py-10 text-center">
@@ -41,7 +42,7 @@ const PaymentDone = () => {
               href="/"
               className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
             >
-              GO BACK
+              Volver al inicio
             </Link>
           </div>
         </div>

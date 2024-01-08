@@ -33,8 +33,9 @@ exports.createOrder = async (req, res) => {
       pending: "http://localhost:3002/api/pending",
     },
     auto_return: "approved",
+    //cambiar por el https de la web
     notification_url:
-      "https://e816-2802-8010-8b05-9e00-dcbe-a618-1eb4-e36e.ngrok-free.app/api/webhook",
+      "https://0842-2802-8010-8b2e-b600-a9b6-954e-30ad-2e4f.ngrok-free.app/api/webhook",
   });
 
   // console.log(JSON.stringify(result.body, null, 2));

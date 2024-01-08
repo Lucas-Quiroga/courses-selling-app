@@ -10,9 +10,9 @@ const Testimonials = () => {
         <div className="mx-auto ">
           <div className="mt-6 md:flex md:items-center md:justify-between">
             <div>
-              <h1 className="text-3xl text-center md:text-left font-semibold text-gray-800 lg:text-3xl dark:text-white">
+              <h3 className="text-2xl sm:text-3xl text-center md:text-left font-semibold text-gray-800  dark:text-white">
                 Testimonios de alumnos
-              </h1>
+              </h3>
             </div>
           </div>
           <hr className="my-8 border-gray-200 dark:border-gray-700" />

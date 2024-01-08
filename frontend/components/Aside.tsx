@@ -75,9 +75,6 @@ const Aside = () => {
           </div>
         </div>
       </aside>
-      {modalOpen && (
-        <Modal2 isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      )}
     </div>
   );
 };

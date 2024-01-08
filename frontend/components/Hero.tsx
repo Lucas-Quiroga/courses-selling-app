@@ -86,14 +86,14 @@ const Hero = () => {
           <div className="bg-indigo-400">
             <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-20 lg:pb-5">
               <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
-                <div className="flex flex-col mb-16 sm:text-center sm:mb-0">
-                  <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-                    <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
+                <div className="flex flex-col sm:text-center sm:mb-0">
+                  <div className="max-w-xl  md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+                    <h1 className="max-w-lg mb-6 font-sans text-3xl text-center font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
                       <span className="relative inline-block">
                         <svg
                           viewBox="0 0 52 24"
                           fill="currentColor"
-                          className="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-deep-purple-accent-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
+                          className="absolute top-0 left-[-1rem] z-0 hidden w-32 -mt-8 -ml-20 text-deep-purple-accent-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
                         >
                           <defs>
                             <pattern
@@ -112,17 +112,17 @@ const Hero = () => {
                             height="24"
                           />
                         </svg>
-                        <span className="relative">The</span>
+                        <span className="relative">Hola,</span>
                       </span>{" "}
-                      quick, brown fox jumps over a lazy dog
-                    </h2>
-                    <p className="text-base text-indigo-100 md:text-lg">
-                      Sed ut perspiciatis unde omnis iste natus error sit
-                      voluptatem accusantium doloremque rem aperiam, eaque ipsa
-                      quae.
+                      soy Paula Dominguez
+                    </h1>
+                    <p className="text-base text-center text-indigo-100 md:text-lg">
+                      Bienvenidos a la magia que guarda todas las respuestas que
+                      habitan tu alma. Encara tu vida como un gran
+                      acontecimiento irrepetible y unico.
                     </p>
                   </div>
-                  <a
+                  {/* <a
                     href="/"
                     aria-label="Scroll down"
                     className="flex items-center justify-center w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110"
@@ -136,7 +136,7 @@ const Hero = () => {
                     >
                       <path d="M10.293,3.293,6,7.586,1.707,3.293A1,1,0,0,0,.293,4.707l5,5a1,1,0,0,0,1.414,0l5-5a1,1,0,1,0-1.414-1.414Z" />
                     </svg>
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
@@ -146,9 +146,9 @@ const Hero = () => {
               <div className="mx-auto">
                 <div className="mt-6 md:flex md:items-center md:justify-between">
                   <div>
-                    <h1 className="text-4xl text-center md:text-left  font-semibold text-gray-800 lg:text-3xl dark:text-white">
+                    <h2 className="text-2xl sm:text-3xl text-center md:text-left  font-semibold text-gray-800  dark:text-white">
                       Cursos o clases unicas
-                    </h1>
+                    </h2>
                   </div>
                 </div>
                 <hr className="my-8 border-gray-200 dark:border-gray-700" />

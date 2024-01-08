@@ -6,11 +6,13 @@ const HowToPurchase = () => {
       <div className="bg-indigo-400">
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-20 lg:pb-5">
           <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
-            <div className="flex flex-col mb-16 sm:text-center sm:mb-0">
-              <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-                <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
-                  <span className="relative inline-block"></span> Información
-                  acerca del proceso de compra
+            <div className="flex flex-col sm:text-center sm:mb-0">
+              <div className="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl ">
+                <h2 className="max-w-lg font-sans text-3xl font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
+                  <span className="relative inline-block uppercase">
+                    {" "}
+                    Proceso de compra
+                  </span>{" "}
                 </h2>
               </div>
             </div>
@@ -18,32 +20,29 @@ const HowToPurchase = () => {
         </div>
 
         <div className="flex w-full flex-col items-center justify-between gap-y-10 lg:flex-row lg:gap-x-8 lg:gap-y-0 xl:gap-x-10">
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-4 my-8 mx-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-solid border-purple-blue-500 bg-transparent text-purple-blue-500">
               <span className="text-base font-bold leading-7">1</span>
             </div>
             <div className="flex flex-col">
-              <h3 className="text-2xl font-semibold text-gray-800 lg:text-3xl ">
-                <span className="text-indigo-600 "> Paso 1:</span> Realizar el
-                pago
+              <h3 className="text-2xl font-semibold text-white lg:text-3xl pb-5 ">
+                Pago
               </h3>
 
-              <p className="text-base font-medium leading-7 text-dark-grey-600 break-words">
-                “Después de realizar el pago, recibirá un código único. Este
-                código sirve como comprobante de transacción y será necesario
-                para consultas o solicitudes relacionadas con la compra. También
-                se utiliza para generar un PDF personalizado con detalles
-                adicionales sobre la compra.”.
+              <p className="text-base font-medium leading-7 text-indigo-100 break-words">
+                “Después de abonar, recibirás un código único que necesitarás
+                para consultas o solicitudes relacionadas con la compra.”.
               </p>
             </div>
           </div>
-          <div className="rotate-90 lg:rotate-0">
+          <div className="rotate-90 lg:rotate-0 bg-white rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="43"
               height="42"
               viewBox="0 0 43 42"
               fill="none"
+              color="white"
             >
               <g clip-path="url(#clip0_3346_6663)">
                 <path
@@ -63,25 +62,24 @@ const HowToPurchase = () => {
               </defs>
             </svg>
           </div>
-          <div className="flex items-start gap-4">
+
+          <div className="flex items-start gap-4 my-8 mx-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-solid border-purple-blue-500 bg-transparent text-purple-blue-500">
               <span className="text-base font-bold leading-7">2</span>
             </div>
             <div className="flex flex-col">
-              <h3 className="text-2xl font-semibold text-gray-800 lg:text-3xl ">
-                <span className="text-indigo-600 "> Paso 2:</span>
+              <h3 className="text-2xl font-semibold text-white lg:text-3xl pb-5">
                 Confirmación de pago
               </h3>
-              <p className="text-base font-medium leading-7 text-dark-grey-600">
-                “Nuestro equipo se pondrá en contacto en 12 a 24 horas después
-                de realizar el pago. Se procesará la transacción y se
-                proporcionarán detalles adicionales sobre la compra. Estos
-                detalles incluirán cómo acceder al contenido del curso y otros
-                beneficios asociados.”.
+              <p className="text-base font-medium leading-7 text-indigo-100">
+                “Nos pondremos en contacto en 8 a 12 horas para confirmar el
+                pago, puedes enviar el comprobante al +54 9 11 2787-7943 con el
+                código recibido. También recibirás instrucciones para acceder al
+                curso.”.
               </p>
             </div>
           </div>
-          <div className="rotate-90 lg:rotate-0">
+          <div className="rotate-90 lg:rotate-0 bg-white rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="43"
@@ -107,22 +105,18 @@ const HowToPurchase = () => {
               </defs>
             </svg>
           </div>
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-4 my-8 mx-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-solid border-purple-blue-500 bg-transparent text-purple-blue-500">
               <span className="text-base font-bold leading-7">3</span>
             </div>
             <div className="flex flex-col">
-              <h3 className="text-2xl font-semibold text-gray-800 lg:text-3xl ">
-                <span className="text-indigo-600 ">Paso 3:</span> Acceso al
-                curso
+              <h3 className="text-2xl font-semibold text-white lg:text-3xl pb-5">
+                Acceso al curso
               </h3>
-              <p className="text-base font-medium leading-7 text-dark-grey-600">
-                “Una vez confirmado el pago, se habilitará el acceso al curso a
-                través de Google Drive en 12 a 24 horas. Se enviarán
-                instrucciones detalladas y recursos adicionales para aprovechar
-                al máximo la experiencia de aprendizaje. Si surge alguna
-                pregunta o se necesita asistencia, el equipo está disponible
-                para ayudar en el viaje educativo”.
+              <p className="text-base font-medium leading-7 text-indigo-100">
+                “Una vez confirmado el pago, se habilitará el acceso al curso en
+                Google Drive. Estamos disponibles para ayudarte con cualquier
+                pregunta o asistencia que necesites.”.
               </p>
             </div>
           </div>

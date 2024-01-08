@@ -1,6 +1,7 @@
  // Función para calcular el precio más caro con un incremento del 20%
  export const calculateOriginalPrice = (price: number): number => {
-    const originalPrice = price * 1.2; // Aumento del 20%
+    // const originalPrice = price * 1.2; // Aumento del 20%
+    const originalPrice = price ;
     return originalPrice;
   };
 

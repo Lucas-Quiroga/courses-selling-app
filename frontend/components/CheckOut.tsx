@@ -217,7 +217,7 @@ const CheckOut = ({ idCourse }: any) => {
                               {formattedOriginalPrice} ARS
                             </p>
                           </div>
-                          <div className="flex justify-between items-center w-full">
+                          {/* <div className="flex justify-between items-center w-full">
                             <p className="text-base leading-4 text-gray-800">
                               Descuento{" "}
                               <span className="bg-gray-200 p-1 text-xs font-medium leading-3  text-gray-800">
@@ -228,10 +228,13 @@ const CheckOut = ({ idCourse }: any) => {
                               {formattedResta} ({formattedPorcentajeDeLaResta}%)
                               ARS
                             </p>
-                          </div>
+                          </div> */}
                           <div className="flex justify-between items-center w-full">
                             <p className="text-base leading-4 text-gray-800">
                               Cargo servicio web
+                              <span className="bg-gray-200 p-1 ml-1 text-xs font-medium leading-3  text-gray-800">
+                                ACTIVO
+                              </span>
                             </p>
                             <p className="text-base leading-4 text-gray-600">
                               {formattedPrecioConRecargoWeb}
