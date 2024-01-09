@@ -1,20 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next-nprogress-bar";
-import { useCart } from "@/context/CartContext";
+// import { useCart } from "@/context/CartContext";
 // import { addToCart } from "@/coreComponents/helper/cart";
-import { useSession } from "next-auth/react";
-import { isAuthenticated } from "@/coreComponents/helper/auth";
+// import { useSession } from "next-auth/react";
+// import { isAuthenticated } from "@/coreComponents/helper/auth";
 // import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
 import { CardDetailsProps } from "@/types";
 
 const CardDetails = ({ course }: CardDetailsProps) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  // const [isAuth, setIsAuth] = useState<boolean>(false);
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  const { dispatch } = useCart();
+  // const { dispatch } = useCart();
 
   // const handleBuyClick = () => {
   //   dispatch({
@@ -72,14 +72,14 @@ const CardDetails = ({ course }: CardDetailsProps) => {
     maximumFractionDigits: 0,
   }).format(course.price);
 
-  useEffect(() => {
-    const checkAuth = () => setIsAuth(isAuthenticated());
-    checkAuth(); // Verifica la autenticación inmediatamente
+  // useEffect(() => {
+  //   const checkAuth = () => setIsAuth(isAuthenticated());
+  //   checkAuth(); // Verifica la autenticación inmediatamente
 
-    const intervalId = setInterval(checkAuth, 1000); // Verifica la autenticación cada segundo
+  //   const intervalId = setInterval(checkAuth, 1000); // Verifica la autenticación cada segundo
 
-    return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta el componente
-  }, []);
+  //   return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta el componente
+  // }, []);
 
   return (
     <>
@@ -259,7 +259,8 @@ const CardDetails = ({ course }: CardDetailsProps) => {
         </div>
       </section>
 
-      <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+      {/* gift of beer */}
+      {/* <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
         <div>
           <a
             title="Buy me a beer"
@@ -273,7 +274,7 @@ const CardDetails = ({ course }: CardDetailsProps) => {
             />
           </a>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

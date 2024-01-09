@@ -81,9 +81,14 @@ const CheckOut = ({ idCourse }: any) => {
       }
 
       // Agrega el cargo del servicio web al precio del curso
+      // const dataWithWebCharge = {
+      //   ...data,
+      //   price: data.price + CARGO_SERVICIO_WEB,
+      // };
+
       const dataWithWebCharge = {
         ...data,
-        price: data.price + CARGO_SERVICIO_WEB,
+        price: data.price,
       };
 
       // Crea la orden en MercadoPago
