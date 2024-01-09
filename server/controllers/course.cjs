@@ -1,4 +1,3 @@
-const Admin = require("../models/admin");
 const User = require("../models/user");
 const Courses = require("../models/course");
 

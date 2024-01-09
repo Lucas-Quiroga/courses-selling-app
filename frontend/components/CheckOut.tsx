@@ -1,16 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import mercadoPagoIcon from "@/public/mercadopago.png";
-import Modal from "./Modal";
 import { createOrder } from "@/coreComponents/helper/cart";
 import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
 import {
-  calculatePercentage,
   calculateOriginalPrice,
   calculateTotalWithWebCharge,
   formatCurrency,
 } from "@/math/calculations";
-import { Course, CartItem } from "@/types";
+import { Course } from "@/types";
 import { CARGO_SERVICIO_WEB } from "@/constants/constants";
 import { useForm, FieldError, SubmitHandler } from "react-hook-form";
 
@@ -22,19 +20,14 @@ interface userProps {
 }
 
 const CheckOut = ({ idCourse }: any) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
   const [data, setData] = useState<Course | null>(null);
-  const [user, setUser] = useState({});
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-    watch,
   } = useForm<userProps>();
 
-  const [toggleModal, setToggleModal] = useState(false);
   const fetchData = async () => {
     if (idCourse) {
       try {
@@ -53,27 +46,22 @@ const CheckOut = ({ idCourse }: any) => {
         } = course;
         // Asegúrate de que cada propiedad del curso tenga un valor predeterminado si es opcional
         setData({
-          _id: "", // Puedes poner un valor predeterminado aquí
-          name: name || "", // Puedes poner un valor predeterminado aquí
-          description: description || "", // Puedes poner un valor predeterminado aquí
-          price: price || 0, // Puedes poner un valor predeterminado aquí
-          thumbnail: thumbnail || "", // Puedes poner un valor predeterminado aquí
-          duration: duration || "", // Puedes poner un valor predeterminado aquí
-          videos: videos || 0, // Puedes poner un valor predeterminado aquí
-          level: level || "", // Puedes poner un valor predeterminado aquí
-          highlights: highlights || [], // Puedes poner un valor predeterminado aquí
-          details: details || "", // Puedes poner un valor predeterminado aquí
-          format: format || "", // Puedes poner un valor predeterminado aquí
+          _id: "",
+          name: name || "",
+          description: description || "",
+          price: price || 0,
+          thumbnail: thumbnail || "",
+          duration: duration || "",
+          videos: videos || 0,
+          level: level || "",
+          highlights: highlights || [],
+          details: details || "",
+          format: format || "",
         });
       } catch (error) {
         console.error("Error fetching course data:", error);
-        // Manejar el error de alguna manera si es necesario
       }
     }
-  };
-
-  const handleToggleModal = () => {
-    setToggleModal(!toggleModal);
   };
 
   // Función de pago
@@ -127,19 +115,19 @@ const CheckOut = ({ idCourse }: any) => {
 
   // Calcular el precio más caro
   const originalPrice = calculateOriginalPrice(data?.price ?? 0); // Proporciona 0 como valor predeterminado si data?.price es undefined
-  const formattedPrice = formatCurrency(data?.price ?? 0);
+  // const formattedPrice = formatCurrency(data?.price ?? 0);
   const formattedOriginalPrice = formatCurrency(originalPrice);
 
-  const resta: number = (data?.price ?? 0) - (originalPrice ?? 0);
+  // const resta: number = (data?.price ?? 0) - (originalPrice ?? 0);
 
   // Calcular el porcentaje de la resta
-  const percentageResta: number = calculatePercentage(
-    Math.abs(resta),
-    originalPrice
-  );
+  // const percentageResta: number = calculatePercentage(
+  //   Math.abs(resta),
+  //   originalPrice
+  // );
 
-  const formattedResta = formatCurrency(resta);
-  const formattedPorcentajeDeLaResta = percentageResta.toFixed(2);
+  // const formattedResta = formatCurrency(resta);
+  // const formattedPorcentajeDeLaResta = percentageResta.toFixed(2);
 
   const formattedPrecioConRecargoWeb = formatCurrency(CARGO_SERVICIO_WEB);
 

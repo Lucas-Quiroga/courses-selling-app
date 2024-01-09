@@ -4,12 +4,8 @@ import Loading from "@/coreComponents/Loading";
 import { getCourses } from "@/coreComponents/helper/apiCalls";
 import { Cards, Filters } from "@/components";
 import { CourseType1 as Course } from "@/types/index";
-import { Categories } from "@/components";
-import { OffCanvas } from "@/components";
 import { Testimonials } from "@/components";
 import Spinner from "@/coreComponents/Spinner";
-
-// import axios from "axios";
 
 const Hero = () => {
   const [courses, setCourses] = useState<Course[]>([]);

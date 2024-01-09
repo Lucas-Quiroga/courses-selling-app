@@ -5,7 +5,6 @@ import { useForm, FieldError, SubmitHandler } from "react-hook-form";
 import { signin } from "@/coreComponents/helper/auth";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 
 interface IFormInput {
   email: string;
@@ -25,7 +24,6 @@ const LoginUser = () => {
     handleSubmit,
     reset,
     formState: { errors },
-    watch,
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {

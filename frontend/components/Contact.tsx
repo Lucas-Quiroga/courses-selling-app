@@ -2,8 +2,6 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { sendEmail } from "@/coreComponents/helper/email";
-import { FaWhatsapp } from "react-icons/fa";
-import ContactInfo from "@/json/ContactInfo.json";
 
 interface IFormInput {
   from: string;
@@ -12,11 +10,7 @@ interface IFormInput {
 }
 
 const Contact = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInput>();
+  const { register, handleSubmit } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     // Construir los datos del correo electrónico
@@ -261,60 +255,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-{
-  /* <div className="mt-8 ">
-<div className="w-full px-8 py-10 mx-auto overflow-hidden bg-white rounded-lg  lg:max-w-xl shadow-gray-300/50 shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]">
-  <h1 className="text-lg font-medium text-gray-700 uppercase">
-    Infórmanos acerca de cualquier pregunta que puedas tener.
-  </h1>
-
-  <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-    <div className="flex-1">
-      <label className="block mb-2 text-sm text-gray-600">
-        Tu nombre y/o apellido
-      </label>
-      <input
-        {...register("from")}
-        type="text"
-        id="from"
-        placeholder="John Doe"
-        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-      />
-    </div>
-
-    <div className="flex-1 mt-6">
-      <label className="block mb-2 text-sm text-gray-600">
-        Tu correo electrónico
-      </label>
-      <input
-        {...register("to")}
-        type="email"
-        id="to"
-        placeholder="johndoe@example.com"
-        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-      />
-    </div>
-
-    <div className="w-full mt-6">
-      <label className="block mb-2 text-sm text-gray-600">
-        Mensaje
-      </label>
-      <textarea
-        {...register("html")}
-        id="html"
-        className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48 focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-        placeholder="Message"
-      ></textarea>
-    </div>
-
-    <button
-      type="submit"
-      className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-    >
-      get in touch
-    </button>
-  </form>
-</div>
-</div> */
-}

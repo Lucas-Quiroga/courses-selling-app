@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useForm, FieldError, SubmitHandler } from "react-hook-form";
 import { signup } from "@/coreComponents/helper/auth";
-import Link from "next/link";
 
 interface IFormInput {
   firstName: string;

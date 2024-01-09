@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  FcEngineering,
-  FcFilmReel,
-  FcMultipleDevices,
-  FcMusic,
-  FcOldTimeCamera,
-  FcSalesPerformance,
-  FcSportsMode,
-} from "react-icons/fc";
 import { IconType } from "react-icons";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+// import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface CategoryItemProps {
   label: string;
@@ -17,17 +8,17 @@ interface CategoryItemProps {
   icon?: IconType;
 }
 
-const CategoryItems = ({ label, value, icon: Icon }: CategoryItemProps) => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+const CategoryItems = ({ label, icon: Icon }: CategoryItemProps) => {
+  // const pathname = usePathname();
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
 
-  const currentCategoryId = searchParams.get("categoryId");
-  const currentTitle = searchParams.get("title");
+  // const currentCategoryId = searchParams.get("categoryId");
+  // const currentTitle = searchParams.get("title");
 
   //   const isSelected = currentCategoryId === value;
 
-  let isSelected = true;
+  // let isSelected = true;
 
   return (
     <button

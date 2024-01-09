@@ -1,16 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
 import { useSession, signOut } from "next-auth/react";
 import { FaCartShopping } from "react-icons/fa6";
-import { getSession } from "next-auth/react";
 
 const Navbar = () => {
-  const { toggleForm, toggleModal, active, setActive } = useAuth();
-
   const router = useRouter();
 
   const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -49,9 +45,6 @@ const Navbar = () => {
   if (isAuth && session?.user) {
     return null;
   }
-
-  // console.log("is auth?", isAuth);
-  // console.log(session?.user);
 
   return (
     <div className="relative bg-white">

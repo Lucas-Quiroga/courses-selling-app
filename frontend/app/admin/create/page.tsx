@@ -4,18 +4,13 @@ import {
   useForm,
   FieldError,
   SubmitHandler,
-  useFieldArray,
-  useWatch,
   Controller,
 } from "react-hook-form";
 import { useParams } from "next/navigation";
-// import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
 import { createCourse, updateCourse } from "@/coreComponents/helper/course";
 import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
 import { useRouter } from "next/navigation";
-import { Cards } from "@/components";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import Image from "next/image";
 import { MdOndemandVideo } from "react-icons/md";
 import CustomButton from "@/coreComponents/CustomButton";
 

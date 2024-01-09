@@ -22,7 +22,6 @@ const UserProfileSection = () => {
     handleSubmit,
     reset,
     formState: { errors },
-    watch,
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {

@@ -30,8 +30,8 @@ const HowToPurchase = () => {
               </h3>
 
               <p className="text-base font-medium leading-7 text-indigo-100 break-words">
-                “Después de abonar, recibirás un código único que necesitarás
-                para consultas o solicitudes relacionadas con la compra.”.
+                “Después de abonar, recibirás un código único con el cual puedes
+                consultar sobre la compra.”.
               </p>
             </div>
           </div>

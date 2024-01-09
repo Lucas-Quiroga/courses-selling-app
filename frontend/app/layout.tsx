@@ -1,10 +1,7 @@
-import { useAuth } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import "./globals.css";
 import {
-  NavbarOrigen,
   Footer,
-  Aside,
   Header,
   HeaderMobile,
   SideNav,

@@ -12,8 +12,6 @@ const VideoGallery = () => {
     "We will learn DFS of Graph in this problem"
   );
 
-  const [pago, setPago] = useState(false);
-
   const arr = Data;
   return (
     <div className="flex flex-row w-11/12 h-full pt-2">
@@ -60,26 +58,3 @@ const VideoGallery = () => {
 };
 
 export default VideoGallery;
-
-//barbinililiana@gmail.com
-
-// gentilemarcela28@gmail.com
-// gentilemarcela28@gmail.com
-
-// johannasperanza@gmail.com
-// johannasperanza@gmail.com
-
-// metegabriela@gmail.com
-// metegabriela@gmail.com
-
-// natydelossantos3012@gmail.com
-// natydelossantos3012@gmail.com
-
-// paulavcade@gmail.com
-// paulavcade@gmail.com
-
-// ramoskarinaethel@gmail.com
-// ramoskarinaethel@gmail.com
-
-// yaninaguzman3004@gmail.com
-// yaninaguzman3004@gmail.com

@@ -16,7 +16,7 @@ const Header = () => {
   if (!contextValue) {
     throw new Error("useContext must be used within a ThemeProvider");
   }
-  const { toggleTheme } = contextValue;
+  // const { toggleTheme } = contextValue;
 
   return (
     <div

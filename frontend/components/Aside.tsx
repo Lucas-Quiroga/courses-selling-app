@@ -4,8 +4,6 @@ import Link from "next/link";
 import { IoMdHome, IoIosHelpCircle } from "react-icons/io";
 import { MdEmail, MdQuestionAnswer } from "react-icons/md";
 import { SiCodemagic } from "react-icons/si";
-import { AiFillLike } from "react-icons/ai";
-import Modal2 from "./Modal2";
 
 const Aside = () => {
   const [modalOpen, setModalOpen] = useState(false);

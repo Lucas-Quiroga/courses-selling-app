@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -38,10 +38,10 @@ export default SideNav;
 
 const MenuItem = ({ item }: { item: SideNavItem }) => {
   const pathname = usePathname();
-  const [subMenuOpen, setSubMenuOpen] = useState(false);
-  const toggleSubMenu = () => {
-    setSubMenuOpen(!subMenuOpen);
-  };
+  // const [subMenuOpen, setSubMenuOpen] = useState(false);
+  // const toggleSubMenu = () => {
+  //   setSubMenuOpen(!subMenuOpen);
+  // };
 
   return (
     <div className="">

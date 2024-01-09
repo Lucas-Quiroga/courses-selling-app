@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useCart } from "@/context/CartContext";
-import { useRouter } from "next/navigation";
+// import { useCart } from "@/context/CartContext";
+// import { useRouter } from "next/navigation";
 import { getCart, createOrder } from "@/coreComponents/helper/cart";
 import { MdDelete } from "react-icons/md";
 import { removeFromCart } from "@/coreComponents/helper/cart";
@@ -9,9 +9,9 @@ import { CartItem } from "@/types";
 
 const Cart = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const { state, dispatch } = useCart();
+  // const { state, dispatch } = useCart();
 
-  const router = useRouter();
+  // const router = useRouter();
 
   // const handleRemoveClick = (courseId: number) => {
   //   dispatch({

@@ -1,13 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
 
 const NavbarUser = () => {
-  const { toggleForm, toggleModal, active, setActive } = useAuth();
-
   const router = useRouter();
 
   const [isAuth, setIsAuth] = useState<boolean>(false);

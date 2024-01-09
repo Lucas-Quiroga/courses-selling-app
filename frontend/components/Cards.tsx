@@ -1,41 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next-nprogress-bar";
-// import { RadioButtons } from ".";
-import { usePathname } from "next/navigation";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
 import { CardsProps } from "@/types";
-import { FaUserGraduate, FaLongArrowAltLeft } from "react-icons/fa";
+import { FaUserGraduate } from "react-icons/fa";
 import { FaGoogleDrive } from "react-icons/fa";
 
 const Cards = ({ courses }: any) => {
-  const [tooltipIndex, setTooltipIndex] = useState<number | null>(null);
   courses.image = courses.image ? courses.image : "/cardimg.png";
 
-  const pathname = usePathname();
-
   const router = useRouter();
-
-  const generateRating = (rating: number) => {
-    if (rating < 1 || rating > 5) {
-      return null;
-    }
-
-    const stars = (
-      <div className="flex gap-1 text-[20px] text-[#FF9529]">
-        {Array.from({ length: 5 }, (_, index) => (
-          <div key={index}>
-            {index < rating ? <AiFillStar /> : <AiOutlineStar />}
-          </div>
-        ))}
-      </div>
-    );
-
-    return stars;
-  };
 
   // Función para calcular el precio más caro
   const calculateOriginalPrice = (price: number): number => {
@@ -43,14 +19,6 @@ const Cards = ({ courses }: any) => {
     const originalPrice = price * 1.2; // Aumento del 20%
     return originalPrice;
   };
-
-  // const showTooltip = (index: number) => {
-  //   setTooltipIndex(index);
-  // };
-
-  // const hideTooltip = () => {
-  //   setTooltipIndex(null);
-  // };
 
   return (
     <div>

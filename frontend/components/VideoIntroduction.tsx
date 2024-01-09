@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const VideoIntroduction = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const handleGoBack = () => {
-    router.back(); // Utiliza el método back() para volver a la página anterior
-  };
+  // const handleGoBack = () => {
+  //   router.back(); // Utiliza el método back() para volver a la página anterior
+  // };
   return (
     <>
       <video className="flex m-auto my-6 rounded-lg" controls>

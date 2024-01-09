@@ -2,19 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next-nprogress-bar";
 import { useCart } from "@/context/CartContext";
-import { addToCart } from "@/coreComponents/helper/cart";
+// import { addToCart } from "@/coreComponents/helper/cart";
 import { useSession } from "next-auth/react";
 import { isAuthenticated } from "@/coreComponents/helper/auth";
-import CustomButton from "@/coreComponents/CustomButton";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+// import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
 import { CardDetailsProps } from "@/types";
-import { Breadcrumbs } from ".";
-import { VideoIntroduction } from ".";
 
 const CardDetails = ({ course }: CardDetailsProps) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [showMore, setShowMore] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -28,46 +24,46 @@ const CardDetails = ({ course }: CardDetailsProps) => {
   //   router.push("/cart/checkout");
   // };
 
-  const generateRating = (rating: number) => {
-    if (rating < 1 || rating > 5) {
-      return null;
-    }
+  // const generateRating = (rating: number) => {
+  //   if (rating < 1 || rating > 5) {
+  //     return null;
+  //   }
 
-    const stars = (
-      <div className="flex gap-1 text-[20px] text-[#FF9529]">
-        {Array.from({ length: 5 }, (_, index) => (
-          <div key={index}>
-            {index < rating ? <AiFillStar /> : <AiOutlineStar />}
-          </div>
-        ))}
-      </div>
-    );
+  //   const stars = (
+  //     <div className="flex gap-1 text-[20px] text-[#FF9529]">
+  //       {Array.from({ length: 5 }, (_, index) => (
+  //         <div key={index}>
+  //           {index < rating ? <AiFillStar /> : <AiOutlineStar />}
+  //         </div>
+  //       ))}
+  //     </div>
+  //   );
 
-    return stars;
-  };
+  //   return stars;
+  // };
 
-  const newhandleBuyClick = () => {
-    router.push("/checkout");
-  };
+  // const newhandleBuyClick = () => {
+  //   router.push("/checkout");
+  // };
 
-  const handleBuyClick = async (_id: number) => {
-    try {
-      if (!(session?.user || isAuth)) {
-        // Si el usuario no está autenticado, redirige a la página de inicio de sesión
-        router.push("/user/signin");
-        return;
-      }
-      // Llamada a la función addToCart del cliente
-      const cartData = await addToCart(course._id);
-      console.log("Curso agregado al carrito:", cartData);
+  // const handleBuyClick = async (_id: number) => {
+  //   try {
+  //     if (!(session?.user || isAuth)) {
+  //       // Si el usuario no está autenticado, redirige a la página de inicio de sesión
+  //       router.push("/user/signin");
+  //       return;
+  //     }
+  //     // Llamada a la función addToCart del cliente
+  //     const cartData = await addToCart(course._id);
+  //     console.log("Curso agregado al carrito:", cartData);
 
-      // Redirigir o realizar otras acciones según sea necesario
-      router.push("/cart/checkout");
-    } catch (error) {
-      console.error("Error al agregar al carrito:", error);
-      // Manejar el error según sea necesario
-    }
-  };
+  //     // Redirigir o realizar otras acciones según sea necesario
+  //     router.push("/cart/checkout");
+  //   } catch (error) {
+  //     console.error("Error al agregar al carrito:", error);
+  //     // Manejar el error según sea necesario
+  //   }
+  // };
 
   const formattedPrice = new Intl.NumberFormat("es-AR", {
     style: "currency",
@@ -87,172 +83,6 @@ const CardDetails = ({ course }: CardDetailsProps) => {
 
   return (
     <>
-      {/* <div className="min-w-screen flex items-center overflow-hidden relative">
-        <div className="w-full  rounded  shadow-xl lg:p-10 mx-auto text-gray-800 relative md:text-left">
-          <div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-1 gap-4 ">
-            <div className="w-full gap-10 bg-white p-5 rounded">
-              <div className="relative flex justify-between flex-col">
-                <div>
-                  <h2 className="text-sm title-font uppercase text-gray-500 tracking-widest">
-                    {course.format}
-                  </h2>
-                  <h1 className="font-bold uppercase text-2xl mb-5">
-                    {course.name}
-                  </h1>
-                </div>
-                <VideoIntroduction />
-              </div>
-            </div>
-            <div className="w-full px-10 bg-white p-5 rounded">
-              <div className="mb-10">
-                <div>
-                  <h3 className="text-sm font-medium uppercase text-gray-900 relative">
-                    Descripción
-                  </h3>
-
-                  <div className="space-y-6 relative">
-                    <p className="text-base text-gray-900 mt-4 break-words relative">
-                      {course.description}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-10 flex justify-between items-center">
-                  <div>
-                    <h3 className="text-sm font-medium uppercase text-gray-900">
-                      Aspectos destacados
-                    </h3>
-
-                    <div className="mt-4">
-                      <ul
-                        role="list"
-                        className="list-disc space-y-2 pl-4 text-md"
-                      >
-                        {course.highlights.map((highlight, index) => (
-                          <li key={index} className="text-gray-400">
-                            <span className="text-gray-600">{highlight}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium uppercase text-gray-900">
-                      Información del Curso
-                    </h3>
-
-                    <div className="mt-4">
-                      <ul className="space-y-2 text-md">
-                        <li className="text-gray-400">
-                          <div className="flex items-center">
-                            <span>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 text-indigo-600 mb-1.5 mr-1"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                              </svg>
-                            </span>
-                            <p className="text-md text-gray-600">
-                              Duración del curso: <b> {course.duration} </b>
-                            </p>
-                          </div>
-                        </li>
-                        <li className="text-gray-400">
-                          <div className="flex items-center">
-                            <MdOndemandVideo className="h-6 w-6 text-indigo-600 mb-1.5 mr-1" />
-                            <p className="text-md text-gray-600">
-                              Cantidad de videos: <b>{course.videos}</b>
-                            </p>
-                          </div>
-                        </li>
-                        <li className="text-gray-400">
-                          <div className="flex items-center">
-                            <span>
-                              <svg
-                                className="h-6 w-6 text-indigo-600 mb-1.5 mr-1"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                stroke="#741f7a"
-                              >
-                                <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-
-                                <g
-                                  id="SVGRepo_tracerCarrier"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-
-                                <g id="SVGRepo_iconCarrier">
-                                  {" "}
-                                  <path
-                                    d="M10.05 2.53004L4.03002 6.46004C2.10002 7.72004 2.10002 10.54 4.03002 11.8L10.05 15.73C11.13 16.44 12.91 16.44 13.99 15.73L19.98 11.8C21.9 10.54 21.9 7.73004 19.98 6.47004L13.99 2.54004C12.91 1.82004 11.13 1.82004 10.05 2.53004Z"
-                                    stroke="#4f46e5"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />{" "}
-                                  <path
-                                    d="M5.63 13.08L5.62 17.77C5.62 19.04 6.6 20.4 7.8 20.8L10.99 21.86C11.54 22.04 12.45 22.04 13.01 21.86L16.2 20.8C17.4 20.4 18.38 19.04 18.38 17.77V13.13"
-                                    stroke="#4f46e5"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />{" "}
-                                  <path
-                                    d="M21.4 15V9"
-                                    stroke="#4f46e5"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />{" "}
-                                </g>
-                              </svg>
-                            </span>
-                            <p className="text-md text-gray-600">
-                              Nivel del curso: <b> {course.level}</b>
-                            </p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-
-              <div>
-                <div className="flex justify-between align-bottom mr-5">
-                  <span className="font-bold text-5xl leading-none align-baseline">
-                    {formattedPrice} ARS
-                  </span>
-                  <button
-                    className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                    onClick={() =>
-                      router.push(
-                        `/Courses/${course._id}/checkout`,
-                        {},
-                        { showProgressBar: true }
-                      )
-                    }
-                  >
-                    Comprar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <section className="bg-indigo-500">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
