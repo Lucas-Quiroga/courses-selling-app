@@ -6,9 +6,8 @@ const app = express();
 const connectedDataBase = require("./db/mongodb.cjs");
 const authRoutes = require("./routes/auth.cjs");
 const courseRoutes = require("./routes/course.cjs");
-const cartRoutes = require("./routes/cart.cjs");
-const paymentRoutes = require("./routes/payment.cjs");
 const emailRoutes = require("./routes/email.cjs");
+const paymentRoutes = require("./routes/payment.cjs");
 const {
   appConfig,
   dataBaseConfig,
@@ -33,7 +32,6 @@ app.use(bodyParser.json());
 app.use("/api", authRoutes);
 app.use("/api", paymentRoutes);
 app.use("/api", courseRoutes);
-app.use("/api", cartRoutes);
 app.use("/api", emailRoutes);
 
 app.get("/ping", (req, res) => {

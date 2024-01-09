@@ -1,69 +1,11 @@
 "use client";
 import React from "react";
 import { useRouter } from "next-nprogress-bar";
-// import { useCart } from "@/context/CartContext";
-// import { addToCart } from "@/coreComponents/helper/cart";
-// import { useSession } from "next-auth/react";
-// import { isAuthenticated } from "@/coreComponents/helper/auth";
-// import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
 import { CardDetailsProps } from "@/types";
 
 const CardDetails = ({ course }: CardDetailsProps) => {
-  // const [isAuth, setIsAuth] = useState<boolean>(false);
   const router = useRouter();
-  // const { data: session } = useSession();
-
-  // const { dispatch } = useCart();
-
-  // const handleBuyClick = () => {
-  //   dispatch({
-  //     type: "ADD_TO_CART",
-  //     payload: course,
-  //   });
-  //   router.push("/cart/checkout");
-  // };
-
-  // const generateRating = (rating: number) => {
-  //   if (rating < 1 || rating > 5) {
-  //     return null;
-  //   }
-
-  //   const stars = (
-  //     <div className="flex gap-1 text-[20px] text-[#FF9529]">
-  //       {Array.from({ length: 5 }, (_, index) => (
-  //         <div key={index}>
-  //           {index < rating ? <AiFillStar /> : <AiOutlineStar />}
-  //         </div>
-  //       ))}
-  //     </div>
-  //   );
-
-  //   return stars;
-  // };
-
-  // const newhandleBuyClick = () => {
-  //   router.push("/checkout");
-  // };
-
-  // const handleBuyClick = async (_id: number) => {
-  //   try {
-  //     if (!(session?.user || isAuth)) {
-  //       // Si el usuario no está autenticado, redirige a la página de inicio de sesión
-  //       router.push("/user/signin");
-  //       return;
-  //     }
-  //     // Llamada a la función addToCart del cliente
-  //     const cartData = await addToCart(course._id);
-  //     console.log("Curso agregado al carrito:", cartData);
-
-  //     // Redirigir o realizar otras acciones según sea necesario
-  //     router.push("/cart/checkout");
-  //   } catch (error) {
-  //     console.error("Error al agregar al carrito:", error);
-  //     // Manejar el error según sea necesario
-  //   }
-  // };
 
   const formattedPrice = new Intl.NumberFormat("es-AR", {
     style: "currency",
@@ -71,15 +13,6 @@ const CardDetails = ({ course }: CardDetailsProps) => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(course.price);
-
-  // useEffect(() => {
-  //   const checkAuth = () => setIsAuth(isAuthenticated());
-  //   checkAuth(); // Verifica la autenticación inmediatamente
-
-  //   const intervalId = setInterval(checkAuth, 1000); // Verifica la autenticación cada segundo
-
-  //   return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta el componente
-  // }, []);
 
   return (
     <>

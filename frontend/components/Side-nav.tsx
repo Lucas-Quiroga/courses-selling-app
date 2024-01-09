@@ -38,10 +38,6 @@ export default SideNav;
 
 const MenuItem = ({ item }: { item: SideNavItem }) => {
   const pathname = usePathname();
-  // const [subMenuOpen, setSubMenuOpen] = useState(false);
-  // const toggleSubMenu = () => {
-  //   setSubMenuOpen(!subMenuOpen);
-  // };
 
   return (
     <div className="">

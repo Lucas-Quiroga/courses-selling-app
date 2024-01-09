@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next-nprogress-bar";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { MdOndemandVideo } from "react-icons/md";
 import { CardsProps } from "@/types";
 import { FaUserGraduate } from "react-icons/fa";

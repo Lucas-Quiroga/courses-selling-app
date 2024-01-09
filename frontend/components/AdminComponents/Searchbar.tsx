@@ -1,7 +1,5 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
-import { usePathname, useRouter } from "next/navigation";
-import { useTransition } from "react";
 
 const Searchbar = () => {
   return (

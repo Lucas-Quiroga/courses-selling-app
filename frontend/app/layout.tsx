@@ -8,7 +8,6 @@ import {
   PageWrapper,
   MarginWidthWrapper,
 } from "@/components";
-import ProvidersAuth from "./ProvidersAuth";
 import { CartProvider } from "@/context/CartContext";
 import Provider from "@/context/ProgressBarContext";
 import ScrollToTopButton from "@/coreComponents/ScrollUp";
@@ -31,18 +30,16 @@ export default function RootLayout({
         <ThemeProvider>
           <Provider>
             <CartProvider>
-              <ProvidersAuth>
-                <div>
-                  <SideNav />
-                  <main className="flex-1">
-                    <MarginWidthWrapper>
-                      <Header />
-                      <HeaderMobile />
-                      <PageWrapper>{children}</PageWrapper>
-                    </MarginWidthWrapper>
-                  </main>
-                </div>
-              </ProvidersAuth>
+              <div>
+                <SideNav />
+                <main className="flex-1">
+                  <MarginWidthWrapper>
+                    <Header />
+                    <HeaderMobile />
+                    <PageWrapper>{children}</PageWrapper>
+                  </MarginWidthWrapper>
+                </main>
+              </div>
             </CartProvider>
           </Provider>
           <Footer />

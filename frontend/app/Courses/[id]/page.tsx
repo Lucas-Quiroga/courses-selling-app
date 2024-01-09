@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { getCourseDetail } from "@/coreComponents/helper/apiCalls";
 import CardDetails from "@/components/CardDetails";
 import Courses from "@/app/Courses/page";
-import { Banner, Aside } from "@/components";
+import { Banner } from "@/components";
 
 const Page = async ({ params }: any) => {
   const course = await getCourseDetail(params.id);

@@ -44,7 +44,6 @@ const page = () => {
   });
 
   const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
   const [highlights, setHighlights] = useState([{ id: 1, value: "" }]);
   const [handleView, setHandleView] = useState(false);
 
