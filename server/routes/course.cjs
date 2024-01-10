@@ -10,8 +10,8 @@ const {
 const { authenticateJwtAdmin } = require("../controllers/auth.cjs");
 
 // Rutas públicas
-router.get("/user/courses", courses);
-router.get("/user/course/:courseId", course);
+router.get("/courses", courses);
+router.get("/course/:courseId", course);
 
 // Rutas protegidas para administradores
 router.post("/admin/create", authenticateJwtAdmin, createCourse);
