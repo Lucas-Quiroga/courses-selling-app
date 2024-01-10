@@ -17,13 +17,13 @@ const Faqs = () => {
 
   return (
     <div>
-      <section className="bg-white dark:bg-gray-900 relative">
+      <section className="bg-white  relative">
         <div className="container px-6 py-12 mx-auto">
-          <h1 className="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">
+          <h1 className="text-2xl font-semibold text-gray-800 lg:text-3xl ">
             Consultas habituales
           </h1>
 
-          <hr className="my-6 border-gray-200 dark:border-gray-700" />
+          <hr className="my-6 border-gray-200 " />
 
           <div className="mt-8 space-y-8 lg:mt-12">
             {frequentQuestions.map((faqGroup, groupIndex) => (
@@ -33,7 +33,7 @@ const Faqs = () => {
                 {/* MAPEO DE PREGUNTAS Y RESPUESTAS */}
                 {faqGroup.preguntas.map((question, questionIndex) => (
                   <div
-                    className="flex flex-col mt-5 p-8 bg-gray-100 rounded-lg dark:bg-gray-800"
+                    className="flex flex-col mt-5 p-8 bg-gray-100 rounded-lg "
                     key={`${groupIndex}-${questionIndex}`}
                   >
                     <button
@@ -42,7 +42,7 @@ const Faqs = () => {
                         handleQuestionToggle(groupIndex, questionIndex)
                       }
                     >
-                      <h1 className="font-semibold text-gray-700 dark:text-white">
+                      <h1 className="font-semibold text-gray-700 ">
                         {question.pregunta}
                       </h1>
 
@@ -68,7 +68,7 @@ const Faqs = () => {
                       </span>
                     </button>
                     {expandedQuestions[groupIndex] === questionIndex && (
-                      <p className="mt-6 text-sm text-gray-500 dark:text-gray-300">
+                      <p className="mt-6 text-sm text-gray-500 ">
                         {question.respuesta}
                       </p>
                     )}

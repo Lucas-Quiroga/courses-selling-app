@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="relative  dark:bg-slate-800">
+      <body className="relative">
         <ThemeProvider>
           <AuthProvider>
             <Provider>

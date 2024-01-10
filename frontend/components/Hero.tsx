@@ -73,52 +73,53 @@ const Hero = () => {
     }
   }, [filter, courses]);
 
+  if (loading || courses.length === 0) {
+    return <Spinner />;
+  }
+
   return (
     <>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <div>
-          <div className="bg-indigo-400">
-            <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-20 lg:pb-5">
-              <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
-                <div className="flex flex-col sm:text-center sm:mb-0">
-                  <div className="max-w-xl  md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-                    <h1 className="max-w-lg mb-6 font-sans text-3xl text-center font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
-                      <span className="relative inline-block">
-                        <svg
-                          viewBox="0 0 52 24"
-                          fill="currentColor"
-                          className="absolute top-0 left-[-1rem] z-0 hidden w-32 -mt-8 -ml-20 text-deep-purple-accent-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
-                        >
-                          <defs>
-                            <pattern
-                              id="700c93bf-0068-4e32-aafe-ef5b6a647708"
-                              x="0"
-                              y="0"
-                              width=".135"
-                              height=".30"
-                            >
-                              <circle cx="1" cy="1" r=".7" />
-                            </pattern>
-                          </defs>
-                          <rect
-                            fill="url(#700c93bf-0068-4e32-aafe-ef5b6a647708)"
-                            width="52"
-                            height="24"
-                          />
-                        </svg>
-                        <span className="relative">Hola,</span>
-                      </span>{" "}
-                      soy Paula Dominguez
-                    </h1>
-                    <p className="text-base text-center text-indigo-100 md:text-lg">
-                      Bienvenidos a la magia que guarda todas las respuestas que
-                      habitan tu alma. Encara tu vida como un gran
-                      acontecimiento irrepetible y unico.
-                    </p>
-                  </div>
-                  {/* <a
+      <div>
+        <div className="bg-indigo-400">
+          <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-20 lg:pb-5">
+            <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
+              <div className="flex flex-col sm:text-center sm:mb-0">
+                <div className="max-w-xl  md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+                  <h1 className="max-w-lg mb-6 font-sans text-3xl text-center font-bold leading-none tracking-tight text-white sm:text-4xl md:mx-auto">
+                    <span className="relative inline-block">
+                      <svg
+                        viewBox="0 0 52 24"
+                        fill="currentColor"
+                        className="absolute top-0 left-[-1rem] z-0 hidden w-32 -mt-8 -ml-20 text-deep-purple-accent-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
+                      >
+                        <defs>
+                          <pattern
+                            id="700c93bf-0068-4e32-aafe-ef5b6a647708"
+                            x="0"
+                            y="0"
+                            width=".135"
+                            height=".30"
+                          >
+                            <circle cx="1" cy="1" r=".7" />
+                          </pattern>
+                        </defs>
+                        <rect
+                          fill="url(#700c93bf-0068-4e32-aafe-ef5b6a647708)"
+                          width="52"
+                          height="24"
+                        />
+                      </svg>
+                      <span className="relative">Hola,</span>
+                    </span>{" "}
+                    soy Paula Dominguez
+                  </h1>
+                  <p className="text-base text-center text-indigo-100 md:text-lg">
+                    Bienvenidos a la magia que guarda todas las respuestas que
+                    habitan tu alma. Encara tu vida como un gran acontecimiento
+                    irrepetible y unico.
+                  </p>
+                </div>
+                {/* <a
                     href="/"
                     aria-label="Scroll down"
                     className="flex items-center justify-center w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110"
@@ -133,63 +134,62 @@ const Hero = () => {
                       <path d="M10.293,3.293,6,7.586,1.707,3.293A1,1,0,0,0,.293,4.707l5,5a1,1,0,0,0,1.414,0l5-5a1,1,0,1,0-1.414-1.414Z" />
                     </svg>
                   </a> */}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-5 relative items-center flex ">
-            <div className="container px-6 mx-auto">
-              <div className="mx-auto">
-                <div className="mt-6 md:flex md:items-center md:justify-between">
-                  <div>
-                    <h2 className="text-2xl sm:text-3xl text-center md:text-left  font-semibold text-gray-800  dark:text-white">
-                      Cursos o clases unicas
-                    </h2>
-                  </div>
-                </div>
-                <hr className="my-8 border-gray-200 dark:border-gray-700" />
-              </div>
-              {courses.length > 1 && (
-                <Filters filter={filter} onFilterChange={handleFilterChange} />
-              )}
-              <div className="">
-                <div className="mt-5">
-                  {loading ? (
-                    <Loading number={filteredCourses.length} />
-                  ) : courses.length > 0 ? (
-                    <div className="flex flex-col ">
-                      {/* <Filters filter={filter} onFilterChange={handleFilterChange} /> */}
-                      {/* <Categories /> */}
-                      {/* Mostrar mensaje si no hay cursos filtrados */}
-                      {filteredCourses.length === 0 && (
-                        <div className=" text-red-500 text-xl mt-7">
-                          No se encuentra un curso con estas especificaciones.
-                        </div>
-                      )}
-
-                      {/* Mostrar los cursos filtrados */}
-                      {filteredCourses.length > 0 && (
-                        <Cards courses={filteredCourses} />
-                      )}
-                      <Testimonials />
-                      {courses.length > initialCourses.length && (
-                        <button
-                          onClick={handleShowMore}
-                          className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                        >
-                          {showMore ? "Show Less" : "Show More"}
-                        </button>
-                      )}
-                    </div>
-                  ) : (
-                    <div>Not found</div>
-                  )}
-                </div>
               </div>
             </div>
           </div>
         </div>
-      )}
+        <div className="mt-5 relative items-center flex ">
+          <div className="container px-6 mx-auto">
+            <div className="mx-auto">
+              <div className="mt-6 md:flex md:items-center md:justify-between">
+                <div>
+                  <h2 className="text-2xl sm:text-3xl text-center md:text-left  font-semibold text-gray-800  ">
+                    Cursos o clases unicas
+                  </h2>
+                </div>
+              </div>
+              <hr className="my-8 border-gray-200 " />
+            </div>
+            {courses.length > 1 && (
+              <Filters filter={filter} onFilterChange={handleFilterChange} />
+            )}
+            <div className="">
+              <div className="mt-5">
+                {loading ? (
+                  <Loading number={filteredCourses.length} />
+                ) : courses.length > 0 ? (
+                  <div className="flex flex-col ">
+                    {/* <Filters filter={filter} onFilterChange={handleFilterChange} /> */}
+                    {/* <Categories /> */}
+                    {/* Mostrar mensaje si no hay cursos filtrados */}
+                    {filteredCourses.length === 0 && (
+                      <div className=" text-red-500 text-xl mt-7">
+                        No se encuentra un curso con estas especificaciones.
+                      </div>
+                    )}
+
+                    {/* Mostrar los cursos filtrados */}
+                    {filteredCourses.length > 0 && (
+                      <Cards courses={filteredCourses} />
+                    )}
+                    <Testimonials />
+                    {courses.length > initialCourses.length && (
+                      <button
+                        onClick={handleShowMore}
+                        className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                      >
+                        {showMore ? "Show Less" : "Show More"}
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div>Not found</div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

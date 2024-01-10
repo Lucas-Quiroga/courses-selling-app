@@ -32,15 +32,15 @@ const Contact = () => {
   };
 
   return (
-    <section className=" bg-white dark:bg-gray-900">
+    <section className=" bg-white ">
       <div className="container px-6 py-10 mx-auto">
         <div className="lg:flex lg:items-center lg:-mx-10 ">
           <div className="lg:w-1/2 lg:mx-10 ">
-            <h1 className="text-2xl font-semibold text-gray-800 capitalize dark:text-white lg:text-3xl">
+            <h1 className="text-2xl font-semibold text-gray-800 capitalize  lg:text-3xl">
               Hablemos
             </h1>
 
-            <p className="mt-4 text-gray-500 dark:text-gray-400">
+            <p className="mt-4 text-gray-500 ">
               Infórmanos acerca de cualquier duda o pregunta que puedas tener.
             </p>
 
@@ -129,7 +129,7 @@ const Contact = () => {
               <p className="flex items-start -mx-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 mx-2 text-blue-500 dark:text-blue-400"
+                  className="w-6 h-6 mx-2 text-blue-500 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -142,7 +142,7 @@ const Contact = () => {
                   />
                 </svg>
 
-                <span className="mx-2 text-gray-700 truncate w-72 dark:text-gray-400">
+                <span className="mx-2 text-gray-700 truncate w-72 ">
                   +54 9 11 2787-7943
                 </span>
               </p>
@@ -150,7 +150,7 @@ const Contact = () => {
               <p className="flex items-start -mx-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 mx-2 text-blue-500 dark:text-blue-400"
+                  className="w-6 h-6 mx-2 text-blue-500 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -163,7 +163,7 @@ const Contact = () => {
                   />
                 </svg>
 
-                <span className="mx-2 text-gray-700 truncate w-72 dark:text-gray-400">
+                <span className="mx-2 text-gray-700 truncate w-72 ">
                   paula.dominguez1946@gmail.com
                 </span>
               </p>

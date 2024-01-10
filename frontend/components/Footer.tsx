@@ -3,7 +3,7 @@ import Modal from "./Modal2";
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-slate-900 border-t-2 border-gray-200 ">
+    <footer className="bg-white  border-t-2 border-gray-200 ">
       <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
         <nav className="flex flex-wrap justify-center -mx-5 -my-2 ">
           <Modal />

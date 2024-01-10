@@ -10,12 +10,12 @@ const Testimonials = () => {
         <div className="mx-auto ">
           <div className="mt-6 md:flex md:items-center md:justify-between">
             <div>
-              <h3 className="text-2xl sm:text-3xl text-center md:text-left font-semibold text-gray-800  dark:text-white">
+              <h3 className="text-2xl sm:text-3xl text-center md:text-left font-semibold text-gray-800  ">
                 Testimonios de alumnos
               </h3>
             </div>
           </div>
-          <hr className="my-8 border-gray-200 dark:border-gray-700" />
+          <hr className="my-8 border-gray-200 " />
         </div>
         <Marquee pauseOnHover>
           {Data.map((testimonials, index) => (
@@ -25,7 +25,7 @@ const Testimonials = () => {
                   className="p-8 mb-0 border rounded-lg flex flex-col justify-between h-full w-100 bg-white"
                   key={index}
                 >
-                  <p className="leading-loose text-black dark:text-gray-200">
+                  <p className="leading-loose text-black ">
                     “{testimonials.description}”.
                   </p>
 
@@ -39,10 +39,10 @@ const Testimonials = () => {
                     />
 
                     <div className="mx-2">
-                      <h1 className="font-semibold text-gray-800 dark:text-gray-200">
+                      <h1 className="font-semibold text-gray-800 ">
                         {testimonials.name}
                       </h1>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                      <span className="text-sm text-gray-500 ">
                         {testimonials.role}
                       </span>
                     </div>

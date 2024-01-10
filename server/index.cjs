@@ -23,6 +23,9 @@ const corsOptions = {
 app.use(morgan("dev"));
 
 app.use(cors(corsOptions));
+
+// Middleware CORS sin restricciones
+// app.use(cors());
 dotenv.config();
 // Analiza datos codificados en formato URL.
 app.use(bodyParser.urlencoded({ extended: true }));

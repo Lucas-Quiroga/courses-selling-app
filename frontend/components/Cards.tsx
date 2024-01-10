@@ -71,29 +71,23 @@ const Cards = ({ courses }: any) => {
                     <div className="text-3xl md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
                       {course.name}
                     </div>
-                    <p className="text-xs text-muted-foreground text-gray-400 uppercase dark:text-gray-200">
+                    <p className="text-xs text-muted-foreground text-gray-400 uppercase">
                       {course.format}
                     </p>
 
                     <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
                       <div className="flex flex-col gap-x-1 text-slate-500">
                         <div className="flex space-x-1 items-center">
-                          <MdOndemandVideo className="h-5 w-5 text-indigo-600 mb-1.5 dark:text-white" />
-                          <p className="text-sm dark:text-white">
-                            {course.videos} videos
-                          </p>
+                          <MdOndemandVideo className="h-5 w-5 text-indigo-600 mb-1.5 " />
+                          <p className="text-sm ">{course.videos} videos</p>
                         </div>
                         <div className="flex space-x-1 items-center">
-                          <FaGoogleDrive className="h-5 w-5 text-indigo-600 mb-1.5 dark:text-white" />
-                          <p className="text-sm dark:text-white">
-                            Google drive
-                          </p>
+                          <FaGoogleDrive className="h-5 w-5 text-indigo-600 mb-1.5" />
+                          <p className="text-sm ">Google drive</p>
                         </div>
                         <div className="flex space-x-1 items-center">
-                          <FaUserGraduate className="h-5 w-5 text-indigo-600 mb-1.5 dark:text-white" />
-                          <p className="text-sm dark:text-white">
-                            {course.level}
-                          </p>
+                          <FaUserGraduate className="h-5 w-5 text-indigo-600 mb-1.5 " />
+                          <p className="text-sm ">{course.level}</p>
                         </div>
                       </div>
                     </div>
