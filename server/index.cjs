@@ -16,7 +16,7 @@ const {
 const morgan = require("morgan");
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Reemplaza con el origen de tu aplicación frontend
+  origin: "https://courses-selling-app.vercel.app", // Reemplaza con el origen de tu aplicación frontend
   credentials: true, // Habilita el envío de cookies y credenciales en las solicitudes
 };
 
