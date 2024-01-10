@@ -1,7 +1,8 @@
 import axios from "axios";
 
+//http://localhost:3002/
 const http = axios.create({
-  baseURL: "http://localhost:3002/",
+  baseURL: "https://courses-selling-app-api.onrender.com/",
   timeout: 1000, // Aumenté el tiempo de espera a 10 segundos (ms)
   headers: {
     "Content-Type": "application/json",
