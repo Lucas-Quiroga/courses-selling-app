@@ -5,7 +5,6 @@ import { getCourses } from "@/coreComponents/helper/apiCalls";
 import { Cards, Filters } from "@/components";
 import { CourseType1 as Course } from "@/types/index";
 import { Testimonials } from "@/components";
-import { useRouter } from "next/router";
 import Spinner from "@/coreComponents/Spinner";
 
 const Hero = () => {
@@ -14,8 +13,6 @@ const Hero = () => {
   const [showMore, setShowMore] = useState(false);
   const [filter, setFilter] = useState({ price: "", duration: "", level: "" });
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
-
-  const router = useRouter();
 
   // Obtener los primeros 5 cursos
   const initialCourses = courses.slice(0, 5);
@@ -59,7 +56,7 @@ const Hero = () => {
     };
 
     fetchData();
-  }, [router.asPath]);
+  }, []);
 
   // Actualizar los cursos filtrados cuando cambia el filtro o se cargan los cursos
   useEffect(() => {
