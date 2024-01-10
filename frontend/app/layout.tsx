@@ -9,6 +9,7 @@ import {
   MarginWidthWrapper,
 } from "@/components";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 import Provider from "@/context/ProgressBarContext";
 import ScrollToTopButton from "@/coreComponents/ScrollUp";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -28,22 +29,24 @@ export default function RootLayout({
     <html lang="es">
       <body className="relative  dark:bg-slate-800">
         <ThemeProvider>
-          <Provider>
-            <CartProvider>
-              <div>
-                <SideNav />
-                <main className="flex-1">
-                  <MarginWidthWrapper>
-                    <Header />
-                    <HeaderMobile />
-                    <PageWrapper>{children}</PageWrapper>
-                  </MarginWidthWrapper>
-                </main>
-              </div>
-            </CartProvider>
-          </Provider>
-          <Footer />
-          <ScrollToTopButton />
+          <AuthProvider>
+            <Provider>
+              <CartProvider>
+                <div>
+                  <SideNav />
+                  <main className="flex-1">
+                    <MarginWidthWrapper>
+                      <Header />
+                      <HeaderMobile />
+                      <PageWrapper>{children}</PageWrapper>
+                    </MarginWidthWrapper>
+                  </main>
+                </div>
+              </CartProvider>
+            </Provider>
+            <Footer />
+            <ScrollToTopButton />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
