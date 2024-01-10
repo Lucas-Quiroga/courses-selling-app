@@ -28,14 +28,14 @@ exports.createOrder = async (req, res) => {
       surname: payerOrder.surname,
     },
     back_urls: {
-      success: "http://localhost:3000/success",
-      failure: "http://localhost:3002/api/failure",
-      pending: "http://localhost:3002/api/pending",
+      success: "https://courses-selling-app.vercel.app/success",
+      failure: "https://courses-selling-app.vercel.app/api/failure",
+      pending: "https://courses-selling-app.vercel.app/api/pending",
     },
     auto_return: "approved",
     //cambiar por el https de la web
     notification_url:
-      "https://0842-2802-8010-8b2e-b600-a9b6-954e-30ad-2e4f.ngrok-free.app/api/webhook",
+      "https://courses-selling-app-api.onrender.com/api/webhook",
   });
 
   // console.log(JSON.stringify(result.body, null, 2));
