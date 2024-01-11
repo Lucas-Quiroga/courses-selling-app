@@ -34,8 +34,7 @@ exports.createOrder = async (req, res) => {
     },
     auto_return: "approved",
     //cambiar por el https de la web
-    notification_url:
-      "https://courses-selling-app-api.onrender.com/api/webhook",
+    notification_url: "https://courses-selling-app.vercel.app/api/webhook",
   });
 
   // console.log(JSON.stringify(result.body, null, 2));
