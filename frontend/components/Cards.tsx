@@ -68,7 +68,7 @@ const Cards = ({ courses }: any) => {
                     />
                   </div>
                   <div className="flex flex-col pt-2">
-                    <div className="text-3xl md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
+                    <div className="text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
                       {course.name}
                     </div>
                     <p className="text-xs text-muted-foreground text-gray-400 uppercase">
